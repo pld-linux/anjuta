@@ -53,7 +53,7 @@ xml-i18n-toolize --copy --force
 aclocal -I macros
 autoconf
 automake -a -c -f
-CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions"
+CXXFLAGS="%{rpmcflags} -fno-exceptions"
 %configure \
 	--with-gnome
 %{__make}
