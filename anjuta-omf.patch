@@ -1,0 +1,104 @@
+diff -Nuard anjuta-0.1.9.orig/manuals/C/anjuta-faqs/anjuta-faqs-C.omf anjuta-0.1.9/manuals/C/anjuta-faqs/anjuta-faqs-C.omf
+--- anjuta-0.1.9.orig/manuals/C/anjuta-faqs/anjuta-faqs-C.omf	Thu Feb 14 20:28:34 2002
++++ anjuta-0.1.9/manuals/C/anjuta-faqs/anjuta-faqs-C.omf	Thu Oct  3 19:58:12 2002
+@@ -1,28 +1,29 @@
+ <?xml version="1.0" standalone="no"?>
++<!DOCTYPE omf PUBLIC "-//OMF//DTD Scrollkeeper OMF Variant V1.0//EN" "http://scrollkeeper.sourceforge.net/dtds/scrollkeeper-omf-1.0/scrollkeeper-omf.dtd">
+ <omf>
+  <resource>
++  <creator>
++    Andy Piper andy.piper@freeuk.com
++  </creator>
+   <title>
+    Anjuta FAQ
+   </title>
+-   <creator>
+-	<person>
+-	 <firstName>Andy</firstName>
+-	 <lastName>Piper</lastName>
+-	 <email>andy.piper@freeuk.com</email> 
+-	</person>
+-   </creator>
+-  <subject>
+-  <category>GNOME|Development</category>
+-  </subject>
+-    <description>
++  <date>
++    2002-10-03
++  </date>
++  <version identifier="0.1.9" date="2002-10-03"/>
++  <subject category="GNOME|Development"/>
++  <description>
+      This document contains a list of Frequently Asked Questions about the Anjuta C/C++ IDE.
+-    </description>
+-    <type>
++  </description>
++  <type>
+      article
+-    </type>
++  </type>
+   <format mime="text/sgml"/>
+   <identifier url="anjuta-faq.sgml"/>
+   <language code="C"/>
++  <relation seriesid="2e4dc372-d6f9-11d6-89aa-991e0f85c51c"/>
++  <rights type="GNU GPL" license.version="2" license="http://www.gnu.org/licenses/gpl.html"/>
+  </resource>
+ </omf>
+ 
+diff -Nuard anjuta-0.1.9.orig/manuals/C/anjuta-manual/anjuta-manual-C.omf anjuta-0.1.9/manuals/C/anjuta-manual/anjuta-manual-C.omf
+--- anjuta-0.1.9.orig/manuals/C/anjuta-manual/anjuta-manual-C.omf	Thu Feb 14 20:28:34 2002
++++ anjuta-0.1.9/manuals/C/anjuta-manual/anjuta-manual-C.omf	Thu Oct  3 19:59:57 2002
+@@ -1,29 +1,28 @@
+ <?xml version="1.0" standalone="no"?>
++<!DOCTYPE omf PUBLIC "-//OMF//DTD Scrollkeeper OMF Variant V1.0//EN" "http://scrollkeeper.sourceforge.net/dtds/scrollkeeper-omf-1.0/scrollkeeper-omf.dtd">
+ <omf>
+-  <resource>
+-    <title>
+-     Anjuta IDE Manual
+-    </title>
+-    <creator>
+-     <person>
+-      <firstName>Naba</firstName>
+-      <lastName>Kumar</lastName>
+-      <email>kh_naba@users.sourceforge.net</email> 
+-     </person>
+-    </creator>
+-    <subject>
+-	<category>GNOME|Development</category>
+-    </subject>
+-    <description>
+-     This document describes how the Anjuta IDE is used for developing 
+-	 software projects.
+-    </description>
+-    <type>
++ <resource>
++  <creator>
++    Naba Kumar kh_naba@users.sourceforge.net
++  </creator>
++  <title>
++    Anjuta IDE Manual
++  </title>
++  <date>
++    2002-10-03
++  </date>
++  <version identifier="0.1.9" date="2002-10-03"/>
++  <subject category="GNOME|Development"/>
++  <description>
++     This document describes how the Anjuta IDE is used for developing software projects.
++  </description>
++  <type>
+      manual
+-    </type>
+-    <format mime="text/sgml"/>
+-    <identifier url="anjuta-manual.sgml"/>
+-    <language code="C"/>
+-  </resource>
++  </type>
++  <format mime="text/sgml"/>
++  <identifier url="anjuta-manual.sgml"/>
++  <language code="C"/>
++  <relation seriesid="2e4dc372-d6f9-11d6-89aa-991e0f85c51c"/>
++  <rights type="GNU GPL" license.version="2" license="http://www.gnu.org/licenses/gpl.html"/>
++ </resource>
+ </omf>
+-
