@@ -67,7 +67,7 @@ rm -f missing
 %{__gettextize}
 intltoolize --copy --force
 xml-i18n-toolize --copy --force
-aclocal -I macros
+%{__aclocal} -I macros
 %{__autoconf}
 %{__automake}
 echo "all install:">plugins/sample1/Makefile.in
