@@ -5,7 +5,7 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	1.1.97
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
@@ -15,7 +15,7 @@ Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-gettext.patch
 URL:		http://anjuta.sourceforge.net/
-BuildRequires:	ORBit2-devel >= 2.4.0
+BuildRequires:	ORBit2-devel >= 2.7.5-1
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	glib2-devel >= 2.0.6
@@ -23,7 +23,7 @@ BuildRequires:	intltool
 BuildRequires:	gnome-common
 BuildRequires:	libglade2-devel >= 2.0.0
 BuildRequires:	libgnomeprintui-devel >= 2.2.0
-BuildRequires:	libgnomeui-devel >= 2.2.0
+BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
 BuildRequires:	libtool
 BuildRequires:	libzvt-devel >= 2.0.0
 BuildRequires: 	ncurses-devel
