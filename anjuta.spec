@@ -2,6 +2,7 @@
 
 Summary:	GNOME integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
+Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	1.1.98
@@ -36,11 +37,19 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Anjuta is a very versatile integrated development environment for C
-and C++ GNU/Linux. Written in GTK/GNOME and written for GTK/GNOME, it
-features many advanced programming tools and utilities. Besides many
-other, it has project management, application wizards, onboard
+and C++ for GNU/Linux. Written in GTK/GNOME and written for GTK/GNOME,
+it features many advanced programming tools and utilities. Besides
+many other, it has project management, application wizards, onboard
 interactive debugger, and a powerful source editor with source
 browsing.
+
+%description -l es
+Anjuta es un entorno integrado de desarrollo para C y C++ para
+GNU/Linux. Escrito en y para GTK/GNOME, proporciona muchas
+herramientas de programación avanzadas. Entre otros, habilita
+manejamiento de proyectos, wizards de aplicaciones, depurador
+interactivo y un editador potente de código fuente que permite
+hojearlo.
 
 %description -l pl
 Anjuta to wszechstronne zintegrowane ¶rodowisko programowania dla
@@ -70,7 +79,7 @@ rm -f missing
 #%%{__gettextize}
 #intltoolize
 %{__libtoolize}
-%{__aclocal} -I /usr/share/aclocal/gnome2-macros
+%{__aclocal} -I %{_aclocaldir}/gnome2-macros
 %{__autoheader}
 %{__autoconf}
 %{__automake}
