@@ -3,28 +3,24 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	0.1.9
-Release:	3
+Release:	4
 License:	GPL
 Group:		Development/Tools
 Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-ac_am.patch
 URL:		http://anjuta.sourceforge.net/
-BuildRequires:	ORBit-devel
-BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	esound-devel
+BuildRequires:	bonobo-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-libs-devel
-BuildRequires:	gtk+-devel
+BuildRequires:	gnome-vfs-devel
+BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	intltool
-BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml-devel
 BuildRequires:	pkgconfig
 BuildRequires:	scrollkeeper
-BuildRequires:	libsigc++1-devel
 BuildRequires:	gnomemm-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -69,6 +65,7 @@ xml-i18n-toolize --copy --force
 aclocal -I macros
 %{__autoconf}
 %{__automake}
+echo "all install:">plugins/sample1/Makefile.in
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
 %configure \
 	--with-gnome
@@ -76,10 +73,10 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/%{_applnkdir}/Development \
+install -d $RPM_BUILD_ROOT%{_applnkdir}/Development \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/gnome
 
-install %{SOURCE1} $RPM_BUILD_ROOT/%{_applnkdir}/Development
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Development
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
