@@ -90,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README ChangeLog NEWS TODO AUTHORS COPYING 
+%doc README ChangeLog NEWS TODO AUTHORS COPYING
 %doc FUTURE INSTALL doc/ScintillaDoc.html
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/anjuta
