@@ -2,7 +2,7 @@ Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Name:		anjuta
 Version:	0.1.8
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Group(de):	Entwicklung/Werkzeuge
@@ -12,15 +12,15 @@ Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-am_ac.patch
 URL:		http://anjuta.sourceforge.net/
+BuildRequires:	ORBit-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
+BuildRequires:	intltool
 BuildRequires:	libstdc++-devel
-BuildRequires:	xml-i18n-tools
-BuildRequires:	ORBit-devel
 BuildRequires:	scrollkeeper
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -48,13 +48,13 @@ odpluskwiacz oraz edytor z mo¿liwo¶ci± przegl±dania ¼róde³.
 %patch0 -p1
 
 %build
+sed -e s/AM_GNOME_GETTEXT/AM_GNU_GETTEXT/ configure.in > configure.in.tmp
+mv -f configure.in.tmp configure.in
 rm -f missing
-install %{SOURCE1} .
-cp macros/aclocal-include.m4 acinclude.m4
 libtoolize --copy --force
 gettextize --copy --force
 xml-i18n-toolize --copy --force
-aclocal -I %{_aclocaldir}/gnome
+aclocal -I macros
 autoconf
 automake -a -c
 CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions"
