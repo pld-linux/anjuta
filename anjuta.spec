@@ -6,7 +6,7 @@ Version:	0.9.99
 Release:	1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
+Source0:	http://belnet.dl.sourceforge.net/sourceforge/anjuta/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 #Patch0:		%{name}-ac_am.patch
 URL:		http://anjuta.sourceforge.net/
