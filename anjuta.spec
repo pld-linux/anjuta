@@ -14,6 +14,7 @@ Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
 Patch2:		%{name}-locale-names.patch
 Patch3:		%{name}-desktop.patch
+Patch4:		%{name}-ac.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 2.8.0
 BuildRequires:	autoconf >= 2.52
@@ -71,6 +72,7 @@ amigáveis.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 mv -f po/{no,nb}.po
 
