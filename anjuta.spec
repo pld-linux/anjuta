@@ -1,12 +1,13 @@
+%define snap 2002-10-24-15
 Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	0.1.9
-Release:	9
+Version:	1.0.
+Release:	0.%(echo %{snap} | sed 's/-//g').1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
+Source0:	http://anjuta.sourceforge.net/cvs/anjuta-cvs-HEAD-hourly-%{snap}.tar.gz
 Patch0:		%{name}-ac_am.patch
 Patch1:		%{name}-no_systemtags.patch
 Patch2:		%{name}-omf.patch
@@ -16,22 +17,16 @@ Patch5:		%{name}-desktop_fix.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bonobo-devel
-BuildRequires:	gettext-devel
-BuildRequires:	gnome-vfs-devel
-BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	intltool
 BuildRequires:	libtool
-BuildRequires:	libxml-devel
 BuildRequires:	pkgconfig
 BuildRequires:	scrollkeeper
-BuildRequires:	gnomemm-devel
-Requires:	gnome-libs-devel
+BuildRequires:	libgnomeui-devel >= 2.0.5
+BuildRequires:	libgnomeprintui-devel >= 1.116.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
 %define		_mandir		%{_prefix}/man
-%define		_omf_dest_dir	%(scrollkeeper-config --omfdir)
 
 %description
 Anjuta is a very versatile integrated development environment for C
@@ -58,24 +53,18 @@ são geralmente executadas em um console em modo texto e podem ser não
 amigáveis.
 
 %prep
-%setup  -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
+%setup -q -n %{name}
 
 %build
+CXXFLAGS="%{rpmcflags} -fno-exceptions"
 rm -f missing
+glib-gettextize
+intltoolize
 %{__libtoolize}
-%{__gettextize}
-xml-i18n-toolize --copy --force
-%{__aclocal} -I macros
+%{__aclocal}
+%{__autoheader}
 %{__autoconf}
 %{__automake}
-echo "all install:">plugins/sample1/Makefile.in
-CXXFLAGS="%{rpmcflags} -fno-exceptions"
 %configure \
 	--with-gnome \
 	--disable-static
@@ -86,7 +75,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	omf_dest_dir=%{_omf_dest_dir}/%{name} \
 	gnomemenudir=%{_applnkdir}/Development
 
 %find_lang %{name} --with-gnome
