@@ -3,15 +3,16 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	1.2.1
+Version:	1.2.2
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	f74a86d4541e0f55115be9de66d8c2c4
+# Source0-md5:	a30858dba0b902064d0d702cedfdc84f
 Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
+Patch2:		%{name}-locale-names.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 2.8.0
 BuildRequires:	autoconf
@@ -67,6 +68,9 @@ amigáveis.
 %setup -q
 %patch0 -p0
 %patch1 -p1
+%patch2 -p1
+
+mv po/{no,nb}.po
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
@@ -80,6 +84,7 @@ rm -f missing
 %configure \
 	--disable-static \
 	--enable-gprof
+
 %{__make}
 
 %install
@@ -102,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog FUTURE NEWS README THANKS TODO doc/ScintillaDoc.html
+%doc AUTHORS ChangeLog FUTURE NEWS README TODO doc/ScintillaDoc.html
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
