@@ -1,0 +1,10 @@
+--- anjuta-0.1.9/plugins/class-gen/Makefile.am~	Tue Oct  8 04:06:28 2002
++++ anjuta-0.1.9/plugins/class-gen/Makefile.am	Tue Oct  8 04:06:28 2002
+@@ -20,6 +20,7 @@
+ plugin_LTLIBRARIES = libanjuta_clsGen.la
+ 
+ libanjuta_clsGen_la_SOURCES = clsGen.c
++libanjuta_clsGen_la_LDFLAGS = -module -avoid-version
+ 
+ INCLUDES = 						\
+ 	-I$(ANJUTA_SRC_DIR)				\
