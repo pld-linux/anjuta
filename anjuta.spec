@@ -4,7 +4,7 @@ Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	1.2.2
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
@@ -13,6 +13,7 @@ Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
 Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
 Patch2:		%{name}-locale-names.patch
+Patch3:		%{name}-desktop.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 2.8.0
 BuildRequires:	autoconf >= 2.52
@@ -69,6 +70,7 @@ amigáveis.
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 mv -f po/{no,nb}.po
 
