@@ -1,15 +1,28 @@
-diff -urN anjuta-0.1.8.org/Makefile.am anjuta-0.1.8/Makefile.am
---- anjuta-0.1.8.org/Makefile.am	Thu Dec  6 21:34:49 2001
-+++ anjuta-0.1.8/Makefile.am	Thu Dec  6 22:38:59 2001
-@@ -27,13 +27,15 @@
- 	xml-i18n-update.in \
- 	$(anjutadoc_DATA)
+--- anjuta-0.1.8/Makefile.am~	Fri Nov 30 23:45:38 2001
++++ anjuta-0.1.8/Makefile.am	Tue Feb 12 20:07:52 2002
+@@ -7,19 +7,11 @@
+ 	widgets manuals omf-install src pixmaps data \
+ 	doc launcher
  
--@XML_I18N_MERGE_DESKTOP_RULE@
-+@XML_I18N_MERGE_DESKTOP_RULE1@
- 
- gnomemenudir = $(prefix)/@NO_PREFIX_PACKAGE_MENU_DIR@/Development
- 
+-anjutadocdir = ${prefix}/doc/anjuta
+-anjutadoc_DATA = \
++
++EXTRA_DIST = \
+ 	README\
+-	COPYING\
+-	AUTHORS\
+-	ChangeLog\
+-	INSTALL\
+-	NEWS\
+ 	TODO\
+-	ABOUT-NLS\
+ 	FUTURE
+-
+-EXTRA_DIST = \
+ 	anjuta.desktop.in.in \
+ 	anjuta.spec.in \
+ 	xml-i18n-extract.in \
+@@ -34,6 +26,8 @@
  gnomemenu_premerge_file = anjuta.desktop.in
  gnomemenu_DATA = $(gnomemenu_premerge_file:.desktop.in=.desktop)
  
@@ -18,18 +31,6 @@ diff -urN anjuta-0.1.8.org/Makefile.am anjuta-0.1.8/Makefile.am
  # Copy all the spec files. Of cource, only one is actually used.
  dist-hook:
  	for specfile in *.spec; do \
-diff -urN anjuta-0.1.8.org/configure.in anjuta-0.1.8/configure.in
---- anjuta-0.1.8.org/configure.in	Thu Dec  6 21:34:49 2001
-+++ anjuta-0.1.8/configure.in	Thu Dec  6 21:45:02 2001
-@@ -268,7 +268,7 @@
- 
- dnl Languages which your application supports
- ALL_LINGUAS="de es fr it ja nl no pl pt_BR ru sv ta tr uk zh_CN zh_TW"
--AM_GNOME_GETTEXT
-+AM_GNU_GETTEXT
- 
- dnl Set PACKAGE_LOCALE_DIR in config.h.
- if test "x${prefix}" = "xNONE"; then
 diff -urN anjuta-0.1.8.org/data/Makefile.am anjuta-0.1.8/data/Makefile.am
 --- anjuta-0.1.8.org/data/Makefile.am	Thu Dec  6 21:34:50 2001
 +++ anjuta-0.1.8/data/Makefile.am	Thu Dec  6 22:55:58 2001
