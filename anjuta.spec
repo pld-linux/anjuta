@@ -23,6 +23,8 @@ BuildRequires:	libtool
 BuildRequires:	libxml-devel
 BuildRequires:	pkgconfig
 BuildRequires:	scrollkeeper
+BuildRequires:	libsigc++1-devel
+BuildRequires:	gnomemm-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
