@@ -59,7 +59,7 @@ amigáveis.
 %build
 rm -f missing
 %{__libtoolize}
-gettextize --copy --force
+%{__gettextize}
 intltoolize --copy --force
 xml-i18n-toolize --copy --force
 aclocal -I macros
