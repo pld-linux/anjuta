@@ -1,27 +1,27 @@
+%define		snap	20030307
+
 Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	1.0.0
-Release:	1
+Version:	1.2.0
+Release:	0.%{snap}
 License:	GPL
 Group:		Development/Tools
-Source0:	http://cesnet.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
-Patch0:		%{name}-ac_am.patch
-Patch1:		%{name}-no_systemtags.patch
-Patch2:		%{name}-omf.patch
-Patch3:		%{name}-module_no_version.patch
-#Patch4:		%{name}-use_AM_CXXFLAGS.patch obsolete
-Patch5:		%{name}-desktop_fix.patch
+#Source0:	http://cesnet.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
+Source0:	%{name}/%{name}-%{version}-%{snap}.tar.bz2
+Patch0:		%{name}-am.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	intltool
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	scrollkeeper
-BuildRequires:	libgnomeui-devel >= 2.0.5
-BuildRequires:	libgnomeprintui-devel >= 1.116.0
+BuildRequires:	libglade2-devel
+BuildRequires:	libgnomeprintui-devel >= 2.2.0
+BuildRequires:	libgnomeui-devel >= 2.2.0
+BuildRequires:	vte-devel
+BuildRequires:	libzvt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 
@@ -50,26 +50,21 @@ são geralmente executadas em um console em modo texto e podem ser não
 amigáveis.
 
 %prep
-%setup -q
+%setup -q -n %{name}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-#%patch4 -p1 obsolete
-%patch5 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
-rm -f missing
-%{__gettextize}
-intltoolize
-%{__libtoolize}
-%{__aclocal} -I macros
-%{__autoheader}
-%{__autoconf}
-%{__automake}
+#rm -f missing
+#%{__gettextize}
+#intltoolize
+#%{__libtoolize}
+#%{__aclocal} -I /usr/share/aclocal/gnome2-macros
+#%{__autoheader}
+#%{__autoconf}
+#%{__automake}
+./autogen.sh
 %configure \
-	--with-gnome \
 	--disable-static
 %{__make}
 
@@ -78,29 +73,24 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	gnomemenudir=%{_applnkdir}/Development \
-	omf_dest_dir=%{_omf_dest_dir}/anjuta
+	gnomemenudir=%{_datadir}/applications
 
 %find_lang %{name} --with-gnome
-
-%post   -p /usr/bin/scrollkeeper-update
-%postun -p /usr/bin/scrollkeeper-update
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README ChangeLog NEWS TODO ABOUT-NLS AUTHORS COPYING 
+%doc README ChangeLog NEWS TODO AUTHORS COPYING 
 %doc FUTURE INSTALL doc/ScintillaDoc.html
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/anjuta
 %attr(755,root,root) %{_libdir}/anjuta/lib*.so*
 %{_libdir}/anjuta/lib*.la
-%{_omf_dest_dir}/%{name}
+%{_pixmapsdir}/anjuta
 %{_datadir}/anjuta
-%{_applnkdir}/Development/*
-%{_pixmapsdir}/*
-%{_mandir}/man1/*
+%{_datadir}/applications/*
 %{_datadir}/mime-info
 %{_datadir}/mimelnk
+%{_mandir}/man1/*
