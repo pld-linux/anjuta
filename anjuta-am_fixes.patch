@@ -1,14 +1,12 @@
---- anjuta-0.1.4/scintilla/Makefile.am~	Mon Mar  5 09:07:00 2001
-+++ anjuta-0.1.4/scintilla/Makefile.am	Fri Jun 29 22:47:29 2001
-@@ -4,9 +4,9 @@
+diff -urN anjuta-0.1.8.org/manuals/sgmldocs.make anjuta-0.1.8/manuals/sgmldocs.make
+--- anjuta-0.1.8.org/manuals/sgmldocs.make	Thu Dec  6 21:34:49 2001
++++ anjuta-0.1.8/manuals/sgmldocs.make	Thu Dec  6 21:36:52 2001
+@@ -53,7 +53,7 @@
+ 	-cp $(docname)/index.html .
  
- noinst_LIBRARIES = libscintilla.a
+ $(docname).sgml: $(sgml_ents)
+-        -ourdir=`pwd`;  \
++        ourdir=`pwd`;  \
+         cd $(srcdir);   \
+         cp $(sgml_ents) $$ourdir
  
--INCLUDES = -I include
-+DEFS = -DGTK -DSCI_LEXER -DUSE_XIM -DHAVE_CONFIG_H
- 
--CXXFLAGS = -DGTK -DSCI_LEXER -DUSE_XIM -W -Wall -g -O
-+INCLUDES = -I include
- 
- libscintilla_a_SOURCES =\
- 	AutoComplete.cxx \

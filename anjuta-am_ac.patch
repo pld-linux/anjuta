@@ -1,0 +1,68 @@
+diff -urN anjuta-0.1.8.org/Makefile.am anjuta-0.1.8/Makefile.am
+--- anjuta-0.1.8.org/Makefile.am	Thu Dec  6 21:34:49 2001
++++ anjuta-0.1.8/Makefile.am	Thu Dec  6 22:38:59 2001
+@@ -27,13 +27,15 @@
+ 	xml-i18n-update.in \
+ 	$(anjutadoc_DATA)
+ 
+-@XML_I18N_MERGE_DESKTOP_RULE@
++@XML_I18N_MERGE_DESKTOP_RULE1@
+ 
+ gnomemenudir = $(prefix)/@NO_PREFIX_PACKAGE_MENU_DIR@/Development
+ 
+ gnomemenu_premerge_file = anjuta.desktop.in
+ gnomemenu_DATA = $(gnomemenu_premerge_file:.desktop.in=.desktop)
+ 
++anjuta.desktop:
++
+ # Copy all the spec files. Of cource, only one is actually used.
+ dist-hook:
+ 	for specfile in *.spec; do \
+diff -urN anjuta-0.1.8.org/configure.in anjuta-0.1.8/configure.in
+--- anjuta-0.1.8.org/configure.in	Thu Dec  6 21:34:49 2001
++++ anjuta-0.1.8/configure.in	Thu Dec  6 21:45:02 2001
+@@ -268,7 +268,7 @@
+ 
+ dnl Languages which your application supports
+ ALL_LINGUAS="de es fr it ja nl no pl pt_BR ru sv ta tr uk zh_CN zh_TW"
+-AM_GNOME_GETTEXT
++AM_GNU_GETTEXT
+ 
+ dnl Set PACKAGE_LOCALE_DIR in config.h.
+ if test "x${prefix}" = "xNONE"; then
+diff -urN anjuta-0.1.8.org/data/Makefile.am anjuta-0.1.8/data/Makefile.am
+--- anjuta-0.1.8.org/data/Makefile.am	Thu Dec  6 21:34:50 2001
++++ anjuta-0.1.8/data/Makefile.am	Thu Dec  6 22:55:58 2001
+@@ -33,15 +33,15 @@
+ 
+ install-data-local:
+ 	mkdir -p $(MACROS_dir)
+-	$(INSTALL_DATA) $(MACROS:%=$(top_srcdir)/macros/%) $(MACROS_dir)
++	$(INSTALL_DATA) $(MACROS:%=$(top_srcdir)/macros/%) $(DESTDIR)$(MACROS_dir)
+ 
+ uninstall-local:
+ 	@rm -fv $(MACROS:%=$(MACROS_dir)/%)
+-	if test -d $(MACROS_dir); then \
+-	  rmdir $(MACROS_dir); \
++	if test -d $(DESTDIR)$(MACROS_dir); then \
++	  rmdir $(DESTDIR)$(MACROS_dir); \
+ 	  \
+-	  if test -d $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@; then \
+-	    rmdir $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@; \
++	  if test -d $(DESTDIR)$(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@; then \
++	    rmdir $(DESTDIR)$(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@; \
+ 	  fi; \
+ 	fi
+ 
+diff -urN anjuta-0.1.8.org/manuals/sgmldocs.make anjuta-0.1.8/manuals/sgmldocs.make
+--- anjuta-0.1.8.org/manuals/sgmldocs.make	Thu Dec  6 21:34:49 2001
++++ anjuta-0.1.8/manuals/sgmldocs.make	Thu Dec  6 21:36:52 2001
+@@ -53,7 +53,7 @@
+ 	-cp $(docname)/index.html .
+ 
+ $(docname).sgml: $(sgml_ents)
+-        -ourdir=`pwd`;  \
++        ourdir=`pwd`;  \
+         cd $(srcdir);   \
+         cp $(sgml_ents) $$ourdir
+ 
