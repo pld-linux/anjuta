@@ -9,7 +9,7 @@ Release:	0.%{snap}
 License:	GPL
 Group:		Development/Tools
 #Source0:	http://cesnet.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
-Source0:	%{name}/%{name}-%{version}-%{snap}.tar.bz2
+Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Patch0:		%{name}-am.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	autoconf
