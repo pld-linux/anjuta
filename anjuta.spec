@@ -56,13 +56,13 @@ amigáveis.
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
 #rm -f missing
-#%{__gettextize}
+#%%{__gettextize}
 #intltoolize
-#%{__libtoolize}
-#%{__aclocal} -I /usr/share/aclocal/gnome2-macros
-#%{__autoheader}
-#%{__autoconf}
-#%{__automake}
+#%%{__libtoolize}
+#%%{__aclocal} -I /usr/share/aclocal/gnome2-macros
+#%%{__autoheader}
+#%%{__autoconf}
+#%%{__automake}
 ./autogen.sh
 %configure \
 	--disable-static
