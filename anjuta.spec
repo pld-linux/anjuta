@@ -4,7 +4,7 @@ Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	1.2.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
