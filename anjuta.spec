@@ -27,6 +27,7 @@ BuildRequires:	gtk+-devel
 BuildRequires:	intltool
 BuildRequires:	libstdc++-devel
 BuildRequires:	scrollkeeper
+BuildRequires:	libxml-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
