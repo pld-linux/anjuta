@@ -1,0 +1,32 @@
+diff -Nur anjuta-0.1.9/data/Makefile.am anjuta-0.1.9.new/data/Makefile.am
+--- anjuta-0.1.9/data/Makefile.am	Thu Feb 14 20:28:34 2002
++++ anjuta-0.1.9.new/data/Makefile.am	Sun Apr 28 04:55:33 2002
+@@ -31,9 +31,9 @@
+ MACROS_dir = $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/gnome
+ 
+ install-data-local: system.tags
+-	mkdir -p $(MACROS_dir)
+-	$(INSTALL_DATA) $(MACROS:%=$(top_srcdir)/macros/%) $(MACROS_dir)
+-	$(INSTALL_DATA) system.tags $(anjuta_datadir)
++	mkdir -p $(DESTDIR)$(MACROS_dir)
++	$(INSTALL_DATA) $(MACROS:%=$(top_srcdir)/macros/%) $(DESTDIR)$(MACROS_dir)
++	$(INSTALL_DATA) system.tags $(DESTDIR)$(anjuta_datadir)
+ 
+ uninstall-local:
+ 	@rm -fv $(MACROS:%=$(MACROS_dir)/%)
+diff -Nur anjuta-0.1.9/manuals/sgmldocs.make anjuta-0.1.9.new/manuals/sgmldocs.make
+--- anjuta-0.1.9/manuals/sgmldocs.make	Thu Feb 14 20:28:34 2002
++++ anjuta-0.1.9.new/manuals/sgmldocs.make	Sun Apr 28 04:40:50 2002
+@@ -52,12 +52,6 @@
+ index.html: $(docname)/index.html
+ 	-cp $(docname)/index.html .
+ 
+-$(docname).sgml: $(sgml_ents)
+-        -ourdir=`pwd`;  \
+-        cd $(srcdir);   \
+-        cp $(sgml_ents) $$ourdir
+-
+-
+ # The weird srcdir trick is because the db2html from the Cygnus RPMs
+ # cannot handle relative filenames
+ $(docname)/index.html: $(srcdir)/$(docname).sgml
