@@ -12,6 +12,7 @@ Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 # Source0-md5:	5ba4547bd71dd9c6d19006913623680e
 Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
+Patch2:		%{name}-desktop.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 2.8.0
 BuildRequires:	autoconf
@@ -67,6 +68,7 @@ amigáveis.
 %setup -q
 %patch0 -p0
 %patch1 -p1
+%patch2 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
