@@ -2,13 +2,13 @@ Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	0.1.9
-Release:	5
+Version:	0.9.99
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
-Patch0:		%{name}-ac_am.patch
+#Patch0:		%{name}-ac_am.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -22,6 +22,8 @@ BuildRequires:	libxml-devel
 BuildRequires:	pkgconfig
 BuildRequires:	scrollkeeper
 BuildRequires:	gnomemm-devel
+BuildRequires:	openssl-devel
+BuildRequires:	docbook-utils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -54,7 +56,7 @@ amigáveis.
 
 %prep
 %setup  -q
-%patch0 -p1
+#%patch0 -p1
 
 %build
 rm -f missing
