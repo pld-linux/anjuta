@@ -5,9 +5,14 @@ Version:	0.1.8
 Release:	2
 License:	GPL
 Group:		Development/Tools
-Group(de):	Entwicklung/Werkzeuge
+Group(cs):	Vývojové prostøedky/Nástroje
+Group(de):	Entwicklung/Tools
+Group(es):	Desarrollo/Herramientas
 Group(fr):	Development/Outils
+Group(ja):	³«È¯/¥Ä¡¼¥ë
 Group(pl):	Programowanie/Narzêdzia
+Group(pt):	Desenvolvimento/Ferramentas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/éÎÓÔÒÕÍÅÎÔÙ
 Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-am_ac.patch
@@ -50,6 +55,8 @@ odpluskwiacz oraz edytor z mo¿liwo¶ci± przegl±dania ¼róde³.
 %build
 sed -e s/AM_GNOME_GETTEXT/AM_GNU_GETTEXT/ configure.in > configure.in.tmp
 mv -f configure.in.tmp configure.in
+sed -e s/XML_I18N_MERGE_DESKTOP_RULE1/XML_I18N_MERGE_DESKTOP_RULE/ Makefile.am > Makefile.am.tmp
+mv -f Makefile.am.tmp Makefile.am
 rm -f missing
 libtoolize --copy --force
 gettextize --copy --force
