@@ -83,6 +83,9 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	gnomemenudir=%{_desktopdir}
 
+# *.la not needed - *.so loaded through libgmodule
+rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
+
 %find_lang %{name} --with-gnome
 
 %clean
@@ -90,12 +93,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README ChangeLog NEWS TODO AUTHORS COPYING
-%doc FUTURE INSTALL doc/ScintillaDoc.html
+%doc AUTHORS ChangeLog FUTURE NEWS README TODO doc/ScintillaDoc.html
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/anjuta
 %attr(755,root,root) %{_libdir}/anjuta/lib*.so*
-%{_libdir}/anjuta/lib*.la
 %{_pixmapsdir}/anjuta
 %{_datadir}/anjuta
 %{_datadir}/mime-info/*
