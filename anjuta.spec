@@ -26,7 +26,7 @@ BuildRequires:	libgnomeprintui-devel >= 2.2.0
 BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
 BuildRequires:	libtool
 BuildRequires:	libzvt-devel >= 2.0.0
-BuildRequires: 	ncurses-devel
+BuildRequires:	ncurses-devel
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
 BuildRequires:	vte-devel >= 0.9.0
