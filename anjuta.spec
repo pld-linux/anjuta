@@ -1,4 +1,5 @@
 Summary:	Gnome integrated development environment
+Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Name:		anjuta
 Version:	0.1.4
 Release:	0
@@ -12,6 +13,19 @@ URL:		http://anjuta.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
+Anjuta is a very versatile integrated development environment for C
+and C++ GNU/Linux. Written in GTK/Gnome and written for GTK/Gnome, it
+features many advanced programming tools and utilities. Besides many
+other, it has project management, application wizards, onboard
+interactive debugger, and a powerful source editor with source
+browsing.
+
+%description -l pl
+Anjuta to wszechstronne zintegrowane ¶rodowisko programowania dla jêzyka
+C oraz C++. Zosta³o napisane z wykorzystaniem tandemu GTK/Gnome, w³a¶nie
+po to by go w takim otoczeniu u¿ywaæ. Miêdzy innymi posiada zarz±dcê
+projektów, kreator aplikacji, wbudowany interaktywny odpluskwiacz oraz
+edytor z mo¿liwo¶ci± przegl±dania ¼róde³.
 
 %prep
 %setup  -q
