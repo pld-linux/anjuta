@@ -41,8 +41,8 @@ odpluskwiacz oraz edytor z mo¿liwo¶ci± przegl±dania ¼róde³.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/%{_applnk}/Development
-install %{SOURCE1} $RPM_BUILD_ROOT/%{_applnk}/Development/anjuta
+install -d $RPM_BUILD_ROOT/%{_applnkdir}/Development
+install %{SOURCE1} $RPM_BUILD_ROOT/%{_applnkdir}/Development/anjuta
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
@@ -57,7 +57,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755, root, root) %{_bindir}/anjuta
 %attr(755, root, root) %{_bindir}/anjuta_launcher
 %{_datadir}/anjuta
-%{_applnkdir}/Development
 %{_datadir}/gnome/help/anjuta
 %{_datadir}/pixmaps/anjuta
 %{_applnkdir}/Development/anjuta
