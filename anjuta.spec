@@ -3,7 +3,7 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	0.1.9
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
@@ -82,7 +82,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT/%{_applnkdir}/Development
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	omf_dest_dir=%{_omf_dest_dir}/%{name}
+	omf_dest_dir=%{_omf_dest_dir}/omf/%{name}
 
 gzip -9nf README ChangeLog NEWS TODO
 
@@ -101,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/anjuta
 %attr(755,root,root) %{_libdir}/anjuta/lib*.so.*.*
 %attr(755,root,root) %{_libdir}/anjuta/lib*.??
-%{_omf_dest_dir}/%{name}
+%{_omf_dest_dir}/omf/%{name}
 %{_datadir}/anjuta
 %{_applnkdir}/Development/*
 %{_pixmapsdir}/anjuta
