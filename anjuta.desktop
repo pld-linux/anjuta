@@ -7,4 +7,5 @@ Exec=anjuta
 Icon=/usr/X11R6/share/pixmaps/anjuta/anjuta_icon.png
 Terminal=0
 Type=Application
+Encoding=UTF-8
 # vi: encoding=utf-8
