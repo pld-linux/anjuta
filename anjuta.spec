@@ -14,6 +14,7 @@ Patch2:		%{name}-omf.patch
 Patch3:		%{name}-module_no_version.patch
 Patch4:		%{name}-use_AM_CXXFLAGS.patch
 Patch5:		%{name}-desktop_fix.patch
+Patch6:		%{name}-desktop.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -66,6 +67,7 @@ amigáveis.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 rm -f missing
