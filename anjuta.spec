@@ -1,32 +1,28 @@
-#%%define		snap	20030425
-
 Summary:	GNOME integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	1.1.98
-Release:	2
+Version:	1.2.0
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
-#Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	cd4a048c856831d5eaddd6e78de3169c
+# Source0-md5:	5ba4547bd71dd9c6d19006913623680e
 Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 2.8.0
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	glib2-devel >= 2.2.0
 BuildRequires:	intltool
 BuildRequires:	gnome-common >= 2.4.0
 BuildRequires:	gnome-vfs2-devel >= 2.4.0
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnomeprintui-devel >= 2.4.0
 BuildRequires:	libgnomeui-devel >= 2.4.0
-BuildRequires:	libxml2-devel >= 2.4.2
+BuildRequires:	libxml2-devel >= 2.4.23
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel
 BuildRequires:	pcre-devel >= 3.9
@@ -76,14 +72,11 @@ amigáveis.
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
 CFLAGS="%{rpmcflags} -fno-omit-frame-pointer"
 rm -f missing
-#%%{__gettextize}
-#intltoolize
 %{__libtoolize}
 %{__aclocal} -I %{_aclocaldir}/gnome2-macros
 %{__autoheader}
 %{__autoconf}
 %{__automake}
-#./autogen.sh
 %configure \
 	--disable-static \
 	--enable-gprof
@@ -109,12 +102,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog FUTURE NEWS README TODO doc/ScintillaDoc.html
+%doc AUTHORS ChangeLog FUTURE NEWS README THANKS TODO doc/ScintillaDoc.html
 %attr(755,root,root) %{_bindir}/*
-%dir %{_libdir}/anjuta
-%attr(755,root,root) %{_libdir}/anjuta/lib*.so*
-%{_pixmapsdir}/anjuta
-%{_datadir}/anjuta
+%dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
+%{_pixmapsdir}/%{name}
+%{_datadir}/%{name}
 %{_datadir}/mime-info/*
 %{_datadir}/mimelnk/application/*
 %{_desktopdir}/*
