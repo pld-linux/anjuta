@@ -18,7 +18,7 @@ BuildRequires:	ORBit2-devel >= 2.8.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	intltool
-BuildRequires:	gnome-common >= 2.4.0
+BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.4.0
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnomeprintui-devel >= 2.4.0
@@ -78,7 +78,7 @@ mv -f po/{no,nb}.po
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
 CFLAGS="%{rpmcflags} -fno-omit-frame-pointer"
 %{__libtoolize}
-%{__aclocal} -I %{_aclocaldir}/gnome2-macros
+%{__aclocal}
 %{__autoheader}
 %{__autoconf}
 %{__automake}
