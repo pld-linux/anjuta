@@ -4,32 +4,33 @@ Summary:	GNOME integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	1.1.97
-Release:	2
+Version:	1.1.98
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	fc938d304f29f62353ab5fdf48c93685
-Patch0:		%{name}-am.patch
-Patch1:		%{name}-gettext.patch
+# Source0-md5:	cd4a048c856831d5eaddd6e78de3169c
+Patch0:		%{name}-gettext.patch
 URL:		http://anjuta.sourceforge.net/
-BuildRequires:	ORBit2-devel >= 2.7.5-1
+BuildRequires:	ORBit2-devel >= 2.8.0
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	glib2-devel >= 2.0.6
+BuildRequires:	glib2-devel >= 2.2.0
 BuildRequires:	intltool
-BuildRequires:	gnome-common
-BuildRequires:	libglade2-devel >= 2.0.0
-BuildRequires:	libgnomeprintui-devel >= 2.2.0
-BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
+BuildRequires:	gnome-common >= 2.4.0
+BuildRequires:	gnome-vfs2-devel >= 2.4.0
+BuildRequires:	libglade2-devel >= 2.0.1
+BuildRequires:	libgnomeprintui-devel >= 2.4.0
+BuildRequires:	libgnomeui-devel >= 2.4.0
+BuildRequires:	libxml2-devel >= 2.4.2
 BuildRequires:	libtool
-BuildRequires:	libzvt-devel >= 2.0.0
 BuildRequires:	ncurses-devel
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
-BuildRequires:	vte-devel >= 0.9.0
+BuildRequires:	scrollkeeper
+BuildRequires:	vte-devel >= 0.11.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,8 +59,7 @@ amigáveis.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p0
+%patch0 -p0
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
@@ -73,7 +73,8 @@ rm -f missing
 %{__automake}
 #./autogen.sh
 %configure \
-	--disable-static
+	--disable-static \
+	--enable-gprof
 %{__make}
 
 %install
@@ -91,6 +92,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post -p /usr/bin/scrollkeeper-update
+%postun -p /usr/bin/scrollkeeper-update
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog FUTURE NEWS README TODO doc/ScintillaDoc.html
@@ -103,3 +107,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mimelnk/application/*
 %{_desktopdir}/*
 %{_mandir}/man1/*
+%{_omf_dest_dir}/%{name}
