@@ -1,0 +1,11 @@
+--- anjuta-0.1.9/scintilla/Makefile.am~	Tue Oct  8 04:18:40 2002
++++ anjuta-0.1.9/scintilla/Makefile.am	Tue Oct  8 04:18:40 2002
+@@ -6,7 +6,7 @@
+ 
+ INCLUDES = -I$(srcdir)/include $(GTK_CFLAGS)
+ 
+-CXXFLAGS = -DGTK -DSCI_LEXER -DUSE_XIM -W -Wall -g -O
++AM_CXXFLAGS = -DGTK -DSCI_LEXER -DUSE_XIM -W -Wall
+ 
+ libscintilla_a_SOURCES =\
+ 	AutoComplete.cxx \
