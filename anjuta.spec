@@ -3,13 +3,14 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	0.1.9
-Release:	7
+Release:	8
 License:	GPL
 Group:		Development/Tools
 Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-ac_am.patch
 Patch1:		%{name}-no_systemtags.patch
+Patch2:		%{name}-omf.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -58,6 +59,7 @@ amigáveis.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 rm -f missing
