@@ -10,12 +10,14 @@ Group(da):	Udvikling/Værktøj
 Group(de):	Entwicklung/Tools
 Group(es):	Desarrollo/Herramientas
 Group(fr):	Development/Outils
+Group(is):	Þróunartól/Tól
 Group(it):	Sviluppo/Tool
 Group(ja):	³«È¯/¥Ä¡¼¥ë
 Group(no):	Utvikling/Verktøy
 Group(pl):	Programowanie/Narzêdzia
 Group(pt):	Desenvolvimento/Ferramentas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/éÎÓÔÒÕÍÅÎÔÙ
+Group(sl):	Razvoj/Orodja
 Group(sv):	Utveckling/Verktyg
 Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
@@ -26,15 +28,15 @@ URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
 BuildRequires:	intltool
+BuildRequires:	intltool
 BuildRequires:	libstdc++-devel
-BuildRequires:	scrollkeeper
+BuildRequires:	libtool
 BuildRequires:	libxml-devel
-BuildRequires:	xml-i18n-tools
+BuildRequires:	scrollkeeper
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -65,8 +67,6 @@ odpluskwiacz oraz edytor z mo¿liwo¶ci± przegl±dania ¼róde³.
 %build
 sed -e s/AM_GNOME_GETTEXT/AM_GNU_GETTEXT/ configure.in > configure.in.tmp
 mv -f configure.in.tmp configure.in
-sed -e s/XML_I18N_MERGE_DESKTOP_RULE1/XML_I18N_MERGE_DESKTOP_RULE/ Makefile.am > Makefile.am.tmp
-mv -f Makefile.am.tmp Makefile.am
 rm -f missing
 libtoolize --copy --force
 gettextize --copy --force
