@@ -4,7 +4,7 @@ Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	1.2.2
-Release:	4
+Release:	5
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
@@ -21,17 +21,18 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	intltool
 BuildRequires:	gnome-common >= 2.8.0
-BuildRequires:	gnome-vfs2-devel >= 2.4.0
-BuildRequires:	libglade2-devel >= 2.0.1
-BuildRequires:	libgnomeprintui-devel >= 2.4.0
-BuildRequires:	libgnomeui-devel >= 2.4.0
-BuildRequires:	libxml2-devel >= 2.4.23
+BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
+BuildRequires:	libglade2-devel >= 1:2.5.1
+BuildRequires:	libgnomeprintui-devel >= 2.10.0
+BuildRequires:	libgnomeui-devel >= 2.10.0-2
+BuildRequires:	libxml2-devel >= 1:2.6.17
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
 BuildRequires:	scrollkeeper
 BuildRequires:	vte-devel >= 0.11.0
+Requires(post,postun):	scrollkeeper
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -106,8 +107,11 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /usr/bin/scrollkeeper-update
-%postun	-p /usr/bin/scrollkeeper-update
+%post
+/usr/bin/scrollkeeper-update -q
+
+%postun
+/usr/bin/scrollkeeper-update -q
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
