@@ -61,6 +61,7 @@ amigáveis.
 %patch0 -p1
 
 %build
+rm -f missing
 libtoolize --copy --force
 gettextize --copy --force
 intltoolize --copy --force
@@ -84,8 +85,6 @@ install %{SOURCE1} $RPM_BUILD_ROOT/%{_applnkdir}/Development
 	DESTDIR=$RPM_BUILD_ROOT \
 	omf_dest_dir=%{_omf_dest_dir}/%{name}
 
-gzip -9nf README ChangeLog NEWS TODO
-
 %find_lang %{name} --with-gnome
 
 %post   -p /usr/bin/scrollkeeper-update
@@ -96,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README ChangeLog NEWS TODO
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/anjuta
 %attr(755,root,root) %{_libdir}/anjuta/lib*.so.*.*
