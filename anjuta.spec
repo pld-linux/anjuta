@@ -10,8 +10,14 @@ Group(fr):	Development/Outils
 Group(pl):	Programowanie/Narzêdzia
 Source0:	http://anjuta.sourceforge.net/packages/14/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
+Patch0:		%{name}-am_fixes.patch
 URL:		http://anjuta.sourceforge.net/
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
+BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -33,30 +39,38 @@ odpluskwiacz oraz edytor z mo¿liwo¶ci± przegl±dania ¼róde³.
 
 %prep
 %setup  -q
+%patch0 -p1
 
 %build
+libtoolize --copy --force
+gettextize --copy --force
+aclocal -I macros
+autoconf
+automake -a -c
+CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions"
 %configure 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT/%{_applnkdir}/Development
-install %{SOURCE1} $RPM_BUILD_ROOT/%{_applnkdir}/Development/anjuta
+
+install %{SOURCE1} $RPM_BUILD_ROOT/%{_applnkdir}/Development
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 gzip -9nf README ChangeLog NEWS TODO
 
+%find_lang %{name} --with-gnome
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README.gz ChangeLog.gz NEWS.gz TODO.gz
-%attr(755, root, root) %{_bindir}/anjuta
-%attr(755, root, root) %{_bindir}/anjuta_launcher
+%doc *.gz
+%attr(755,root,root) %{_bindir}/anjuta
+%attr(755,root,root) %{_bindir}/anjuta_launcher
 %{_datadir}/anjuta
-%{_datadir}/gnome/help/anjuta
-%{_datadir}/pixmaps/anjuta
-%{_applnkdir}/Development/anjuta
+%{_pixmapsdir}/*
+%{_applnkdir}/Development/*
