@@ -23,6 +23,7 @@ BuildRequires:	libgnomeui-devel >= 2.2.0
 BuildRequires:	vte-devel
 BuildRequires:	libzvt-devel
 BuildRequires:	pcre-devel
+BuildRequires:	glib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 
