@@ -10,8 +10,10 @@ Source1:	%{name}.desktop
 Patch0:		%{name}-ac_am.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit-devel
+BuildRequires:	audiofile-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	esound-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
@@ -19,6 +21,7 @@ BuildRequires:	intltool
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml-devel
+BuildRequires:	pkgconfig
 BuildRequires:	scrollkeeper
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
