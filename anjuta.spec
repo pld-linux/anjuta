@@ -82,8 +82,7 @@ rm -f missing
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-static \
-	--enable-gprof
+	--disable-static
 
 %{__make}
 
