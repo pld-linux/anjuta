@@ -12,6 +12,8 @@ Source0:	http://anjuta.sourceforge.net/packages/14/%{name}-%{version}.tar.gz
 URL:		http://anjuta.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define         _prefix         /usr/X11R6
+
 %description
 Anjuta is a very versatile integrated development environment for C
 and C++ GNU/Linux. Written in GTK/Gnome and written for GTK/Gnome, it
@@ -39,7 +41,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-gzip -9nf README ChangeLog 
+gzip -9nf README ChangeLog NEWS TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%files
+%doc README.gz ChangeLog.gz NEWS.gz TODO.gz
+/usr/X11R6/bin/anjuta
+/usr/X11R6/bin/anjuta_launcher
+/usr/X11R6/share/anjuta
+/usr/X11R6/share/gnome/apps/Development
+/usr/X11R6/share/gnome/help/anjuta
+/usr/X11R6/share/pixmaps/anjuta
