@@ -1,15 +1,13 @@
 Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Name:		anjuta
-Version:	0.1.8
-Release:	4
+Version:	0.1.9
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
-Patch0:		%{name}-am_ac.patch
-Patch1:		%{name}-dont_rebuild_tags.patch
-Patch2:		%{name}-destdir.patch
+Patch0:		%{name}-ac_am.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit-devel
 BuildRequires:	autoconf
@@ -47,15 +45,11 @@ odpluskwiacz oraz edytor z mo¿liwo¶ci± przegl±dania ¼róde³.
 %prep
 %setup  -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
-sed -e s/AM_GNOME_GETTEXT/AM_GNU_GETTEXT/ configure.in > configure.in.tmp
-mv -f configure.in.tmp configure.in
-rm -f missing
 libtoolize --copy --force
 gettextize --copy --force
+intltoolize --copy --force
 xml-i18n-toolize --copy --force
 aclocal -I macros
 autoconf
@@ -74,7 +68,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT/%{_applnkdir}/Development
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	omf_dest_dir=%{_omf_dest_dir}/omf/%{name}
+	omf_dest_dir=%{_omf_dest_dir}/%{name}
 
 gzip -9nf README ChangeLog NEWS TODO
 
@@ -90,7 +84,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
+%dir %{_libdir}/anjuta
+%attr(755,root,root) %{_libdir}/anjuta/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/anjuta/lib*.??
+%{_omf_dest_dir}/%{name}
 %{_datadir}/anjuta
-%{_omf_dest_dir}/omf/%{name}
-%{_pixmapsdir}/*
+%{_datadir}/gnome/apps/Development/*
 %{_applnkdir}/Development/*
+%{_pixmapsdir}/anjuta
