@@ -3,16 +3,15 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	1.2.0
+Version:	1.2.1
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	5ba4547bd71dd9c6d19006913623680e
+# Source0-md5:	f74a86d4541e0f55115be9de66d8c2c4
 Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
-Patch2:		%{name}-desktop.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 2.8.0
 BuildRequires:	autoconf
@@ -68,7 +67,6 @@ amigáveis.
 %setup -q
 %patch0 -p0
 %patch1 -p1
-%patch2 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
