@@ -1,4 +1,4 @@
-%define		snap	20030405
+%define		snap	20030412
 
 Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
