@@ -58,7 +58,7 @@ amigáveis.
 
 %build
 rm -f missing
-libtoolize --copy --force
+%{__libtoolize}
 gettextize --copy --force
 intltoolize --copy --force
 xml-i18n-toolize --copy --force
