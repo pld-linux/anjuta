@@ -98,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/anjuta/lib*.la
 %{_pixmapsdir}/anjuta
 %{_datadir}/anjuta
-%{_datadir}/applications/*
 %{_datadir}/mime-info/*
 %{_datadir}/mimelnk/application/*
+%{_desktopdir}/*
 %{_mandir}/man1/*
