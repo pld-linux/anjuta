@@ -1,0 +1,11 @@
+diff -urN aa/anjuta-1.2.2/configure.in anjuta-1.2.2/configure.in
+--- aa/anjuta-1.2.2/configure.in	2004-04-12 10:10:34.000000000 +0200
++++ anjuta-1.2.2/configure.in	2004-12-27 20:34:23.654303032 +0100
+@@ -183,7 +183,6 @@
+ AC_SUBST(GETTEXT_PACKAGE)
+ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
+ AM_GLIB_GNU_GETTEXT
+-AC_PROG_INTLTOOL
+ 
+ dnl ***************************************************************************
+ dnl Check for Gnome XML [Is this still required?]
