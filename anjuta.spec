@@ -1,11 +1,12 @@
-%define		snap	20030412
+%define		snap	20030425
 
 Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	1.2.0
+Version:	1.1.1
 Release:	0.%{snap}.1
+Epoch:		1
 License:	GPL
 Group:		Development/Tools
 #Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
