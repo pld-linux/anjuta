@@ -4,18 +4,18 @@ Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	1.2.2
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
 # Source0-md5:	a30858dba0b902064d0d702cedfdc84f
 Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
 Patch2:		%{name}-locale-names.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 2.8.0
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	intltool
 BuildRequires:	gnome-common >= 2.4.0
@@ -70,12 +70,13 @@ amigáveis.
 %patch1 -p1
 %patch2 -p1
 
-mv po/{no,nb}.po
+mv -f po/{no,nb}.po
+
+%{__perl} -pi -e 's@^(packageplugindir=)lib/@$1%{_lib}/@' configure.in
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
 CFLAGS="%{rpmcflags} -fno-omit-frame-pointer"
-rm -f missing
 %{__libtoolize}
 %{__aclocal} -I %{_aclocaldir}/gnome2-macros
 %{__autoheader}
@@ -101,8 +102,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /usr/bin/scrollkeeper-update
-%postun -p /usr/bin/scrollkeeper-update
+%post	-p /usr/bin/scrollkeeper-update
+%postun	-p /usr/bin/scrollkeeper-update
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
