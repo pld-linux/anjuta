@@ -1,0 +1,10 @@
+--- src/main.c.orig	Mon Mar  3 08:06:44 2003
++++ src/main.c	Sat Mar 22 23:33:30 2003
+@@ -152,6 +152,7 @@
+ #ifdef ENABLE_NLS
+ 	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
+ 	textdomain (PACKAGE);
++	bind_textdomain_codeset (PACKAGE, "UTF-8");
+ #endif
+ 	
+ 	/* Connect the necessary kernal signals */
