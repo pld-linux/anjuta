@@ -7,8 +7,8 @@ diff -uNr anjuta-0.1.9.orig/Makefile.am anjuta-0.1.9/Makefile.am
  
 -SUBDIRS = intl po macros tagmanager global-tags scintilla \
 +SUBDIRS = intl po macros tagmanager scintilla \
- 	widgets manuals omf-install src pixmaps data \
- 	doc launcher plugins scripts
+ 	widgets printing manuals omf-install pixmaps scripts data \
+ 	doc launcher plugins src macros2
  
 diff -uNr anjuta-0.1.9.orig/configure.in anjuta-0.1.9/configure.in
 --- anjuta-0.1.9.orig/configure.in	Thu Feb 14 20:28:34 2002
@@ -24,42 +24,32 @@ diff -uNr anjuta-0.1.9.orig/configure.in anjuta-0.1.9/configure.in
 diff -uNr anjuta-0.1.9.orig/data/Makefile.am anjuta-0.1.9/data/Makefile.am
 --- anjuta-0.1.9.orig/data/Makefile.am	Tue Sep 17 11:27:53 2002
 +++ anjuta-0.1.9/data/Makefile.am	Tue Sep 17 11:28:50 2002
-@@ -30,7 +30,7 @@
+@@ -45,17 +45,15 @@
  
- MACROS_dir = $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/gnome
+ MACROS2_dir = $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/gnome2
  
 -install-data-local: system.tags
-+install-data-local: 
++install-data-local:
  	mkdir -p $(DESTDIR)$(MACROS_dir)
+ 	mkdir -p $(DESTDIR)$(MACROS2_dir)
  	$(INSTALL_DATA) $(MACROS:%=$(top_srcdir)/macros/%) $(DESTDIR)$(MACROS_dir)
- 	$(INSTALL_DATA) system.tags $(DESTDIR)$(anjuta_datadir)
-@@ -48,9 +48,3 @@
+ 	$(INSTALL_DATA) $(MACROS2:%=$(top_srcdir)/macros2/%) $(DESTDIR)$(MACROS2_dir)
+ 	mv $(DESTDIR)$(MACROS2_dir)/Makefile.am.project $(DESTDIR)$(MACROS2_dir)/Makefile.am
+-	$(INSTALL_DATA) system.tags $(DESTDIR)$(anjuta_datadir)
+ 	$(INSTALL_DATA) $(top_srcdir)/setup-gettext $(DESTDIR)$(anjuta_datadir)
+ 
+ uninstall-local:
+-	@rm -fv $(anjuta_datadir)/system.tags
+ 	@rm -fv $(anjuta_datadir)/setup-gettext
+ 	mv $(MACROS2_dir)/Makefile.am $(MACROS2_dir)/Makefile.am.project
+ 	@rm -fv $(MACROS:%=$(MACROS_dir)/%)
+@@ -55,9 +55,3 @@
+ 	    rmdir $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/properties; fi
  
  clean-local:
- 	@rm -f system.tags
+-	@rm -f system.tags
 -
 -system.tags:
 -	cd $(top_builddir)/tagmanager && make libctags.a
 -	cd $(top_builddir)/global-tags && make system.tags
 -	mv $(top_builddir)/global-tags/system.tags .
--
-diff -uNr anjuta-0.1.9.orig/data/Makefile.am anjuta-0.1.9/data/Makefile.am
---- anjuta-0.1.9.orig/data/Makefile.am	Tue Sep 17 11:55:19 2002
-+++ anjuta-0.1.9/data/Makefile.am	Tue Sep 17 11:56:09 2002
-@@ -33,11 +33,9 @@
- install-data-local: 
- 	mkdir -p $(DESTDIR)$(MACROS_dir)
- 	$(INSTALL_DATA) $(MACROS:%=$(top_srcdir)/macros/%) $(DESTDIR)$(MACROS_dir)
--	$(INSTALL_DATA) system.tags $(DESTDIR)$(anjuta_datadir)
- 
- uninstall-local:
- 	@rm -fv $(MACROS:%=$(MACROS_dir)/%)
--	@rm -fv $(anjuta_datadir)/system.tags
- 	if test -d $(MACROS_dir); then \
- 	  rmdir $(MACROS_dir); \
- 	  \
-@@ -47,4 +45,3 @@
- 	fi
- 
- clean-local:
--	@rm -f system.tags
