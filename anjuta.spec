@@ -64,8 +64,8 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/%{_applnkdir}/Development
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/gnome
+install -d $RPM_BUILD_ROOT/%{_applnkdir}/Development \
+	$RPM_BUILD_ROOT%{_datadir}/%{name}/gnome
 
 install %{SOURCE1} $RPM_BUILD_ROOT/%{_applnkdir}/Development
 
@@ -76,6 +76,9 @@ install %{SOURCE1} $RPM_BUILD_ROOT/%{_applnkdir}/Development
 gzip -9nf README ChangeLog NEWS TODO
 
 %find_lang %{name} --with-gnome
+
+%post   -p /usr/bin/scrollkeeper-update
+%postun -p /usr/bin/scrollkeeper-update
 
 %clean
 rm -rf $RPM_BUILD_ROOT
