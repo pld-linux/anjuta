@@ -1,10 +1,13 @@
-Summary:	anjuta
+Summary:	Gnome integrated development environment
 Name:		anjuta
 Version:	0.1.4
 Release:	0
 License:	GPL
-Group:		Development/Debuggers
-Source0:	anjuta-%{version}.tar.gz
+Group:		Development/Tools
+Group(de):	Entwicklung/Werkzeuge
+Group(fr):	Development/Outils
+Group(pl):	Programowanie/Narzêdzia
+Source0:	http://anjuta.sourceforge.net/packages/14/%{name}-%{version}.tar.gz
 URL:		http://anjuta.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
