@@ -24,8 +24,6 @@ BuildRequires:	libgnomeui-devel >= 2.0.5
 BuildRequires:	libgnomeprintui-devel >= 1.116.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define         _prefix         /usr/X11R6
-%define		_mandir		%{_prefix}/man
 
 %description
 Anjuta is a very versatile integrated development environment for C
