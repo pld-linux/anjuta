@@ -1,18 +1,17 @@
-%define snap 2002-10-24-15
 Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	1.0.
-Release:	0.%(echo %{snap} | sed 's/-//g').1
+Version:	1.0.0
+Release:	0.1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://anjuta.sourceforge.net/cvs/anjuta-cvs-HEAD-hourly-%{snap}.tar.gz
+Source0:	http://cesnet.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-ac_am.patch
 Patch1:		%{name}-no_systemtags.patch
 Patch2:		%{name}-omf.patch
 Patch3:		%{name}-module_no_version.patch
-Patch4:		%{name}-use_AM_CXXFLAGS.patch
+#Patch4:		%{name}-use_AM_CXXFLAGS.patch obsolete
 Patch5:		%{name}-desktop_fix.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	autoconf
@@ -53,15 +52,21 @@ são geralmente executadas em um console em modo texto e podem ser não
 amigáveis.
 
 %prep
-%setup -q -n %{name}
+%setup -q
+%patch0 -p1
+%patch1 -p1
+#%patch2 -p1 need update
+%patch3 -p1
+#%patch4 -p1 obsolete
+%patch5 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
 rm -f missing
-glib-gettextize
+%{__gettextize}
 intltoolize
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I macros
 %{__autoheader}
 %{__autoconf}
 %{__automake}
@@ -75,7 +80,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	gnomemenudir=%{_applnkdir}/Development
+	gnomemenudir=%{_applnkdir}/Development \
+	omf_dest_dir=%{_omf_dest_dir}/anjuta
 
 %find_lang %{name} --with-gnome
 
@@ -87,11 +93,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README ChangeLog NEWS TODO
+%doc README ChangeLog NEWS TODO ABOUT-NLS AUTHORS COPYING 
+%doc FUTURE INSTALL doc/ScintillaDoc.html
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/anjuta
-%attr(755,root,root) %{_libdir}/anjuta/lib*.so
+%attr(755,root,root) %{_libdir}/anjuta/lib*.so*
+%{_libdir}/anjuta/lib*.la
 %{_omf_dest_dir}/%{name}
 %{_datadir}/anjuta
 %{_applnkdir}/Development/*
 %{_pixmapsdir}/*
+%{_mandir}/man1/*
+%{_datadir}/mime-info
+%{_datadir}/mimelnk
