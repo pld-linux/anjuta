@@ -2,8 +2,9 @@
 Name=Anjuta
 Name[pl]=Anjuta
 Comment=Integrated Development Environment
-Comment[pl]=Zintegrowane ¶rodowisko programowania
+Comment[pl]=Zintegrowane Å›rodowisko programowania
 Exec=anjuta
 Icon=/usr/X11R6/share/pixmaps/anjuta/anjuta_icon.xpm
 Terminal=0
 Type=Application
+# vi: encoding=utf-8
