@@ -24,6 +24,7 @@ BuildRequires:	vte-devel
 BuildRequires:	libzvt-devel
 BuildRequires:	pcre-devel
 BuildRequires:	glib-devel
+BuildRequires: 	ncurses-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 
