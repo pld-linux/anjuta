@@ -1,0 +1,43 @@
+diff -Nur anjuta/data/Makefile.am anjuta.new/data/Makefile.am
+--- anjuta/data/Makefile.am	Thu Feb 20 20:17:05 2003
++++ anjuta.new/data/Makefile.am	Sat Mar  8 09:45:13 2003
+@@ -6,7 +6,7 @@
+ 
+ SUBDIRS = properties macros macros2
+ 
+-anjuta_datadir = $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@
++anjuta_datadir = $(DESTDIR)$(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@
+ 
+ anjuta_data_DATA = \
+ 	gdb.init\
+@@ -23,10 +23,10 @@
+ 	autogen.sh.wxwin
+ 
+ 
+-anjuta_mimedir = $(prefix)/share/mime-info
++anjuta_mimedir = $(DESTDIR)$(prefix)/share/mime-info
+ anjuta_mime_DATA = anjuta.mime
+ 
+-anjuta_mimelnkdir = $(prefix)/share/mimelnk/application
++anjuta_mimelnkdir = $(DESTDIR)$(prefix)/share/mimelnk/application
+ anjuta_mimelnk_DATA = x-anjuta-project.desktop
+ 
+ MACROS = \
+@@ -35,7 +35,7 @@
+ 	autogen.sh \
+ 	*.m4
+ 
+-MACROS_dir = $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/gnome
++MACROS_dir = $(DESTDIR)$(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/gnome
+ 
+ MACROS2 = \
+ 	ChangeLog \
+@@ -43,7 +43,7 @@
+ 	autogen.sh \
+ 	*.m4
+ 
+-MACROS2_dir = $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/gnome2
++MACROS2_dir = $(DESTDIR)$(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/gnome2
+ 
+ EXTRA_DIST = $(anjuta_data_DATA) $(anjuta_mime_DATA) $(anjuta_mimelnk_DATA)
+ 
