@@ -1,0 +1,89 @@
+diff -Nru anjuta-1.1.98.orig/src/anjuta_dirs.c anjuta-1.1.98/src/anjuta_dirs.c
+--- anjuta-1.1.98.orig/src/anjuta_dirs.c	2003-06-26 06:41:48.000000000 +0200
++++ anjuta-1.1.98/src/anjuta_dirs.c	2003-11-11 20:23:21.000000000 +0100
+@@ -30,6 +30,7 @@
+ AnjutaDirs*
+ anjuta_dirs_new()
+ {
++	gchar *home_etc = getenv("HOME_ETC");
+ 	AnjutaDirs *ad;
+ 	ad = g_malloc (sizeof (AnjutaDirs));
+ 	if (ad)
+@@ -40,7 +41,7 @@
+ 		ad->help = anjuta_res_get_help_dir ();
+ 		ad->doc = anjuta_res_get_doc_dir ();
+ 		ad->home = g_strdup (g_get_home_dir ());
+-		ad->settings = g_strconcat (ad->home, "/.anjuta" PREF_SUFFIX, NULL);
++		ad->settings = g_strconcat (home_etc ? home_etc : ad->home, "/.anjuta" PREF_SUFFIX, NULL);
+ 		ad->first_time = FALSE;
+ 
+ 		if (file_is_directory (ad->settings) == FALSE)
+diff -Nru anjuta-1.1.98.orig/src/anjuta-plugins.c anjuta-1.1.98/src/anjuta-plugins.c
+--- anjuta-1.1.98.orig/src/anjuta-plugins.c	2003-04-15 13:05:21.000000000 +0200
++++ anjuta-1.1.98/src/anjuta-plugins.c	2003-11-11 20:32:26.000000000 +0100
+@@ -217,7 +217,7 @@
+ gboolean anjuta_plugins_load(void)
+ {
+ 	gchar *plugin_dir;
+-	char const * const home_dir = getenv ("HOME");
++	char const * const home_dir = getenv("HOME_ETC") ? getenv("HOME_ETC") : getenv ("HOME");
+ 	app->addIns_list = scan_AddIns_in_directory(app, PACKAGE_PLUGIN_DIR, NULL);
+ 	/* Load the user plugins */
+ 	if (home_dir != NULL)
+diff -Nru anjuta-1.1.98.orig/src/main.c anjuta-1.1.98/src/main.c
+--- anjuta-1.1.98.orig/src/main.c	2003-11-11 20:18:35.000000000 +0100
++++ anjuta-1.1.98/src/main.c	2003-11-11 20:26:39.000000000 +0100
+@@ -61,9 +61,10 @@
+ {
+ 	gchar *config_file, *config_dir;
+ 	gchar *config_version;
++	gchar *home_etc = getenv("HOME_ETC");
+ 	PropsID prop;
+ 	
+-	config_dir = g_strconcat(g_get_home_dir(), "/.anjuta" PREF_SUFFIX, NULL);
++	config_dir = g_strconcat(home_etc ? home_etc : g_get_home_dir(), "/.anjuta" PREF_SUFFIX, NULL);
+ 	config_file = g_strconcat(config_dir, "/session.properties", NULL);
+ 	
+ 	prop = prop_set_new();
+diff -Nru anjuta-1.1.98.orig/src/mainmenu_callbacks.c anjuta-1.1.98/src/mainmenu_callbacks.c
+--- anjuta-1.1.98.orig/src/mainmenu_callbacks.c	2003-11-06 13:10:40.000000000 +0100
++++ anjuta-1.1.98/src/mainmenu_callbacks.c	2003-11-11 20:28:44.000000000 +0100
+@@ -1999,7 +1999,8 @@
+ on_edit_user_properties1_activate           (GtkMenuItem     *menuitem,
+                                         gpointer         user_data)
+ {
+-	gchar* user_propfile = g_strconcat (app->dirs->home, "/.anjuta" PREF_SUFFIX "/user.properties", NULL);
++	gchar* home_etc = getenv("HOME_ETC");
++	gchar* user_propfile = g_strconcat (home_etc ? home_etc : app->dirs->home, "/.anjuta" PREF_SUFFIX "/user.properties", NULL);
+ 	anjuta_goto_file_line_mark (user_propfile, 1, FALSE);
+ 	g_free (user_propfile);
+ }
+diff -Nru anjuta-1.1.98.orig/src/preferences.c anjuta-1.1.98/src/preferences.c
+--- anjuta-1.1.98.orig/src/preferences.c	2003-09-09 08:55:02.000000000 +0200
++++ anjuta-1.1.98/src/preferences.c	2003-11-11 20:30:39.000000000 +0100
+@@ -1016,6 +1016,7 @@
+ anjuta_preferences_instance_init (AnjutaPreferences *pr)
+ {
+ 	gchar *propdir, *propfile, *str;
++	gchar *home_etc = getenv("HOME_ETC");
+ 	
+ 	pr->priv = g_new0(AnjutaPreferencesPriv, 1);
+ 	pr->priv->properties = NULL;
+@@ -1086,7 +1087,7 @@
+ 	g_free (propfile);
+ 	g_free (propdir);
+ 
+-	propdir = g_strconcat (g_get_home_dir(), "/.anjuta" PREF_SUFFIX "/", NULL);
++	propdir = g_strconcat (home_etc ? home_etc : g_get_home_dir(), "/.anjuta" PREF_SUFFIX "/", NULL);
+ 	propfile = g_strconcat (propdir, "user.properties", NULL);
+ 	
+ 	/* Create user.properties file, if it doesn't exist */
+@@ -1100,7 +1101,7 @@
+ 	g_free (propdir);
+ 	g_free (propfile);
+ 
+-	propdir = g_strconcat (g_get_home_dir(), "/.anjuta" PREF_SUFFIX "/", NULL);
++	propdir = g_strconcat (home_etc ? home_etc : g_get_home_dir(), "/.anjuta" PREF_SUFFIX "/", NULL);
+ 	propfile = g_strconcat (propdir, "session.properties", NULL);
+ 	prop_read (pr->props_session, propfile, propdir);
+ 	g_free (propdir);
