@@ -88,6 +88,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/anjuta/lib*.??
 %{_omf_dest_dir}/%{name}
 %{_datadir}/anjuta
-%{_datadir}/gnome/apps/Development/*
 %{_applnkdir}/Development/*
 %{_pixmapsdir}/anjuta
