@@ -1,0 +1,14 @@
+--- anjuta-0.1.4/scintilla/Makefile.am~	Mon Mar  5 09:07:00 2001
++++ anjuta-0.1.4/scintilla/Makefile.am	Fri Jun 29 22:47:29 2001
+@@ -4,9 +4,9 @@
+ 
+ noinst_LIBRARIES = libscintilla.a
+ 
+-INCLUDES = -I include
++DEFS = -DGTK -DSCI_LEXER -DUSE_XIM -DHAVE_CONFIG_H
+ 
+-CXXFLAGS = -DGTK -DSCI_LEXER -DUSE_XIM -W -Wall -g -O
++INCLUDES = -I include
+ 
+ libscintilla_a_SOURCES =\
+ 	AutoComplete.cxx \

@@ -1,0 +1,22 @@
+--- anjuta-0.1.8/data/Makefile.am	Tue Feb 12 18:54:31 2002
++++ anjuta-0.1.8-new/data/Makefile.am	Tue Feb 12 18:46:00 2002
+@@ -28,7 +28,7 @@
+ 	autogen.sh \
+ 	*.m4
+ 
+-MACROS_dir = $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/gnome
++MACROS_dir = $(DESTDIR)$(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/gnome
+ 
+ install-data-local:
+ 	mkdir -p $(MACROS_dir)
+--- anjuta-0.1.8/data/Makefile.am	Tue Feb 12 18:56:13 2002
++++ anjuta-0.1.8-new/data/Makefile.am	Tue Feb 12 19:30:27 2002
+@@ -32,7 +32,7 @@
+ 
+ install-data-local:
+ 	mkdir -p $(MACROS_dir)
+-	$(INSTALL_DATA) $(MACROS:%=$(top_srcdir)/macros/%) $(DESTDIR)$(MACROS_dir)
++	$(INSTALL_DATA) $(MACROS:%=$(top_srcdir)/macros/%) $(MACROS_dir)
+ 
+ uninstall-local:
+ 	@rm -fv $(MACROS:%=$(MACROS_dir)/%)

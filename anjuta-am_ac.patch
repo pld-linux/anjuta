@@ -1,0 +1,69 @@
+--- anjuta-0.1.8/Makefile.am~	Fri Nov 30 23:45:38 2001
++++ anjuta-0.1.8/Makefile.am	Tue Feb 12 20:07:52 2002
+@@ -7,19 +7,11 @@
+ 	widgets manuals omf-install src pixmaps data \
+ 	doc launcher
+ 
+-anjutadocdir = ${prefix}/doc/anjuta
+-anjutadoc_DATA = \
++
++EXTRA_DIST = \
+ 	README\
+-	COPYING\
+-	AUTHORS\
+-	ChangeLog\
+-	INSTALL\
+-	NEWS\
+ 	TODO\
+-	ABOUT-NLS\
+ 	FUTURE
+-
+-EXTRA_DIST = \
+ 	anjuta.desktop.in.in \
+ 	anjuta.spec.in \
+ 	xml-i18n-extract.in \
+@@ -34,6 +26,8 @@
+ gnomemenu_premerge_file = anjuta.desktop.in
+ gnomemenu_DATA = $(gnomemenu_premerge_file:.desktop.in=.desktop)
+ 
++anjuta.desktop:
++
+ # Copy all the spec files. Of cource, only one is actually used.
+ dist-hook:
+ 	for specfile in *.spec; do \
+diff -urN anjuta-0.1.8.org/data/Makefile.am anjuta-0.1.8/data/Makefile.am
+--- anjuta-0.1.8.org/data/Makefile.am	Thu Dec  6 21:34:50 2001
++++ anjuta-0.1.8/data/Makefile.am	Thu Dec  6 22:55:58 2001
+@@ -33,15 +33,15 @@
+ 
+ install-data-local:
+ 	mkdir -p $(MACROS_dir)
+-	$(INSTALL_DATA) $(MACROS:%=$(top_srcdir)/macros/%) $(MACROS_dir)
++	$(INSTALL_DATA) $(MACROS:%=$(top_srcdir)/macros/%) $(DESTDIR)$(MACROS_dir)
+ 
+ uninstall-local:
+ 	@rm -fv $(MACROS:%=$(MACROS_dir)/%)
+-	if test -d $(MACROS_dir); then \
+-	  rmdir $(MACROS_dir); \
++	if test -d $(DESTDIR)$(MACROS_dir); then \
++	  rmdir $(DESTDIR)$(MACROS_dir); \
+ 	  \
+-	  if test -d $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@; then \
+-	    rmdir $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@; \
++	  if test -d $(DESTDIR)$(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@; then \
++	    rmdir $(DESTDIR)$(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@; \
+ 	  fi; \
+ 	fi
+ 
+diff -urN anjuta-0.1.8.org/manuals/sgmldocs.make anjuta-0.1.8/manuals/sgmldocs.make
+--- anjuta-0.1.8.org/manuals/sgmldocs.make	Thu Dec  6 21:34:49 2001
++++ anjuta-0.1.8/manuals/sgmldocs.make	Thu Dec  6 21:36:52 2001
+@@ -53,7 +53,7 @@
+ 	-cp $(docname)/index.html .
+ 
+ $(docname).sgml: $(sgml_ents)
+-        -ourdir=`pwd`;  \
++        ourdir=`pwd`;  \
+         cd $(srcdir);   \
+         cp $(sgml_ents) $$ourdir
+ 
