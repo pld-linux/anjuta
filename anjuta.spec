@@ -2,7 +2,7 @@ Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Name:		anjuta
 Version:	0.1.8
-Release:	3
+Release:	4
 License:	GPL
 Group:		Development/Tools
 Group(cs):	Vývojové prostøedky/Nástroje
@@ -20,6 +20,8 @@ Group(sv):	Utveckling/Verktyg
 Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-am_ac.patch
+Patch1:		%{name}-dont_rebuild_tags.patch
+Patch2:		%{name}-destdir.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit-devel
 BuildRequires:	autoconf
@@ -32,6 +34,7 @@ BuildRequires:	intltool
 BuildRequires:	libstdc++-devel
 BuildRequires:	scrollkeeper
 BuildRequires:	libxml-devel
+BuildRequires:	xml-i18n-tools
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -56,6 +59,8 @@ odpluskwiacz oraz edytor z mo¿liwo¶ci± przegl±dania ¼róde³.
 %prep
 %setup  -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 sed -e s/AM_GNOME_GETTEXT/AM_GNU_GETTEXT/ configure.in > configure.in.tmp
