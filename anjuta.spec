@@ -66,8 +66,8 @@ gettextize --copy --force
 intltoolize --copy --force
 xml-i18n-toolize --copy --force
 aclocal -I macros
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
 %configure \
 	--with-gnome
