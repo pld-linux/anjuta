@@ -1,11 +1,11 @@
-%define		snap	20030307
+%define		snap	20030319
 
 Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	1.2.0
-Release:	0.%{snap}
+Release:	0.%{snap}.1
 License:	GPL
 Group:		Development/Tools
 #Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
@@ -14,19 +14,18 @@ Patch0:		%{name}-am.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	glib2-devel >= 2.0.6
 BuildRequires:	intltool
-BuildRequires:	libtool
-BuildRequires:	pkgconfig
-BuildRequires:	libglade2-devel
+BuildRequires:	libglade2-devel >= 2.0.0
 BuildRequires:	libgnomeprintui-devel >= 2.2.0
 BuildRequires:	libgnomeui-devel >= 2.2.0
-BuildRequires:	vte-devel
-BuildRequires:	libzvt-devel
-BuildRequires:	pcre-devel
-BuildRequires:	glib-devel
+BuildRequires:	libtool
+BuildRequires:	libzvt-devel >= 2.0.0
 BuildRequires: 	ncurses-devel
+BuildRequires:	pcre-devel
+BuildRequires:	pkgconfig
+BuildRequires:	vte-devel >= 0.9.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %description
 Anjuta is a very versatile integrated development environment for C
@@ -53,7 +52,7 @@ são geralmente executadas em um console em modo texto e podem ser não
 amigáveis.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 %patch0 -p1
 
 %build
@@ -94,6 +93,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/anjuta
 %{_datadir}/anjuta
 %{_datadir}/applications/*
-%{_datadir}/mime-info
-%{_datadir}/mimelnk
+%{_datadir}/mime-info/*
+%{_datadir}/mimelnk/application/*
 %{_mandir}/man1/*
