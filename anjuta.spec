@@ -11,6 +11,7 @@ License:	GPL
 Group:		Development/Tools
 #Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Source0:	%{name}-%{version}-%{snap}.tar.bz2
+# Source0-md5:	c28e0d85ae7b024fe4424629d64c019f
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-gettext.patch
 URL:		http://anjuta.sourceforge.net/
