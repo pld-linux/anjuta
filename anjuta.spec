@@ -3,14 +3,16 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	0.1.9
-Release:	8
+Release:	9
 License:	GPL
 Group:		Development/Tools
 Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
-Source1:	%{name}.desktop
 Patch0:		%{name}-ac_am.patch
 Patch1:		%{name}-no_systemtags.patch
 Patch2:		%{name}-omf.patch
+Patch3:		%{name}-module_no_version.patch
+Patch4:		%{name}-use_AM_CXXFLAGS.patch
+Patch5:		%{name}-desktop_fix.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -60,12 +62,14 @@ amigáveis.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %build
 rm -f missing
 %{__libtoolize}
 %{__gettextize}
-intltoolize --copy --force
 xml-i18n-toolize --copy --force
 %{__aclocal} -I macros
 %{__autoconf}
@@ -73,19 +77,17 @@ xml-i18n-toolize --copy --force
 echo "all install:">plugins/sample1/Makefile.in
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
 %configure \
-	--with-gnome
+	--with-gnome \
+	--disable-static
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_applnkdir}/Development \
-	$RPM_BUILD_ROOT%{_datadir}/%{name}/gnome
-
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Development
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	omf_dest_dir=%{_omf_dest_dir}/%{name}
+	omf_dest_dir=%{_omf_dest_dir}/%{name} \
+	gnomemenudir=$RPM_BUILD_ROOT%{_applnkdir}/Development
 
 %find_lang %{name} --with-gnome
 
@@ -100,9 +102,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc README ChangeLog NEWS TODO
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/anjuta
-%attr(755,root,root) %{_libdir}/anjuta/lib*.so.*.*
-%attr(755,root,root) %{_libdir}/anjuta/lib*.??
+%attr(755,root,root) %{_libdir}/anjuta/lib*.so
 %{_omf_dest_dir}/%{name}
 %{_datadir}/anjuta
 %{_applnkdir}/Development/*
-%{_pixmapsdir}/anjuta
+%{_pixmapsdir}/*
