@@ -1,20 +1,21 @@
-%define		snap	20030425
+#%%define		snap	20030425
 
 Summary:	Gnome integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla Gnome
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	1.1.1
-Release:	0.%{snap}.1
+Version:	1.1.97
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
-#Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Source0:	%{name}-%{version}-%{snap}.tar.bz2
-# Source0-md5:	c28e0d85ae7b024fe4424629d64c019f
+#Source0:	%{name}-%{version}-%{snap}.tar.bz2
+Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	fc938d304f29f62353ab5fdf48c93685
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-gettext.patch
 URL:		http://anjuta.sourceforge.net/
+BuildRequires:	ORBit2-devel >= 2.4.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	glib2-devel >= 2.0.6
@@ -26,7 +27,7 @@ BuildRequires:	libgnomeui-devel >= 2.2.0
 BuildRequires:	libtool
 BuildRequires:	libzvt-devel >= 2.0.0
 BuildRequires: 	ncurses-devel
-BuildRequires:	pcre-devel
+BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
 BuildRequires:	vte-devel >= 0.9.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -62,15 +63,15 @@ amigáveis.
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
-#rm -f missing
+rm -f missing
 #%%{__gettextize}
 #intltoolize
-#%%{__libtoolize}
-#%%{__aclocal} -I /usr/share/aclocal/gnome2-macros
-#%%{__autoheader}
-#%%{__autoconf}
-#%%{__automake}
-./autogen.sh
+%{__libtoolize}
+%{__aclocal} -I /usr/share/aclocal/gnome2-macros
+%{__autoheader}
+%{__autoconf}
+%{__automake}
+#./autogen.sh
 %configure \
 	--disable-static
 %{__make}
@@ -80,7 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	gnomemenudir=%{_datadir}/applications
+	gnomemenudir=%{_desktopdir}
 
 %find_lang %{name} --with-gnome
 
