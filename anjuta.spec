@@ -5,20 +5,6 @@ Version:	0.1.8
 Release:	4
 License:	GPL
 Group:		Development/Tools
-Group(cs):	Vıvojové prostøedky/Nástroje
-Group(da):	Udvikling/Værktøj
-Group(de):	Entwicklung/Tools
-Group(es):	Desarrollo/Herramientas
-Group(fr):	Development/Outils
-Group(is):	Şróunartól/Tól
-Group(it):	Sviluppo/Tool
-Group(ja):	³«È¯/¥Ä¡¼¥ë
-Group(no):	Utvikling/Verktøy
-Group(pl):	Programowanie/Narzêdzia
-Group(pt):	Desenvolvimento/Ferramentas
-Group(ru):	òÁÚÒÁÂÏÔËÁ/éÎÓÔÒÕÍÅÎÔÙ
-Group(sl):	Razvoj/Orodja
-Group(sv):	Utveckling/Verktyg
 Source0:	http://anjuta.sourceforge.net/packages/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-am_ac.patch
