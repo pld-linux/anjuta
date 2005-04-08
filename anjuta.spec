@@ -16,20 +16,21 @@ Patch2:		%{name}-locale-names.patch
 Patch3:		%{name}-desktop.patch
 Patch4:		%{name}-ac.patch
 URL:		http://anjuta.sourceforge.net/
-BuildRequires:	ORBit2-devel >= 2.8.0
+BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	intltool
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
 BuildRequires:	libglade2-devel >= 1:2.5.1
-BuildRequires:	libgnomeprintui-devel >= 2.10.0
+BuildRequires:	libgnomeprintui-devel >= 2.10.2
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
-BuildRequires:	libxml2-devel >= 1:2.6.17
+BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	scrollkeeper
 BuildRequires:	vte-devel >= 0.11.0
 Requires(post,postun):	scrollkeeper
@@ -89,7 +90,6 @@ CFLAGS="%{rpmcflags} -fno-omit-frame-pointer"
 %{__automake}
 %configure \
 	--disable-static
-
 %{__make}
 
 %install
@@ -102,16 +102,18 @@ rm -rf $RPM_BUILD_ROOT
 # *.la not needed - *.so loaded through libgmodule
 rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
 
+rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
+
 %find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/usr/bin/scrollkeeper-update -q
+%scrollkeeper_update_post
 
 %postun
-/usr/bin/scrollkeeper-update -q
+%scrollkeeper_update_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -121,7 +123,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %{_pixmapsdir}/%{name}
 %{_datadir}/%{name}
-%{_datadir}/mime-info/*
 %{_datadir}/mimelnk/application/*
 %{_desktopdir}/*
 %{_mandir}/man1/*
