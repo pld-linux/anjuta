@@ -3,18 +3,16 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	1.2.2
-Release:	5
+Version:	1.2.3
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
-# Source0-md5:	a30858dba0b902064d0d702cedfdc84f
+# Source0-md5:	a2fc3873519f566607cf268276db3b90
 Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
-Patch2:		%{name}-locale-names.patch
-Patch3:		%{name}-desktop.patch
-Patch4:		%{name}-ac.patch
+Patch2:		%{name}-desktop.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
@@ -73,10 +71,6 @@ amigáveis.
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
-
-mv -f po/{no,nb}.po
 
 %{__perl} -pi -e 's@^(packageplugindir=)lib/@$1%{_lib}/@' configure.in
 
@@ -103,6 +97,8 @@ rm -rf $RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
+
+rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name} --with-gnome
 
