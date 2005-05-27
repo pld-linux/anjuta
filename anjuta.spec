@@ -18,16 +18,19 @@ BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	intltool
+BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprintui-devel >= 2.10.2
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
+BuildRequires:	libstdc++-devel
 BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
+BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	scrollkeeper
 BuildRequires:	vte-devel >= 0.11.0
