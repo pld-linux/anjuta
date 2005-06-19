@@ -29,7 +29,7 @@ BuildRequires:	devhelp-devel >= 0.9
 BuildRequires:	gdl-devel >= 0.5.0
 # not released yet
 #BuildRequires:	glade3-devel
-BuildRequires:	gnome-build >= 0.1.1
+BuildRequires:	gnome-build-devel >= 0.1.1
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
 BuildRequires:	graphviz-devel >= 2.2.1
@@ -38,6 +38,7 @@ BuildRequires:	intltool
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprintui-devel >= 2.10.2
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
+BuildRequires:	libsvg-cairo-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	ncurses-devel
