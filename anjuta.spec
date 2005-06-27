@@ -169,7 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog FUTURE NEWS README TODO doc/ScintillaDoc.html
+%doc AUTHORS ChangeLog FUTURE MAINTAINERS NEWS README ROADMAP TODO doc/ScintillaDoc.html
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/libanjuta-*.so*
