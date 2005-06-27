@@ -1,22 +1,12 @@
-diff -aurN anjuta-2.0.0.orig/global-tags/create_global_tags.sh anjuta-2.0.0/global-tags/create_global_tags.sh
---- anjuta-2.0.0.orig/global-tags/create_global_tags.sh	2005-03-11 18:53:15.000000000 +0100
-+++ anjuta-2.0.0/global-tags/create_global_tags.sh	2005-05-16 16:35:55.000000000 +0200
-@@ -1,6 +1,6 @@
- #!/bin/sh
+diff -aurN anjuta-2.0.1.orig/Makefile.am anjuta-2.0.1/Makefile.am
+--- anjuta-2.0.1.orig/Makefile.am	2005-05-23 06:43:15.000000000 +0200
++++ anjuta-2.0.1/Makefile.am	2005-06-27 14:48:43.000000000 +0200
+@@ -7,18 +7,6 @@
+ 	doc libanjuta plugins src manuals mime 
  
--function anjuta_tags () {
-+anjuta_tags () {
- 
-     FILES=""
-     BASEDIR=`pwd`
-diff -aurN anjuta-2.0.0.orig/Makefile.am anjuta-2.0.0/Makefile.am
---- anjuta-2.0.0.orig/Makefile.am	2005-03-07 15:41:09.000000000 +0100
-+++ anjuta-2.0.0/Makefile.am	2005-05-16 16:34:16.000000000 +0200
-@@ -8,15 +8,6 @@
- #	intl
- 
- anjutadocdir = ${prefix}/@NO_PREFIX_PACKAGE_DOC_DIR@
+ anjutadocdir = $(datadir)/doc/anjuta
 -anjutadoc_DATA = \
+-	MAINTAINERS\
 -	README\
 -	COPYING\
 -	AUTHORS\
@@ -24,13 +14,15 @@ diff -aurN anjuta-2.0.0.orig/Makefile.am anjuta-2.0.0/Makefile.am
 -	INSTALL\
 -	NEWS\
 -	TODO\
--	FUTURE
+-	FUTURE\
+-	ROADMAP\
+-	THANKS
  
- anjuta_glade_filedir = $(prefix)/@NO_PREFIX_PACKAGE_DATA_DIR@/glade
+ anjuta_glade_filedir = $(anjuta_glade_dir)
  anjuta_glade_file_DATA = anjuta.glade
-diff -aurN anjuta-2.0.0.orig/mime/Makefile.am anjuta-2.0.0/mime/Makefile.am
---- anjuta-2.0.0.orig/mime/Makefile.am	2005-05-11 17:51:56.000000000 +0200
-+++ anjuta-2.0.0/mime/Makefile.am	2005-05-16 16:35:00.000000000 +0200
+diff -aurN anjuta-2.0.1.orig/mime/Makefile.am anjuta-2.0.1/mime/Makefile.am
+--- anjuta-2.0.1.orig/mime/Makefile.am	2005-05-20 14:56:01.000000000 +0200
++++ anjuta-2.0.1/mime/Makefile.am	2005-06-27 14:50:06.000000000 +0200
 @@ -1,10 +1,4 @@
  
 -appdir = $(datadir)/application-registry
@@ -42,24 +34,3 @@ diff -aurN anjuta-2.0.0.orig/mime/Makefile.am anjuta-2.0.0/mime/Makefile.am
  mimexmldir = $(datadir)/mime/packages
  mimexml_DATA = anjuta.xml
  
-@@ -18,7 +12,5 @@
- 	$(mimeicon_DATA)
- 
- install-data-local: install-mimexmlDATA
--	update-mime-database $(DESTDIR)$(datadir)/mime
- 
--uninstall-local:
--	update-mime-database $(DESTDIR)$(datadir)/mime
-+uninstall-local:
-\ Brak znaku nowej linii na koñcu pliku
-diff -aurN anjuta-2.0.0.orig/plugins/Makefile.am anjuta-2.0.0/plugins/Makefile.am
---- anjuta-2.0.0.orig/plugins/Makefile.am	2005-04-21 16:36:09.000000000 +0200
-+++ anjuta-2.0.0/plugins/Makefile.am	2005-05-16 16:35:37.000000000 +0200
-@@ -21,7 +21,6 @@
- 	macro \
- 	class-gen \
- 	patch \
--	subversion \
- 	project-import \
- 	glade \
- 	tools \
