@@ -9,13 +9,13 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.0.0
+Version:	2.0.1
 Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
-# Source0-md5:	c3bc5f36939f06049c7fa5dfed59ed08
+Source0:	http://heanet.dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
+# Source0-md5:	21d765fabb35da3f2cc405e1b00eaa10
 Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
 Patch2:		%{name}-desktop.patch
@@ -29,7 +29,7 @@ BuildRequires:	devhelp-devel >= 0.9
 BuildRequires:	gdl-devel >= 0.5.0
 # not released yet
 #BuildRequires:	glade3-devel
-BuildRequires:	gnome-build-devel >= 0.1.1
+BuildRequires:	gnome-build-devel >= 0.1.2
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
 BuildRequires:	graphviz-devel >= 2.2.1
@@ -38,17 +38,21 @@ BuildRequires:	intltool
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprintui-devel >= 2.10.2
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
+# shouldn't be in graphviz-devel R:s? not required directly
+# here
 BuildRequires:	libsvg-cairo-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	ncurses-devel
+# for subversion
+#BuildRequires:	neon-devel >= 0.24.5
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 # broken and evil
-#BuildRequires:	subversion-devel >= 1.0.0
-# kill scrollkeeper, can't be required at build time
-BuildRequires:	scrollkeeper
+#BuildRequires:	subversion-devel >= 1.0.2
+# no documentation for now
+# BuildRequires:	scrollkeeper
 BuildRequires:	vte-devel >= 0.11.0
 #Requires(post,postun):	scrollkeeper
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -87,37 +91,39 @@ são geralmente executadas em um console em modo texto e podem ser não
 amigáveis.
 
 %package libs
-Summary:	write me
-Summary(pl):	write me
+Summary:	Anjuta shared libraries
+Summary(pl):	Bibloteki wspó³dzielone Anjuta
 Group:		Development/Libraries
 
 %description libs
-write me.
+Anjuta shared libraries.
 
 %description libs -l pl
-write me.
+Bibloteki wspó³dzielone Anjuta.
 
 %package devel
-Summary:	write me
-Summary(pl):	write me
+Summary:	Anjuta header files
+Summary(pl):	Pliki nag³ówkowe Anjuta
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+
 %description devel
-write me.
+Anjuta header files.
 
 %description devel -l pl
-write me.
+Pliki nag³ówkowe Anjuta.
 
 %package static
-Summary:	write me
-Summary(pl):	write me
+Summary:	Anjuta static library
+Summary(pl):	Biblioteka statyczna Anjuta
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
+
 %description static
-write me.
+Anjuta static library.
 
 %description static -l pl
-write me.
+Biblioteka statyczna Anjuta.
 
 %prep
 %setup -q
@@ -135,8 +141,10 @@ sed -i -e 's|^(packageplugindir=)lib/|$1%{_lib}/|' configure.in
 %{__autoconf}
 %{__automake}
 %configure \
+	--disable-plugin-subversion \
 	--enable-final \
 	--enable-gtk-doc \
+	--enable-static \
 	--with-html-dir=%{_gtkdocdir}	       
 %{__make}
 
@@ -172,6 +180,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}
 %{_desktopdir}/*
 %{_mandir}/man1/*
+# no documentation for now
 #%%{_omf_dest_dir}/%{name}
 
 %files libs
