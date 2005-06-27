@@ -14,7 +14,7 @@ Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://heanet.dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
 # Source0-md5:	21d765fabb35da3f2cc405e1b00eaa10
 Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
