@@ -26,6 +26,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	autogen-devel
 BuildRequires:	automake
 BuildRequires:	devhelp-devel >= 0.9
+BuildRequires:	gd-devel
 BuildRequires:	gdl-devel >= 0.5.0
 # not released yet
 #BuildRequires:	glade3-devel
