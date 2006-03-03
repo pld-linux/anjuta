@@ -44,6 +44,7 @@ BuildRequires:	libgnomeui-devel >= 2.10.0-2
 BuildRequires:	libsvg-cairo-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.19
+BuildRequires:	libxslt-devel
 BuildRequires:	ncurses-devel
 # for subversion
 #BuildRequires:	neon-devel >= 0.24.5
