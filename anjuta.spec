@@ -9,13 +9,13 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.0.1
+Version:	2.0.2
 Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
-# Source0-md5:	21d765fabb35da3f2cc405e1b00eaa10
+# Source0-md5:	e0d1e216da809df32816d233d7c55165
 Patch0:		%{name}-gettext.patch
 Patch1:		%{name}-home_etc.patch
 Patch2:		%{name}-desktop.patch
@@ -28,9 +28,10 @@ BuildRequires:	automake
 BuildRequires:	devhelp-devel >= 0.9
 BuildRequires:	gd-devel
 BuildRequires:	gdl-devel >= 0.5.0
+BuildRequires:	gtk-doc
 # not released yet
 #BuildRequires:	glade3-devel
-BuildRequires:	gnome-build-devel >= 0.1.2
+BuildRequires:	gnome-build-devel >= 0.1.3
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
 BuildRequires:	graphviz-devel >= 2.2.1
@@ -129,7 +130,7 @@ Biblioteka statyczna Anjuta.
 
 %prep
 %setup -q
-%patch0 -p0
+#%patch0 -p0
 #%patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -159,7 +160,6 @@ rm -rf $RPM_BUILD_ROOT
 
 # *.la not needed - *.so loaded through libgmodule
 rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.{a,la}
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name} --with-gnome
 
