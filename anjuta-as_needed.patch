@@ -1,0 +1,14 @@
+diff -aurN anjuta-2.0.2.orig/plugins/gdb/Makefile.am anjuta-2.0.2/plugins/gdb/Makefile.am
+--- anjuta-2.0.2.orig/plugins/gdb/Makefile.am	2005-08-09 10:09:26.000000000 +0200
++++ anjuta-2.0.2/plugins/gdb/Makefile.am	2006-08-13 13:41:20.168387237 +0200
+@@ -25,7 +25,9 @@
+ plugindir = $(anjuta_plugin_dir)
+ plugin_LTLIBRARIES = libanjuta-gdb.la
+ 
+-libanjuta_gdb_la_LIBADD = $(LIBANJUTA_LIBS)
++libanjuta_gdb_la_LIBADD = \
++	$(LIBANJUTA_LIBS) \
++	$(top_builddir)/libanjuta/interfaces/libanjuta-interfaces.la
+ 
+ libanjuta_gdb_la_SOURCES = \
+ 	gdbmi.c \
