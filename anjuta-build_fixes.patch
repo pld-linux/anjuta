@@ -1,0 +1,36 @@
+diff -aurN anjuta-2.0.1.orig/Makefile.am anjuta-2.0.1/Makefile.am
+--- anjuta-2.0.1.orig/Makefile.am	2005-05-23 06:43:15.000000000 +0200
++++ anjuta-2.0.1/Makefile.am	2005-06-27 14:48:43.000000000 +0200
+@@ -7,18 +7,6 @@
+ 	doc libanjuta plugins src manuals mime 
+ 
+ anjutadocdir = $(datadir)/doc/anjuta
+-anjutadoc_DATA = \
+-	MAINTAINERS\
+-	README\
+-	COPYING\
+-	AUTHORS\
+-	ChangeLog\
+-	INSTALL\
+-	NEWS\
+-	TODO\
+-	FUTURE\
+-	ROADMAP\
+-	THANKS
+ 
+ anjuta_glade_filedir = $(anjuta_glade_dir)
+ anjuta_glade_file_DATA = anjuta.glade
+diff -aurN anjuta-2.0.1.orig/mime/Makefile.am anjuta-2.0.1/mime/Makefile.am
+--- anjuta-2.0.1.orig/mime/Makefile.am	2005-05-20 14:56:01.000000000 +0200
++++ anjuta-2.0.1/mime/Makefile.am	2005-06-27 14:50:06.000000000 +0200
+@@ -1,10 +1,4 @@
+ 
+-appdir = $(datadir)/application-registry
+-app_DATA = anjuta.applications
+-
+-mimedir = $(datadir)/mime-info
+-mime_DATA = anjuta.keys anjuta.mime
+-
+ mimexmldir = $(datadir)/mime/packages
+ mimexml_DATA = anjuta.xml
+ 
