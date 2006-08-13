@@ -1,8 +1,6 @@
 # TODO:
 # - subversion plugin
-# - glade-3 support
 # - post/preun mime registration
-# - kill scrolleeper buildtime detection
 #
 Summary:	GNOME integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
@@ -10,54 +8,52 @@ Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.0.2
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
 # Source0-md5:	e0d1e216da809df32816d233d7c55165
-Patch0:		%{name}-gettext.patch
-Patch1:		%{name}-home_etc.patch
-Patch2:		%{name}-desktop.patch
-Patch3:		%{name}-build_fixes.patch
+Patch0:		%{name}-home_etc.patch
+Patch1:		%{name}-desktop.patch
+Patch2:		%{name}-build_fixes.patch
+Patch3:		%{name}-as_needed.patch
+Patch4:		%{name}-flags.patch
+Patch5:		%{name}-glade_fix.patch
 URL:		http://anjuta.sourceforge.net/
-BuildRequires:	ORBit2-devel >= 1:2.12.1
+BuildRequires:	ORBit2-devel >= 1:2.14.2
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	autogen-devel
 BuildRequires:	automake
-BuildRequires:	devhelp-devel >= 0.9
+BuildRequires:	devhelp-devel >= 0.12
 BuildRequires:	gd-devel
-BuildRequires:	gdl-devel >= 0.5.0
-BuildRequires:	gtk-doc
-# not released yet
-#BuildRequires:	glade3-devel
+BuildRequires:	gdl-devel >= 0.6.1
 BuildRequires:	gnome-build-devel >= 0.1.3
-BuildRequires:	gnome-common >= 2.8.0
-BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
+BuildRequires:	gnome-common >= 2.12.0
 BuildRequires:	graphviz-devel >= 2.2.1
+BuildRequires:	gtk-doc >= 1.7
+BuildRequires:	gtksourceview-devel >= 0.7.2
 BuildRequires:	guile-devel >= 1.6.7
-BuildRequires:	intltool
-BuildRequires:	libglade2-devel >= 1:2.5.1
-BuildRequires:	libgnomeprintui-devel >= 2.10.2
-BuildRequires:	libgnomeui-devel >= 2.10.0-2
-# shouldn't be in graphviz-devel R:s? not required directly
-# here
-BuildRequires:	libsvg-cairo-devel
+BuildRequires:	intltool >= 0.35
+BuildRequires:	libglade2-devel >= 1:2.6.0
+BuildRequires:	libgladeui-devel >= 3.0.0
+BuildRequires:	libgnomeprintui-devel >= 2.12.1
+BuildRequires:	libgnomeui-devel >= 2.15.91
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 1:2.6.19
-BuildRequires:	libxslt-devel
+BuildRequires:	libxml2-devel >= 1:2.6.26
+BuildRequires:	libxslt-devel >= 1.1.17
 BuildRequires:	ncurses-devel
-# for subversion
-#BuildRequires:	neon-devel >= 0.24.5
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.197
-# broken and evil
+BuildRequires:	rpmbuild(macros) >= 1.311
+# requires old subversion version to build
 #BuildRequires:	subversion-devel >= 1.0.2
-# no documentation for now
-# BuildRequires:	scrollkeeper
-BuildRequires:	vte-devel >= 0.11.0
-#Requires(post,postun):	scrollkeeper
+BuildRequires:	scrollkeeper
+BuildRequires:	vte-devel >= 0.13.5
+Requires(post,preun):	GConf2 >= 2.14.0
+Requires(post,postun):	gtk+2 >= 2.10.1
+Requires(post,postun):	scrollkeeper
+Requires(post,postun):	shared-mime-info
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -128,12 +124,27 @@ Anjuta static library.
 %description static -l pl
 Biblioteka statyczna Anjuta.
 
+%package apidocs
+Summary:	libanjuta API documentation
+Summary(pl):	Dokumentacja API libanjuta
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+libanjuta API documentation.
+
+%description apidocs -l pl
+Dokumentacja API libanjuta.
+
 %prep
 %setup -q
-#%patch0 -p0
-#%patch1 -p1
+# update me!
+#%patch0 -p1
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 sed -i -e 's|^(packageplugindir=)lib/|$1%{_lib}/|' configure.in
 
@@ -145,10 +156,11 @@ sed -i -e 's|^(packageplugindir=)lib/|$1%{_lib}/|' configure.in
 %{__automake}
 %configure \
 	--disable-plugin-subversion \
-	--enable-final \
+	--disable-schemas-install \
 	--enable-gtk-doc \
 	--enable-static \
-	--with-html-dir=%{_gtkdocdir}	       
+	--with-html-dir=%{_gtkdocdir}
+
 %{__make}
 
 %install
@@ -156,7 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	gnomemenudir=%{_desktopdir}
+	mimeicondir="%{_iconsdir}/hicolor/48x48/mimetypes"
 
 # *.la not needed - *.so loaded through libgmodule
 rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.{a,la}
@@ -166,24 +178,40 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.{a,la}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+%gconf_schema_install anjuta-valgrind.schemas
+%scrollkeeper_update_post
+%update_mime_database
+%update_icon_cache hicolor
+
+%preun
+%gconf_schema_uninstall anjuta-valgrind.schemas
+
+%postun
+%scrollkeeper_update_post
+%update_mime_database
+%update_icon_cache hicolor
+
 %post   libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog FUTURE MAINTAINERS NEWS README ROADMAP TODO doc/ScintillaDoc.html
+%{_sysconfdir}/gconf/schemas/anjuta-valgrind.schemas
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/libanjuta-*.so*
-%{_datadir}/mime/packages/*.xml
 %{_libdir}/%{name}/*.plugin
-%{_iconsdir}/
-%{_pixmapsdir}/%{name}
 %{_datadir}/%{name}
+%{_datadir}/mime/packages/*.xml
 %{_desktopdir}/*
+%{_iconsdir}/hicolor/*/apps/*
+%{_iconsdir}/hicolor/*/mimetypes/*
+%{_pixmapsdir}/%{name}
 %{_mandir}/man1/*
-# no documentation for now
-#%%{_omf_dest_dir}/%{name}
+%dir %{_omf_dest_dir}/%{name}
+%{_omf_dest_dir}/%{name}/*-C.omf
 
 %files libs
 %defattr(644,root,root,755)
@@ -194,9 +222,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libanjuta-1.0
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
-%{_gtkdocdir}/libanjuta
 %{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/libanjuta
