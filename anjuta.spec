@@ -8,7 +8,7 @@ Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.0.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
@@ -36,7 +36,7 @@ BuildRequires:	gtksourceview-devel >= 0.7.2
 BuildRequires:	guile-devel >= 1.6.7
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgladeui-devel >= 3.0.0
+BuildRequires:	libgladeui-devel >= 3.0.1
 BuildRequires:	libgnomeprintui-devel >= 2.12.1
 BuildRequires:	libgnomeui-devel >= 2.15.91
 BuildRequires:	libtool
