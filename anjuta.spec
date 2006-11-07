@@ -123,6 +123,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/mimelnk/application/*
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
 %{_mandir}/man1/*
 %{_omf_dest_dir}/%{name}
