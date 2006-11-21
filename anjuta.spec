@@ -1,10 +1,14 @@
+#
+# TODO: Add message window when apropriate terminal is missing, not only
+#       stderr message
+#
 Summary:	GNOME integrated development environment
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	1.2.4a
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
@@ -35,7 +39,7 @@ BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	scrollkeeper
 BuildRequires:	vte-devel >= 0.11.0
 Requires(post,postun):	scrollkeeper
-Requires:	gnome-terminal
+# Requires:	gnome-terminal
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
