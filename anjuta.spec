@@ -3,8 +3,8 @@
 #       stderr message
 #
 Summary:	GNOME integrated development environment
-Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
+Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	1.2.4a
@@ -21,16 +21,16 @@ URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	intltool
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
+BuildRequires:	intltool
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprintui-devel >= 2.10.2
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
 BuildRequires:	libstdc++-devel
-BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	libtool
+BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	ncurses-devel
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
