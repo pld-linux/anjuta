@@ -37,7 +37,6 @@ BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	scrollkeeper
-BuildRequires:	vte-devel <= 0.13
 BuildRequires:	vte-devel >= 0.11.0
 Requires(post,postun):	scrollkeeper
 # Requires:	gnome-terminal
