@@ -14,9 +14,8 @@ License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
 # Source0-md5:	e0d1e216da809df32816d233d7c55165
-#Patch0:	%{name}-gettext.patch
-#Patch1:	%{name}-home_etc.patch
-Patch2:		%{name}-desktop.patch
+#Patch0:	%{name}-home_etc.patch
+Patch1:		%{name}-desktop.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
@@ -77,9 +76,8 @@ amigáveis.
 
 %prep
 %setup -q
-#%patch0 -p0
-#%patch1 -p1 NEEDS checking
-%patch2 -p1
+#%patch0 -p1 NEEDS checking
+%patch1 -p1
 
 %{__perl} -pi -e 's@^(packageplugindir=)lib/@$1%{_lib}/@' configure.in
 
