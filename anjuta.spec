@@ -7,20 +7,21 @@ Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	1.2.4a
-Release:	4
+Version:	2.0.2
+Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
-# Source0-md5:	7e6af289b4bfd1ec2ca72e2017efc4d3
-Patch0:		%{name}-gettext.patch
-Patch1:		%{name}-home_etc.patch
+# Source0-md5:	e0d1e216da809df32816d233d7c55165
+#Patch0:	%{name}-gettext.patch
+#Patch1:	%{name}-home_etc.patch
 Patch2:		%{name}-desktop.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
+BuildRequires:	gdl-devel >= 0.6.1
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
@@ -76,8 +77,8 @@ amigáveis.
 
 %prep
 %setup -q
-%patch0 -p0
-%patch1 -p1
+#%patch0 -p0
+#%patch1 -p1 NEEDS checking
 %patch2 -p1
 
 %{__perl} -pi -e 's@^(packageplugindir=)lib/@$1%{_lib}/@' configure.in
