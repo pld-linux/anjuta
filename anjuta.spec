@@ -1,29 +1,29 @@
-#
-# TODO: Add message window when apropriate terminal is missing, not only
-#       stderr message
-#
 Summary:	GNOME integrated development environment
 Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.0.2
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
 # Source0-md5:	e0d1e216da809df32816d233d7c55165
-#Patch0:	%{name}-home_etc.patch
+#Patch0: %{name}-home_etc.patch
 Patch1:		%{name}-desktop.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
+BuildRequires:	autogen
 BuildRequires:	automake
+BuildRequires:	devhelp-devel
 BuildRequires:	gdl-devel >= 0.6.1
 BuildRequires:	gettext-devel
+BuildRequires:	gnome-build-devel
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
+BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprintui-devel >= 2.10.2
@@ -32,11 +32,13 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	ncurses-devel
+BuildRequires:	neon-devel
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	scrollkeeper
+BuildRequires:	subversion-devel
 BuildRequires:	vte-devel >= 0.11.0
 Requires(post,postun):	scrollkeeper
 # Requires:	gnome-terminal
@@ -74,6 +76,21 @@ linha de comando e ferramentas para programação para o Linux. Estas
 são geralmente executadas em um console em modo texto e podem ser não
 amigáveis.
 
+%package -n libanjuta
+Summary:	libanjuta library
+Group:		Development/Libraries
+
+%description -n libanjuta
+libanjuta library.
+
+%package -n libanjuta-devel
+Summary:	Header files and develpment documentation for libanjuta
+Group:		Development/Libraries
+Requires:	libanjuta-devel = %{epoch}:%{version}-%{release}
+
+%description -n libanjuta-devel
+Header files and develpment documentation for libanjuta.
+
 %prep
 %setup -q
 #%patch0 -p1 NEEDS checking
@@ -90,6 +107,10 @@ CFLAGS="%{rpmcflags} -fno-omit-frame-pointer"
 %{__autoconf}
 %{__automake}
 %configure \
+	--with-html-dir=%{_gtkdocdir} \
+	--with-apr-config=%{_bindir}/apr-1-config \
+	--with-apu-config=%{_bindir}/apu-1-config \
+	--with-neon-config=%{_bindir}/neon-config \
 	--disable-static
 %{__make}
 
@@ -105,8 +126,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
 
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
-
 %find_lang %{name} --with-gnome
 
 %clean
@@ -118,15 +137,34 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %scrollkeeper_update_postun
 
+%post -n libanjuta -p /sbin/ldconfig
+%postun -n libanjuta -p /sbin/ldconfig
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog FUTURE NEWS README TODO doc/ScintillaDoc.html
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
+%{_libdir}/%{name}/*.plugin
 %{_pixmapsdir}/%{name}
 %{_datadir}/%{name}
-%{_datadir}/mimelnk/application/*
+%{_datadir}/application-registry/*.*
+%{_datadir}/mime/packages/*.*
 %{_desktopdir}/*.desktop
 %{_mandir}/man1/*
 %{_omf_dest_dir}/%{name}
+%{_sysconfdir}/gconf/schemas/*.*
+%{_iconsdir}/*/*/*/*.*
+
+%files -n libanjuta
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/*.so.*
+
+%files -n libanjuta-devel
+%defattr(644,root,root,755)
+%{_includedir}/libanjuta-*
+%attr(755,root,root) %{_libdir}/*.so
+%{_libdir}/*.la
+%{_pkgconfigdir}/*.pc
+%{_gtkdocdir}/libanjuta
