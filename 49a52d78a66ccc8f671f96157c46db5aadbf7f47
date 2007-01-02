@@ -1,0 +1,5 @@
+- updated to 1.1.98
+- removed outdated am patch
+- updated BRs (libzvt is no longer needed)
+- added  --enable-gprof
+- added %post/%postun -p /usr/bin/scrollkeeper-update
