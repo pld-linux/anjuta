@@ -1,0 +1,7 @@
+- added am_fixes patch: dix passing CXXFLAGS to compile C++ code,
+- added missing BuildRequires (libstdc++-devel, gnome-libs-devel),
+- use %find_lang macro for collect all languages depending files,
+- regenerate ac/am/lt/gettext files,
+- pass -fno-rtti -fno-exceptions to C++ compile flags (smaller binaries),
+- use more macros in %files,
+- some cosmetics.
