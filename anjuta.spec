@@ -42,6 +42,7 @@ BuildRequires:	subversion-devel
 BuildRequires:	vte-devel >= 0.11.0
 Requires(post,postun):	scrollkeeper
 # Requires:	gnome-terminal
+Requires:	libanjuta = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -79,6 +80,7 @@ amigáveis.
 %package -n libanjuta
 Summary:	libanjuta library
 Group:		Development/Libraries
+Conflicts:	%{name} < 1:2.0.2-1
 
 %description -n libanjuta
 libanjuta library.
@@ -137,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %scrollkeeper_update_postun
 
-%post -n libanjuta -p /sbin/ldconfig
+%post	-n libanjuta -p /sbin/ldconfig
 %postun -n libanjuta -p /sbin/ldconfig
 
 %files -f %{name}.lang
