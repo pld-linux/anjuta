@@ -4,7 +4,7 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.0.2
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
@@ -30,6 +30,7 @@ BuildRequires:	libgnomeprintui-devel >= 2.10.2
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+BuildRequires:	libwnck-devel
 BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	ncurses-devel
 BuildRequires:	neon-devel
