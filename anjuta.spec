@@ -8,7 +8,7 @@ Summary(pl):	Zintegrowane ¶rodowisko programowania dla GNOME
 Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	1.2.4a
-Release:	4
+Release:	5
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
@@ -86,6 +86,7 @@ amigáveis.
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
 CFLAGS="%{rpmcflags} -fno-omit-frame-pointer"
+cp /usr/share/gettext/config.rpath .
 %{__libtoolize}
 %{__aclocal}
 %{__autoheader}
