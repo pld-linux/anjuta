@@ -12,6 +12,7 @@ Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
 # Source0-md5:	e0d1e216da809df32816d233d7c55165
 #Patch0: %{name}-home_etc.patch
 Patch1:		%{name}-desktop.patch
+Patch2:		%{name}-cflags.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
@@ -98,6 +99,7 @@ Header files and develpment documentation for libanjuta.
 %setup -q
 #%patch0 -p1 NEEDS checking
 %patch1 -p1
+%patch2 -p0
 
 %{__perl} -pi -e 's@^(packageplugindir=)lib/@$1%{_lib}/@' configure.in
 
