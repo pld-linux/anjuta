@@ -18,6 +18,7 @@ BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	autogen
 BuildRequires:	automake
+BuildRequires:	binutils-devel
 BuildRequires:	devhelp-devel
 BuildRequires:	gdl-devel >= 0.6.1
 BuildRequires:	gettext-devel
