@@ -1,7 +1,7 @@
 Summary:	GNOME integrated development environment
-Summary(es.UTF-8):   Entorno integrado de desarrollo (IDE) de GNOME
-Summary(pl.UTF-8):   Zintegrowane środowisko programowania dla GNOME
-Summary(pt_BR.UTF-8):   Ambiente de desenvolvimento integrado C e C++
+Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
+Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
+Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.0.2
 Release:	6
