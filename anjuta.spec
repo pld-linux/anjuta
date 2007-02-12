@@ -3,9 +3,9 @@
 # - post/preun mime registration
 #
 Summary:	GNOME integrated development environment
-Summary(pl):	Zintegrowane ∂rodowisko programowania dla GNOME
-Summary(es):	Entorno integrado de desarrollo (IDE) de GNOME
-Summary(pt_BR):	Ambiente de desenvolvimento integrado C e C++
+Summary(pl.UTF-8):   Zintegrowane ≈õrodowisko programowania dla GNOME
+Summary(es.UTF-8):   Entorno integrado de desarrollo (IDE) de GNOME
+Summary(pt_BR.UTF-8):   Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.0.2
 Release:	2
@@ -65,75 +65,75 @@ many other, it has project management, application wizards, onboard
 interactive debugger, and a powerful source editor with source
 browsing.
 
-%description -l es
+%description -l es.UTF-8
 Anjuta es un entorno integrado de desarrollo para C y C++ para
 GNU/Linux. Escrito en y para GTK/GNOME, proporciona muchas
-herramientas de programaciÛn avanzadas. Entre otros, habilita
+herramientas de programaci√≥n avanzadas. Entre otros, habilita
 manejamiento de proyectos, wizards de aplicaciones, depurador
-interactivo y un editador potente de cÛdigo fuente que permite
+interactivo y un editador potente de c√≥digo fuente que permite
 hojearlo.
 
-%description -l pl
-Anjuta to wszechstronne zintegrowane ∂rodowisko programowania dla
-jÍzyka C oraz C++. Zosta≥o napisane z wykorzystaniem tandemu
-GTK/GNOME, w≥a∂nie po to by go w takim otoczeniu uøywaÊ. MiÍdzy innymi
-posiada zarz±dcÍ projektÛw, kreator aplikacji, wbudowany interaktywny
-odpluskwiacz oraz edytor z moøliwo∂ci± przegl±dania ºrÛde≥.
+%description -l pl.UTF-8
+Anjuta to wszechstronne zintegrowane ≈õrodowisko programowania dla
+jƒôzyka C oraz C++. Zosta≈Ço napisane z wykorzystaniem tandemu
+GTK/GNOME, w≈Ça≈õnie po to by go w takim otoczeniu u≈ºywaƒá. Miƒôdzy innymi
+posiada zarzƒÖdcƒô projekt√≥w, kreator aplikacji, wbudowany interaktywny
+odpluskwiacz oraz edytor z mo≈ºliwo≈õciƒÖ przeglƒÖdania ≈∫r√≥de≈Ç.
 
-%description -l pt_BR
-O Anjuta È um ambiente de desenvolvimento integrado (IDE) vers·til
+%description -l pt_BR.UTF-8
+O Anjuta √© um ambiente de desenvolvimento integrado (IDE) vers√°til
 para as linguagens C e C++. Foi escrito para o GTK/GNOME e tem uma
-sÈrie de caracterÌsticas de programaÁ„o avanÁadas. Basicamente È uma
-interface gr·fica com o usu·rio para um conjunto de utilit·rios de
-linha de comando e ferramentas para programaÁ„o para o Linux. Estas
-s„o geralmente executadas em um console em modo texto e podem ser n„o
-amig·veis.
+s√©rie de caracter√≠sticas de programa√ß√£o avan√ßadas. Basicamente √© uma
+interface gr√°fica com o usu√°rio para um conjunto de utilit√°rios de
+linha de comando e ferramentas para programa√ß√£o para o Linux. Estas
+s√£o geralmente executadas em um console em modo texto e podem ser n√£o
+amig√°veis.
 
 %package libs
 Summary:	Anjuta shared libraries
-Summary(pl):	Bibloteki wspÛ≥dzielone Anjuta
+Summary(pl.UTF-8):   Bibloteki wsp√≥≈Çdzielone Anjuta
 Group:		Development/Libraries
 
 %description libs
 Anjuta shared libraries.
 
-%description libs -l pl
-Bibloteki wspÛ≥dzielone Anjuta.
+%description libs -l pl.UTF-8
+Bibloteki wsp√≥≈Çdzielone Anjuta.
 
 %package devel
 Summary:	Anjuta header files
-Summary(pl):	Pliki nag≥Ûwkowe Anjuta
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe Anjuta
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description devel
 Anjuta header files.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe Anjuta.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe Anjuta.
 
 %package static
 Summary:	Anjuta static library
-Summary(pl):	Biblioteka statyczna Anjuta
+Summary(pl.UTF-8):   Biblioteka statyczna Anjuta
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 Anjuta static library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteka statyczna Anjuta.
 
 %package apidocs
 Summary:	libanjuta API documentation
-Summary(pl):	Dokumentacja API libanjuta
+Summary(pl.UTF-8):   Dokumentacja API libanjuta
 Group:		Documentation
 Requires:	gtk-doc-common
 
 %description apidocs
 libanjuta API documentation.
 
-%description apidocs -l pl
+%description apidocs -l pl.UTF-8
 Dokumentacja API libanjuta.
 
 %prep
