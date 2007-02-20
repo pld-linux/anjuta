@@ -9,7 +9,7 @@ Epoch:		1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.bz2
-# Source0-md5:	e0d1e216da809df32816d233d7c55165
+# Source0-md5:	8113f280db27dcf923748ca66c0c19fa
 #Patch0: %{name}-home_etc.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-glade.patch
