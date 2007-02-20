@@ -3,47 +3,48 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.0.2
-Release:	6
+Version:	2.1.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.bz2
 # Source0-md5:	e0d1e216da809df32816d233d7c55165
 #Patch0: %{name}-home_etc.patch
 Patch1:		%{name}-desktop.patch
-Patch2:		%{name}-cflags.patch
+Patch2:		%{name}-glade.patch
+Patch3:		%{name}-create_global_tags.patch
 URL:		http://anjuta.sourceforge.net/
+BuildRequires:	GConf2-devel >= 2.12.0
 BuildRequires:	ORBit2-devel >= 1:2.12.1
-BuildRequires:	autoconf >= 2.52
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	autogen
 BuildRequires:	automake
 BuildRequires:	binutils-devel
-BuildRequires:	devhelp-devel
-BuildRequires:	gdl-devel >= 0.6.1
+BuildRequires:	devhelp-devel >= 0.13
+BuildRequires:	gdl-devel >= 0.7.0
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-build-devel
-BuildRequires:	gnome-common >= 2.8.0
-BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
-BuildRequires:	gtk-doc
-BuildRequires:	intltool
-BuildRequires:	libglade2-devel >= 1:2.5.1
-BuildRequires:	libgnomeprintui-devel >= 2.10.2
-BuildRequires:	libgnomeui-devel >= 2.10.0-2
+BuildRequires:	gnome-build-devel >= 0.1.4
+BuildRequires:	graphviz-devel >= 2.6.0
+BuildRequires:	gtk-doc >= 1.7
+BuildRequires:	gtksourceview-devel
+BuildRequires:	intltool >= 0.35.0
+BuildRequires:	libgladeui-devel >= 3.0.2
+BuildRequires:	libgnomeprintui-devel >= 2.12.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel
-BuildRequires:	libxml2-devel >= 1:2.6.19
-BuildRequires:	ncurses-devel
-BuildRequires:	neon-devel
+BuildRequires:	neon-devel >= 0.24.5
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
-BuildRequires:	popt-devel
-BuildRequires:	rpmbuild(macros) >= 1.197
+BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
-BuildRequires:	subversion-devel
-BuildRequires:	vte-devel >= 0.11.0
+BuildRequires:	subversion-devel >= 1.0.2
+BuildRequires:	vte-devel >= 0.14.0
+Requires(post,preun):	GConf2
+Requires(post,postun):	gtk+2
+Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	scrollkeeper
+Requires(post,postun):	shared-mime-info
 # Requires:	gnome-terminal
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -82,31 +83,49 @@ amigáveis.
 
 %package -n libanjuta
 Summary:	libanjuta library
+Summary(pl.UTF-8):	Biblioteka libanjuta
 Group:		Development/Libraries
 Conflicts:	%{name} < 1:2.0.2-1
 
 %description -n libanjuta
 libanjuta library.
 
+%description -n libanjuta -l pl.UTF-8
+Biblioteka libanjuta.
+
 %package -n libanjuta-devel
-Summary:	Header files and develpment documentation for libanjuta
+Summary:	Header files for libanjuta library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libanjuta
 Group:		Development/Libraries
 Requires:	libanjuta-devel = %{epoch}:%{version}-%{release}
 
 %description -n libanjuta-devel
-Header files and develpment documentation for libanjuta.
+Header files for libanjuta library.
+
+%description -n libanjuta-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki libanjuta.
+
+%package -n libanjuta-apidocs
+Summary:	libanjuta API documentation
+Summary(pl.UTF-8):	Dokumentacja API biblioteki libanjuta
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description -n libanjuta-apidocs
+libanjuta API documentation.
+
+%description -n libanjuta-apidocs -l pl.UTF-8
+Dokumentacja API biblioteki libanjuta.
 
 %prep
 %setup -q
 #%patch0 -p1 NEEDS checking
 %patch1 -p1
-%patch2 -p0
-
-%{__perl} -pi -e 's@^(packageplugindir=)lib/@$1%{_lib}/@' configure.in
+%patch2 -p1
+%patch3 -p1
 
 %build
-CXXFLAGS="%{rpmcflags} -fno-exceptions"
-CFLAGS="%{rpmcflags} -fno-omit-frame-pointer"
+%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoheader}
@@ -117,6 +136,8 @@ CFLAGS="%{rpmcflags} -fno-omit-frame-pointer"
 	--with-apr-config=%{_bindir}/apr-1-config \
 	--with-apu-config=%{_bindir}/apu-1-config \
 	--with-neon-config=%{_bindir}/neon-config \
+	--with-omf-dir=%{_omf_dest_dir} \
+	--disable-scrollkeeper \
 	--disable-static
 %{__make}
 
@@ -125,43 +146,76 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	gnomemenudir=%{_desktopdir}
+	gnomemenudir=%{_desktopdir} \
+	mimepngicondir=%{_iconsdir}/hicolor/48x48/mimetypes \
+	mimesvgicondir=%{_iconsdir}/hicolor/scalable/mimetypes
+
+mv -f $RPM_BUILD_ROOT%{_datadir}/anjuta/scripts/anjuta-tags $RPM_BUILD_ROOT%{_bindir}
 
 # *.la not needed - *.so loaded through libgmodule
 rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
 
-rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
+rm -rf $RPM_BUILD_ROOT%{_docdir}/anjuta
 
-%find_lang %{name} --with-gnome
+%find_lang %{name} --with-gnome --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 %scrollkeeper_update_post
+%update_mime_database
+%gconf_schema_install anjuta-valgrind.schemas
+%update_icon_cache hicolor
+
+%preun
+%gconf_schema_uninstall anjuta-valgrind.schemas
 
 %postun
 %scrollkeeper_update_postun
+%update_mime_database
+%update_icon_cache hicolor
 
 %post	-n libanjuta -p /sbin/ldconfig
 %postun -n libanjuta -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog FUTURE NEWS README TODO doc/ScintillaDoc.html
+%doc AUTHORS ChangeLog FUTURE NEWS README ROADMAP THANKS TODO doc/ScintillaDoc.html
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %{_libdir}/%{name}/*.plugin
 %{_pixmapsdir}/%{name}
-%{_datadir}/%{name}
-%{_datadir}/application-registry/*.*
-%{_datadir}/mime/packages/*.*
-%{_desktopdir}/*.desktop
-%{_mandir}/man1/*
-%{_omf_dest_dir}/%{name}
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/build
+%{_datadir}/%{name}/class-templates
+%{_datadir}/%{name}/glade
+%{_datadir}/%{name}/gtodo
+%{_datadir}/%{name}/profiles
+%{_datadir}/%{name}/project
+%{_datadir}/%{name}/properties
+%dir %{_datadir}/%{name}/scripts
+%attr(755,root,root) %{_datadir}/%{name}/scripts/create_global_tags.sh
+%dir %{_datadir}/%{name}/tools
+%attr(755,root,root) %{_datadir}/%{name}/tools/find-fixmes.pl
+%attr(755,root,root) %{_datadir}/%{name}/tools/prepare-changelog.pl
+%attr(755,root,root) %{_datadir}/%{name}/tools/translation-status.pl
+%{_datadir}/%{name}/tools/tools-2.xml
+%{_datadir}/%{name}/ui
+%{_datadir}/%{name}/anjuta_project.template
+%{_datadir}/%{name}/gdb.init
+%{_datadir}/%{name}/indent_test.c
+%{_datadir}/%{name}/layout.xml
+%{_datadir}/%{name}/macros.xml
+%{_datadir}/%{name}/welcome.txt
+%{_datadir}/mime/packages/%{name}.xml
+%{_desktopdir}/%{name}.desktop
+%{_mandir}/man1/anjuta.1*
+%{_mandir}/man1/anjuta_launcher.1*
+%{_omf_dest_dir}/%{name}-manual
 %{_sysconfdir}/gconf/schemas/*.*
-%{_iconsdir}/*/*/*/*.*
+%{_iconsdir}/hicolor/*/*/*.*
 
 %files -n libanjuta
 %defattr(644,root,root,755)
@@ -173,4 +227,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/*.so
 %{_libdir}/*.la
 %{_pkgconfigdir}/*.pc
+
+%files -n libanjuta-apidocs
+%defattr(644,root,root,755)
 %{_gtkdocdir}/libanjuta
