@@ -3,13 +3,13 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.1.1
-Release:	4
+Version:	2.1.2
+Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.bz2
-# Source0-md5:	8113f280db27dcf923748ca66c0c19fa
+# Source0-md5:	dcc4f0894b1d1d6441fe1d330ab76dcb
 #Patch0: %{name}-home_etc.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-glade.patch
@@ -22,9 +22,10 @@ BuildRequires:	autogen
 BuildRequires:	automake
 BuildRequires:	binutils-devel
 BuildRequires:	devhelp-devel >= 0.13
-BuildRequires:	gdl-devel >= 0.7.0
+BuildRequires:	gdl-devel >= 0.7.3
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-build-devel >= 0.1.4
+BuildRequires:	gnome-doc-utils
 BuildRequires:	graphviz-devel >= 2.6.0
 BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	gtksourceview-devel
