@@ -23,7 +23,7 @@ BuildRequires:	binutils-devel
 BuildRequires:	devhelp-devel >= 0.13
 BuildRequires:	gdl-devel >= 0.7.3
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-build-devel >= 0.1.4
+BuildRequires:	gnome-build-devel >= 0.2.0
 BuildRequires:	gnome-doc-utils
 BuildRequires:	graphviz-devel >= 2.6.0
 BuildRequires:	gtk-doc >= 1.7
