@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.2.1
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
@@ -46,6 +46,7 @@ Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	scrollkeeper
 Requires(post,postun):	shared-mime-info
 # Requires:	gnome-terminal
+Requires:	glib2 >= 1:2.14
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
