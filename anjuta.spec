@@ -18,22 +18,32 @@ BuildRequires:	GConf2-devel >= 2.12.0
 BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	autogen
-BuildRequires:	automake
-BuildRequires:	binutils-devel
+BuildRequires:	automake >= 1:1.9
+BuildRequires:	binutils-devel >= 3:2.15.92
 BuildRequires:	devhelp-devel >= 0.13
 BuildRequires:	gdl-devel >= 0.7.3
 BuildRequires:	gettext-devel
+BuildRequires:	glib2-devel >= 1:2.14
 BuildRequires:	gnome-build-devel >= 0.2.0
 BuildRequires:	gnome-doc-utils
+BuildRequires:	gnome-vfs2-devel >= 2.10.0
 BuildRequires:	graphviz-devel >= 2.6.0
 BuildRequires:	gtk-doc >= 1.7
-BuildRequires:	gtksourceview-devel
+BuildRequires:	gtk+2-devel >= 2:2.10
+BuildRequires:	gtksourceview-devel >= 1.4.0
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libgladeui-devel >= 3.0.2
+BuildRequires:	libgnomecanvas-devel >= 2.12.0
 BuildRequires:	libgnomeprintui-devel >= 2.12.0
+BuildRequires:	libgnome-devel >= 2.14
+BuildRequires:	libgnomeui-devel >= 2.12.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+BuildRequires:	libwnck-devel >= 2.12
+BuildRequires:	libxml2-devel >= 2.4.23
+BuildRequires:	libxslt-devel
 BuildRequires:	neon-devel >= 0.24.5
+BuildRequires:	pango-devel >= 1:1.1.1
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
