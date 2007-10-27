@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.2.2
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
@@ -26,6 +26,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.14
 BuildRequires:	gnome-build-devel >= 0.2.0
 BuildRequires:	gnome-doc-utils
+BuildRequires:	gnome-libs-devel
 BuildRequires:	gnome-vfs2-devel >= 2.10.0
 BuildRequires:	graphviz-devel >= 2.6.0
 BuildRequires:	gtk-doc >= 1.7
@@ -135,12 +136,12 @@ Dokumentacja API biblioteki libanjuta.
 %patch2 -p1
 
 %build
-#{__intltoolize}
-#{__libtoolize}
-#{__aclocal}
-#{__autoheader}
-#{__autoconf}
-#{__automake}
+%{__intltoolize}
+%{__libtoolize}
+%{__aclocal}
+%{__autoheader}
+%{__autoconf}
+%{__automake}
 %configure \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-apr-config=%{_bindir}/apr-1-config \
@@ -148,7 +149,8 @@ Dokumentacja API biblioteki libanjuta.
 	--with-neon-config=%{_bindir}/neon-config \
 	--with-omf-dir=%{_omf_dest_dir} \
 	--disable-scrollkeeper \
-	--disable-static
+	--disable-static 
+
 %{__make}
 
 %install
