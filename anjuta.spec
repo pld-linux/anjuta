@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.2.2
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
@@ -59,6 +59,8 @@ Requires(post,postun):	shared-mime-info
 # Requires:	gnome-terminal
 Requires:	glib2 >= 1:2.14
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
+# sr@Latn vs. sr@latin
+Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -169,6 +171,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
 
 rm -rf $RPM_BUILD_ROOT%{_docdir}/anjuta
 
+[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
+	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
 %find_lang %{name} --with-gnome --all-name
 
 %clean
