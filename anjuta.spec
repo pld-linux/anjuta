@@ -3,13 +3,13 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.2.2
-Release:	4
+Version:	2.2.3
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.bz2
-# Source0-md5:	ed2e54fdd498db70e5b0bf3d0fed13cd
+# Source0-md5:	d84b255b5ddb81a955b3ad1fc5ea8f9a
 #Patch0: %{name}-home_etc.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-create_global_tags.patch
