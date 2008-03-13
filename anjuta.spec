@@ -3,16 +3,15 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.2.3
-Release:	2
+Version:	2.4.0
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://dl.sourceforge.net/anjuta/%{name}-%{version}.tar.bz2
-# Source0-md5:	d84b255b5ddb81a955b3ad1fc5ea8f9a
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.4/%{name}-%{version}.tar.bz2
+# Source0-md5:	5eca972ef7b95de85a8088eaf9cc0753
 #Patch0: %{name}-home_etc.patch
 Patch1:		%{name}-desktop.patch
-Patch2:		%{name}-create_global_tags.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.12.0
 BuildRequires:	ORBit2-devel >= 1:2.12.1
@@ -135,7 +134,6 @@ Dokumentacja API biblioteki libanjuta.
 %setup -q
 #%patch0 -p1 NEEDS checking
 %patch1 -p1
-%patch2 -p1
 
 %build
 %{__intltoolize}
@@ -163,8 +161,6 @@ rm -rf $RPM_BUILD_ROOT
 	gnomemenudir=%{_desktopdir} \
 	mimepngicondir=%{_iconsdir}/hicolor/48x48/mimetypes \
 	mimesvgicondir=%{_iconsdir}/hicolor/scalable/mimetypes
-
-mv -f $RPM_BUILD_ROOT%{_datadir}/anjuta/scripts/anjuta-tags $RPM_BUILD_ROOT%{_bindir}
 
 # *.la not needed - *.so loaded through libgmodule
 rm -f $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
@@ -202,6 +198,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %{_libdir}/%{name}/*.plugin
+%attr(755,root,root) %{_libdir}/%{name}/anjuta-tags
+%{_libdir}/glade3/modules/libgladeanjuta.so
 %{_pixmapsdir}/%{name}
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/build
@@ -221,11 +219,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/ui
 %{_datadir}/%{name}/anjuta_project.template
 %{_datadir}/%{name}/gdb.init
-%{_datadir}/%{name}/indent_test.c
+%{_datadir}/%{name}/languages.xml
 %{_datadir}/%{name}/layout.xml
 %{_datadir}/%{name}/macros.xml
 %{_datadir}/%{name}/welcome.txt
 %{_datadir}/mime/packages/%{name}.xml
+%{_datadir}/glade3/catalogs/anjuta-glade.xml
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/anjuta.1*
 %{_mandir}/man1/anjuta_launcher.1*
