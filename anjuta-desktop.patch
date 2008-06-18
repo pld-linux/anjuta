@@ -5,7 +5,7 @@ diff -urN anjuta-1.2.2.orig/anjuta.desktop.in.in anjuta-1.2.2/anjuta.desktop.in.
  Terminal=false
  X-MultipleArgs=false
  Type=Application
--Categories=Application;Development;
+-Categories=GNOME;GTK;Development;
 +Categories=GTK;GNOME;Development;IDE;
  Encoding=UTF-8
  StartupNotify=true
