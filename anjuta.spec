@@ -3,15 +3,16 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.4.2
-Release:	6
+Version:	2.24.0.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	66dc5a9aeb051846f82715b1bed55e37
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.24/%{name}-%{version}.tar.bz2
+# Source0-md5:	98cfa3707923c339b987f87f659d1e4f
 #Patch0: %{name}-home_etc.patch
 Patch1:		%{name}-desktop.patch
+Patch2:		%{name}-includes.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.12.0
 BuildRequires:	ORBit2-devel >= 1:2.12.1
@@ -138,9 +139,7 @@ Dokumentacja API biblioteki libanjuta.
 %setup -q
 #%patch0 -p1 NEEDS checking
 %patch1 -p1
-
-sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
-mv po/sr@{Latn,latin}.po
+%patch2 -p0
 
 %build
 %{__intltoolize}
@@ -186,7 +185,6 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_install anjuta-build-basic-autotools-plugin.schemas
 %gconf_schema_install anjuta-cvs-plugin.schemas
 %gconf_schema_install anjuta-document-manager.schemas
-%gconf_schema_install anjuta-editor-scintilla.schemas
 %gconf_schema_install anjuta-editor-sourceview.schemas
 %gconf_schema_install anjuta-language-cpp-java.schemas
 %gconf_schema_install anjuta-message-manager-plugin.schemas
@@ -200,7 +198,6 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_uninstall anjuta-build-basic-autotools-plugin.schemas
 %gconf_schema_uninstall anjuta-cvs-plugin.schemas
 %gconf_schema_uninstall anjuta-document-manager.schemas
-%gconf_schema_uninstall anjuta-editor-scintilla.schemas
 %gconf_schema_uninstall anjuta-editor-sourceview.schemas
 %gconf_schema_uninstall anjuta-language-cpp-java.schemas
 %gconf_schema_uninstall anjuta-message-manager-plugin.schemas
@@ -237,7 +234,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/gtodo
 %{_datadir}/%{name}/profiles
 %{_datadir}/%{name}/project
-%{_datadir}/%{name}/properties
 %dir %{_datadir}/%{name}/scripts
 %attr(755,root,root) %{_datadir}/%{name}/scripts/create_global_tags.sh
 %dir %{_datadir}/%{name}/tools
@@ -261,7 +257,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/gconf/schemas/anjuta-build-basic-autotools-plugin.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-cvs-plugin.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-document-manager.schemas
-%{_sysconfdir}/gconf/schemas/anjuta-editor-scintilla.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-editor-sourceview.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-language-cpp-java.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-message-manager-plugin.schemas
@@ -275,18 +270,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libanjuta-ctags.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libanjuta-ctags.so.0
-%attr(755,root,root) %{_libdir}/libanjuta-egg.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libanjuta-egg.so.0
 %attr(755,root,root) %{_libdir}/libanjuta.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libanjuta.so.0
 
 %files -n libanjuta-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libanjuta-ctags.so
-%attr(755,root,root) %{_libdir}/libanjuta-egg.so
 %attr(755,root,root) %{_libdir}/libanjuta.so
 %{_libdir}/libanjuta-ctags.la
-%{_libdir}/libanjuta-egg.la
 %{_libdir}/libanjuta.la
 %{_includedir}/libanjuta-1.0
 %{_pkgconfigdir}/libanjuta-1.0.pc
