@@ -6,7 +6,7 @@ Name:		anjuta
 Version:	2.24.0.1
 Release:	1
 Epoch:		1
-License:	GPL
+License:	GPL v2+
 Group:		Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.24/%{name}-%{version}.tar.bz2
 # Source0-md5:	98cfa3707923c339b987f87f659d1e4f
@@ -49,7 +49,6 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
-BuildRequires:	sed >= 4.0
 BuildRequires:	subversion-devel >= 1.0.2
 BuildRequires:	vte-devel >= 0.14.0
 Requires(post,postun):	desktop-file-utils
