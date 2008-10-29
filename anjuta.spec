@@ -3,45 +3,43 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.24.0.1
+Version:	2.24.1
 Release:	1
 Epoch:		1
 License:	GPL v2+
-Group:		Development/Tools
+Group:		X11/Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.24/%{name}-%{version}.tar.bz2
-# Source0-md5:	98cfa3707923c339b987f87f659d1e4f
+# Source0-md5:	72606baaf50a1d0e86f04cb6751640c7
 #Patch0: %{name}-home_etc.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-includes.patch
 URL:		http://anjuta.sourceforge.net/
-BuildRequires:	GConf2-devel >= 2.12.0
-BuildRequires:	ORBit2-devel >= 1:2.12.1
+BuildRequires:	GConf2-devel >= 2.24.0
+BuildRequires:	ORBit2-devel >= 1:2.14.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	binutils-devel >= 3:2.15.92
 BuildRequires:	devhelp-devel >= 0.13
-BuildRequires:	gdl-devel >= 0.7.3
+BuildRequires:	gdl-devel >= 2.24.0
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.14.0
-BuildRequires:	gnome-build-devel >= 0.2.0
-BuildRequires:	gnome-common
+BuildRequires:	glib2-devel >= 1:2.18.0
+BuildRequires:	gnome-build-devel >= 2.24.0
+BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gnome-doc-utils
-BuildRequires:	gnome-vfs2-devel >= 2.14.0
+BuildRequires:	gnome-vfs2-devel >= 2.24.0
 BuildRequires:	graphviz-devel >= 2.6.0
-BuildRequires:	gtk+2-devel >= 2:2.10.0
+BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	gtk-doc >= 1.7
-BuildRequires:	gtksourceview2-devel >= 2.2.0
-BuildRequires:	intltool >= 0.36.2
+BuildRequires:	gtksourceview2-devel >= 2.4.0
+BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
 BuildRequires:	libgladeui-devel >= 3.2.0
-BuildRequires:	libgnome-devel >= 2.14.0
 BuildRequires:	libgnomecanvas-devel >= 2.12.0
 BuildRequires:	libgnomeprintui-devel >= 2.12.0
-BuildRequires:	libgnomeui-devel >= 2.12.0
+BuildRequires:	libgnomeui-devel >= 2.24.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.12.0
 BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	libxslt-devel
 BuildRequires:	neon-devel >= 0.24.5
@@ -49,8 +47,8 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
-BuildRequires:	subversion-devel >= 1.0.2
-BuildRequires:	vte-devel >= 0.14.0
+BuildRequires:	subversion-devel >= 1.4.0
+BuildRequires:	vte-devel >= 0.16.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
@@ -58,7 +56,7 @@ Requires(post,postun):	scrollkeeper
 Requires(post,postun):	shared-mime-info
 Requires(post,preun):	GConf2
 # Requires:	gnome-terminal
-Requires:	glib2 >= 1:2.14.0
+Requires:	glib2 >= 1:2.18.0
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
@@ -114,7 +112,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libanjuta
 Group:		Development/Libraries
 Requires:	libanjuta-devel = %{epoch}:%{version}-%{release}
 Requires:	libglade2-devel >= 1:2.6.2
-Requires:	libgnomeui-devel >= 2.12.0
+Requires:	libgnomeui-devel >= 2.24.0
 
 %description -n libanjuta-devel
 Header files for libanjuta library.
@@ -163,7 +161,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	gnomemenudir=%{_desktopdir} \
 	mimepngicondir=%{_iconsdir}/hicolor/48x48/mimetypes \
 	mimesvgicondir=%{_iconsdir}/hicolor/scalable/mimetypes
 
