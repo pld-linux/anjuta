@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.24.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
@@ -13,6 +13,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.24/%{name}-%{version}.t
 #Patch0: %{name}-home_etc.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-includes.patch
+Patch3:		%{name}-devhelp.patch
 URL:		http://anjuta.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	ORBit2-devel >= 1:2.14.0
@@ -20,7 +21,7 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	binutils-devel >= 3:2.15.92
-BuildRequires:	devhelp-devel >= 0.13
+BuildRequires:	devhelp-devel >= 0.22
 BuildRequires:	gdl-devel >= 2.24.0
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.18.0
@@ -137,6 +138,7 @@ Dokumentacja API biblioteki libanjuta.
 #%patch0 -p1 NEEDS checking
 %patch1 -p1
 %patch2 -p0
+%patch3 -p1
 
 %build
 %{__intltoolize}
