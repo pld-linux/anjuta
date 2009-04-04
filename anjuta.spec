@@ -48,7 +48,7 @@ BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
 BuildRequires:	subversion-devel >= 1.5.0
-BuildRequires:	unique-devel >= 1.0.0
+BuildRequires:	libunique-devel >= 1.0.0
 BuildRequires:	vte-devel >= 0.20.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk+2
