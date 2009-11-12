@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.26.2.2
-Release:	4
+Release:	5
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
