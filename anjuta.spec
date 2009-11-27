@@ -21,6 +21,7 @@ BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	binutils-devel >= 3:2.15.92
 BuildRequires:	devhelp-devel >= 0.22
+BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gdl-devel >= 2.26.0
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.20.0
