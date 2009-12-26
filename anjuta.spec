@@ -3,40 +3,35 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.26.2.2
-Release:	6
+Version:	2.28.1.0
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.26/%{name}-%{version}.tar.bz2
-# Source0-md5:	8b05a4ee536b8057e38434efeaf468ff
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.28/%{name}-%{version}.tar.bz2
+# Source0-md5:	610624984bd62ee1e280090900a0ada7
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-includes.patch
-Patch2:		%{name}-install.patch
-URL:		http://anjuta.sourceforge.net/
+URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	GConf2-devel >= 2.26.0
 BuildRequires:	ORBit2-devel >= 1:2.14.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	binutils-devel >= 3:2.15.92
 BuildRequires:	devhelp-devel >= 0.22
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gdl-devel >= 2.26.0
+BuildRequires:	gdl-devel >= 2.28.0
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.20.0
 BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gnome-doc-utils
-BuildRequires:	graphviz-devel >= 2.6.0
 BuildRequires:	gtk+2-devel >= 2:2.16.0
 BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	gtk-webkit-devel
 BuildRequires:	gtksourceview2-devel >= 2.6.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libgda4-devel >= 4.0.0
-BuildRequires:	libglade2-devel >= 1:2.6.2
 BuildRequires:	libgladeui-devel >= 3.6.0
-BuildRequires:	libgnomeui-devel >= 2.24.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.26
@@ -117,8 +112,8 @@ Summary:	Header files for libanjuta library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libanjuta
 Group:		X11/Development/Libraries
 Requires:	libanjuta-devel = %{epoch}:%{version}-%{release}
-Requires:	libglade2-devel >= 1:2.6.2
-Requires:	libgnomeui-devel >= 2.24.0
+Requires:	GConf2-devel >= 2.26.0
+Requires:	gtk+2-devel >= 2:2.16.0
 
 %description -n libanjuta-devel
 Header files for libanjuta library.
@@ -142,7 +137,6 @@ Dokumentacja API biblioteki libanjuta.
 %setup -q
 %patch0 -p1
 %patch1 -p0
-%patch2 -p1
 
 %build
 %{__intltoolize}
@@ -153,9 +147,6 @@ Dokumentacja API biblioteki libanjuta.
 %{__automake}
 %configure \
 	--with-html-dir=%{_gtkdocdir} \
-	--with-apr-config=%{_bindir}/apr-1-config \
-	--with-apu-config=%{_bindir}/apu-1-config \
-	--with-neon-config=%{_bindir}/neon-config \
 	--with-omf-dir=%{_omf_dest_dir} \
 	--disable-schemas-install \
 	--disable-scrollkeeper \
@@ -188,28 +179,28 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_install anjuta-build-basic-autotools-plugin.schemas
 %gconf_schema_install anjuta-cvs-plugin.schemas
 %gconf_schema_install anjuta-document-manager.schemas
-%gconf_schema_install anjuta-editor-scintilla.schemas
+%gconf_schema_install anjuta-debug-manager.schemas
 %gconf_schema_install anjuta-editor-sourceview.schemas
 %gconf_schema_install anjuta-language-cpp-java.schemas
 %gconf_schema_install anjuta-message-manager-plugin.schemas
-%gconf_schema_install anjuta.schemas
+%gconf_schema_install preferences.schemas
 %gconf_schema_install anjuta-symbol-db.schemas
 %gconf_schema_install anjuta-terminal-plugin.schemas
-%gconf_schema_install anjuta-valgrind.schemas
+%gconf_schema_install file-manager.schemas
 %update_icon_cache hicolor
 
 %preun
 %gconf_schema_uninstall anjuta-build-basic-autotools-plugin.schemas
 %gconf_schema_uninstall anjuta-cvs-plugin.schemas
 %gconf_schema_uninstall anjuta-document-manager.schemas
-%gconf_schema_uninstall anjuta-editor-scintilla.schemas
+%gconf_schema_uninstall anjuta-debug-manager.schemas
 %gconf_schema_uninstall anjuta-editor-sourceview.schemas
 %gconf_schema_uninstall anjuta-language-cpp-java.schemas
 %gconf_schema_uninstall anjuta-message-manager-plugin.schemas
-%gconf_schema_uninstall anjuta.schemas
+%gconf_schema_uninstall preferences.schemas
 %gconf_schema_uninstall anjuta-symbol-db.schemas
 %gconf_schema_uninstall anjuta-terminal-plugin.schemas
-%gconf_schema_uninstall anjuta-valgrind.schemas
+%gconf_schema_uninstall file-manager.schemas
 
 %postun
 %scrollkeeper_update_postun
@@ -224,7 +215,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog FUTURE NEWS README ROADMAP THANKS TODO doc/ScintillaDoc.html
 %attr(755,root,root) %{_bindir}/anjuta
-%attr(755,root,root) %{_bindir}/anjuta_launcher
+%attr(755,root,root) %{_bindir}/anjuta-launcher
+%attr(755,root,root) %{_bindir}/anjuta-tags
 %attr(755,root,root) %{_bindir}/gbf-am-parse
 %attr(755,root,root) %{_bindir}/gbf-mkfile-parse
 %dir %{_libdir}/%{name}
@@ -240,7 +232,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/gtodo
 %{_datadir}/%{name}/profiles
 %{_datadir}/%{name}/project
-%{_datadir}/%{name}/properties
 %dir %{_datadir}/%{name}/tools
 %attr(755,root,root) %{_datadir}/%{name}/tools/find-fixmes.pl
 %attr(755,root,root) %{_datadir}/%{name}/tools/prepare-changelog.pl
@@ -252,6 +243,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/languages.xml
 %{_datadir}/%{name}/layout.xml
 %{_datadir}/%{name}/macros.xml
+%{_datadir}/%{name}/tables-from-1-to-228.sql
 %{_datadir}/%{name}/tables.sql
 %{_datadir}/%{name}/welcome.txt
 %{_datadir}/%{name}/AUTHORS
@@ -259,18 +251,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glade3/catalogs/anjuta-glade.xml
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/anjuta.1*
-%{_mandir}/man1/anjuta_launcher.1*
+%{_mandir}/man1/anjuta-launcher.1*
 %{_sysconfdir}/gconf/schemas/anjuta-build-basic-autotools-plugin.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-cvs-plugin.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-document-manager.schemas
-%{_sysconfdir}/gconf/schemas/anjuta-editor-scintilla.schemas
+%{_sysconfdir}/gconf/schemas/anjuta-debug-manager.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-editor-sourceview.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-language-cpp-java.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-message-manager-plugin.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-symbol-db.schemas
 %{_sysconfdir}/gconf/schemas/anjuta-terminal-plugin.schemas
-%{_sysconfdir}/gconf/schemas/anjuta-valgrind.schemas
-%{_sysconfdir}/gconf/schemas/anjuta.schemas
+%{_sysconfdir}/gconf/schemas/file-manager.schemas
+%{_sysconfdir}/gconf/schemas/preferences.schemas
 %{_iconsdir}/hicolor/*/*/*.*
 
 %files -n libanjuta
