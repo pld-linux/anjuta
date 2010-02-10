@@ -3,13 +3,13 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.28.1.0
+Version:	2.28.2.0
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.28/%{name}-%{version}.tar.bz2
-# Source0-md5:	610624984bd62ee1e280090900a0ada7
+# Source0-md5:	3f61d85938d1352125f05a1167183721
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-includes.patch
 URL:		http://projects.gnome.org/anjuta/
@@ -55,6 +55,7 @@ Requires(post,preun):	GConf2
 Requires:	glib2 >= 1:2.20.0
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 Requires:	libgda4-provider-sqlite >= 4.0.0
+Requires:	perl-Locale-gettext
 Requires:	pkgconfig
 Suggests:	ctags
 Obsoletes:	gnome-build
