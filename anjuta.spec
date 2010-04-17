@@ -3,13 +3,13 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.28.2.0
+Version:	2.30.0.0
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.28/%{name}-%{version}.tar.bz2
-# Source0-md5:	3f61d85938d1352125f05a1167183721
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.30/%{name}-%{version}.tar.bz2
+# Source0-md5:	8e6c93b8c6f87c55b572734176ecf83a
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-includes.patch
 URL:		http://projects.gnome.org/anjuta/
@@ -18,22 +18,26 @@ BuildRequires:	ORBit2-devel >= 1:2.14.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.9
+BuildRequires:	dbus-glib-devel
 BuildRequires:	devhelp-devel >= 0.22
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gdl-devel >= 2.28.0
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.20.0
+BuildRequires:	gjs-devel
+BuildRequires:	glib2-devel >= 1:2.22.0
 BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gnome-doc-utils
-BuildRequires:	gtk+2-devel >= 2:2.16.0
+BuildRequires:	gobject-introspection-devel
+BuildRequires:	gtk+2-devel >= 2:2.18.0
 BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	gtk-webkit-devel
-BuildRequires:	gtksourceview2-devel >= 2.6.0
+BuildRequires:	gtksourceview2-devel >= 2.10.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libgda4-devel >= 4.0.0
 BuildRequires:	libgladeui-devel >= 3.6.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+BuildRequires:	libunique-devel >= 1.0.0
 BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	libxslt-devel
 BuildRequires:	neon-devel >= 0.28.2
@@ -43,7 +47,7 @@ BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
 BuildRequires:	subversion-devel >= 1.5.0
-BuildRequires:	libunique-devel >= 1.0.0
+BuildRequires:	vala
 BuildRequires:	vte-devel >= 0.20.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk+2
@@ -52,7 +56,8 @@ Requires(post,postun):	scrollkeeper
 Requires(post,postun):	shared-mime-info
 Requires(post,preun):	GConf2
 # Requires:	gnome-terminal
-Requires:	glib2 >= 1:2.20.0
+Requires:	glib2 >= 1:2.22.0
+Requires:	gtksourceview2 >= 2.10.0
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 Requires:	libgda4-provider-sqlite >= 4.0.0
 Requires:	perl-Locale-gettext
@@ -112,9 +117,9 @@ Biblioteka libanjuta.
 Summary:	Header files for libanjuta library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libanjuta
 Group:		X11/Development/Libraries
-Requires:	libanjuta-devel = %{epoch}:%{version}-%{release}
 Requires:	GConf2-devel >= 2.26.0
-Requires:	gtk+2-devel >= 2:2.16.0
+Requires:	gtk+2-devel >= 2:2.18.0
+Requires:	libanjuta-devel = %{epoch}:%{version}-%{release}
 
 %description -n libanjuta-devel
 Header files for libanjuta library.
@@ -139,6 +144,9 @@ Dokumentacja API biblioteki libanjuta.
 %patch0 -p1
 %patch1 -p0
 
+sed -i -e 's/^en@shaw//' po/LINGUAS
+rm -f po/en@shaw.po
+
 %build
 %{__intltoolize}
 %{__libtoolize}
@@ -151,6 +159,7 @@ Dokumentacja API biblioteki libanjuta.
 	--with-omf-dir=%{_omf_dest_dir} \
 	--disable-schemas-install \
 	--disable-scrollkeeper \
+	--disable-silent-rules \
 	--disable-static
 
 %{__make}
@@ -244,7 +253,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/languages.xml
 %{_datadir}/%{name}/layout.xml
 %{_datadir}/%{name}/macros.xml
-%{_datadir}/%{name}/tables-from-1-to-228.sql
+%{_datadir}/%{name}/sources.list
 %{_datadir}/%{name}/tables.sql
 %{_datadir}/%{name}/welcome.txt
 %{_datadir}/%{name}/AUTHORS
