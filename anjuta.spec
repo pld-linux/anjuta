@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.30.1.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
@@ -119,7 +119,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libanjuta
 Group:		X11/Development/Libraries
 Requires:	GConf2-devel >= 2.26.0
 Requires:	gtk+2-devel >= 2:2.18.0
-Requires:	libanjuta-devel = %{epoch}:%{version}-%{release}
+Requires:	libanjuta = %{epoch}:%{version}-%{release}
 
 %description -n libanjuta-devel
 Header files for libanjuta library.
