@@ -3,15 +3,14 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.30.1.0
-Release:	2
+Version:	2.30.2.1
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.30/%{name}-%{version}.tar.bz2
-# Source0-md5:	433a159761a7d56f4b767054cc90c8fc
+# Source0-md5:	9b511224d97500ac9b318588fbb441ab
 Patch0:		%{name}-desktop.patch
-Patch1:		%{name}-includes.patch
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	GConf2-devel >= 2.26.0
 BuildRequires:	ORBit2-devel >= 1:2.14.0
@@ -142,7 +141,6 @@ Dokumentacja API biblioteki libanjuta.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p0
 
 sed -i -e 's/^en@shaw//' po/LINGUAS
 rm -f po/en@shaw.po
