@@ -3,37 +3,35 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.30.2.1
-Release:	5
+Version:	2.32.1.0
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.30/%{name}-%{version}.tar.bz2
-# Source0-md5:	9b511224d97500ac9b318588fbb441ab
-Patch0:		%{name}-desktop.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.32/%{name}-%{version}.tar.bz2
+# Source0-md5:	347e10404172d7f846b3f2bc92fc6760
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	GConf2-devel >= 2.26.0
-BuildRequires:	ORBit2-devel >= 1:2.14.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	dbus-glib-devel
 BuildRequires:	devhelp-devel >= 0.22
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gdl-devel >= 2.28.0
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel
-BuildRequires:	glib2-devel >= 1:2.22.0
+BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gnome-doc-utils
-BuildRequires:	gobject-introspection-devel
-BuildRequires:	gtk+2-devel >= 2:2.18.0
+BuildRequires:	gobject-introspection-devel >= 0.6.7
+BuildRequires:	graphviz-devel
+BuildRequires:	gtk+2-devel >= 2:2.20.0
 BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	gtk-webkit-devel
 BuildRequires:	gtksourceview2-devel >= 2.10.0
 BuildRequires:	intltool >= 0.40.0
-BuildRequires:	libgda4-devel >= 4.0.0
-BuildRequires:	libgladeui-devel >= 3.6.0
+BuildRequires:	libgda4-devel >= 4.2.0
+BuildRequires:	libgladeui-devel >= 3.6.7
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libunique-devel >= 1.0.0
@@ -46,7 +44,7 @@ BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
 BuildRequires:	subversion-devel >= 1.5.0
-BuildRequires:	vala
+BuildRequires:	vala >= 0.10.0
 BuildRequires:	vte-devel >= 0.20.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk+2
@@ -55,10 +53,10 @@ Requires(post,postun):	scrollkeeper
 Requires(post,postun):	shared-mime-info
 Requires(post,preun):	GConf2
 # Requires:	gnome-terminal
-Requires:	glib2 >= 1:2.22.0
+Requires:	glib2 >= 1:2.26.0
 Requires:	gtksourceview2 >= 2.10.0
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
-Requires:	libgda4-provider-sqlite >= 4.0.0
+Requires:	libgda4-provider-sqlite >= 4.2.0
 Requires:	perl-Locale-gettext
 Requires:	pkgconfig
 Suggests:	ctags
@@ -117,7 +115,7 @@ Summary:	Header files for libanjuta library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libanjuta
 Group:		X11/Development/Libraries
 Requires:	GConf2-devel >= 2.26.0
-Requires:	gtk+2-devel >= 2:2.18.0
+Requires:	gtk+2-devel >= 2:2.20.0
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 
 %description -n libanjuta-devel
@@ -140,7 +138,6 @@ Dokumentacja API biblioteki libanjuta.
 
 %prep
 %setup -q
-%patch0 -p1
 
 sed -i -e 's/^en@shaw//' po/LINGUAS
 rm -f po/en@shaw.po
@@ -160,7 +157,7 @@ rm -f po/en@shaw.po
 	--disable-silent-rules \
 	--disable-static
 
-%{__make}
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -195,6 +192,7 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_install anjuta-symbol-db.schemas
 %gconf_schema_install anjuta-terminal-plugin.schemas
 %gconf_schema_install file-manager.schemas
+%gconf_schema_install python-plugin-properties.schemas
 %update_icon_cache hicolor
 
 %preun
@@ -209,6 +207,7 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_uninstall anjuta-symbol-db.schemas
 %gconf_schema_uninstall anjuta-terminal-plugin.schemas
 %gconf_schema_uninstall file-manager.schemas
+%gconf_schema_uninstall python-plugin-properties.schemas
 
 %postun
 %scrollkeeper_update_postun
@@ -229,6 +228,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gbf-mkfile-parse
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
+%attr(755,root,root) %{_libdir}/%{name}/anjuta-python-autocomplete.py
 %{_libdir}/%{name}/*.plugin
 %attr(755,root,root) %{_libdir}/glade3/modules/libgladeanjuta.so
 %{_pixmapsdir}/%{name}
@@ -250,7 +250,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/gdb.init
 %{_datadir}/%{name}/languages.xml
 %{_datadir}/%{name}/layout.xml
-%{_datadir}/%{name}/macros.xml
+%{_datadir}/%{name}/snippets-global-variables.xml
+%{_datadir}/%{name}/snippets.anjuta-snippets
 %{_datadir}/%{name}/sources.list
 %{_datadir}/%{name}/tables.sql
 %{_datadir}/%{name}/welcome.txt
@@ -271,19 +272,28 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/gconf/schemas/anjuta-terminal-plugin.schemas
 %{_sysconfdir}/gconf/schemas/file-manager.schemas
 %{_sysconfdir}/gconf/schemas/preferences.schemas
+%{_sysconfdir}/gconf/schemas/python-plugin-properties.schemas
 %{_iconsdir}/hicolor/*/*/*.*
 
 %files -n libanjuta
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libanjuta.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libanjuta.so.0
+%attr(755,root,root) %{_libdir}/libanjuta-foocanvas.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libanjuta-foocanvas.so.0
+%{_libdir}/girepository-1.0/Anjuta-1.0.typelib
+%{_libdir}/girepository-1.0/IAnjuta-1.0.typelib
 
 %files -n libanjuta-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libanjuta.so
+%attr(755,root,root) %{_libdir}/libanjuta-foocanvas.so
 %{_libdir}/libanjuta.la
+%{_libdir}/libanjuta-foocanvas.la
 %{_includedir}/libanjuta-1.0
 %{_pkgconfigdir}/libanjuta-1.0.pc
+%{_datadir}/gir-1.0/Anjuta-1.0.gir
+%{_datadir}/gir-1.0/IAnjuta-1.0.gir
 
 %files -n libanjuta-apidocs
 %defattr(644,root,root,755)
