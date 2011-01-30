@@ -21,6 +21,7 @@ BuildRequires:	gdl-devel >= 2.28.0
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
+BuildRequires:	glibc-misc
 BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gnome-doc-utils
 BuildRequires:	gobject-introspection-devel >= 0.6.7
