@@ -140,9 +140,6 @@ Dokumentacja API biblioteki libanjuta.
 %prep
 %setup -q
 
-sed -i -e 's/^en@shaw//' po/LINGUAS
-rm -f po/en@shaw.po
-
 %build
 %{__intltoolize}
 %{__libtoolize}
@@ -169,9 +166,9 @@ rm -rf $RPM_BUILD_ROOT
 	mimesvgicondir=%{_iconsdir}/hicolor/scalable/mimetypes
 
 # *.la not needed - *.so loaded through libgmodule
-rm -f $RPM_BUILD_ROOT%{_libdir}/{anjuta,glade3/modules}/lib*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/{anjuta,glade3/modules}/lib*.la
 
-rm -rf $RPM_BUILD_ROOT%{_docdir}/anjuta
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/anjuta
 
 %find_lang %{name} --with-gnome --with-omf --all-name
 
