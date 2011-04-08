@@ -166,7 +166,6 @@ rm -rf $RPM_BUILD_ROOT
 	mimesvgicondir=%{_iconsdir}/hicolor/scalable/mimetypes
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/anjuta
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libanjuta.la
 
 %find_lang %{name} --with-gnome --with-omf --all-name
 
