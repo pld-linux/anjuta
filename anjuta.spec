@@ -166,7 +166,7 @@ rm -rf $RPM_BUILD_ROOT
 	mimesvgicondir=%{_iconsdir}/hicolor/scalable/mimetypes
 
 # *.la not needed - *.so loaded through libgmodule
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/{anjuta,glade3/modules}/lib*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/{anjuta,glade3}/lib*.la
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/anjuta
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libanjuta.la
