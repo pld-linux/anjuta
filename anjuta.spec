@@ -165,6 +165,9 @@ rm -rf $RPM_BUILD_ROOT
 	mimepngicondir=%{_iconsdir}/hicolor/48x48/mimetypes \
 	mimesvgicondir=%{_iconsdir}/hicolor/scalable/mimetypes
 
+# *.la not needed - *.so loaded through libgmodule
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
+
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/anjuta
 
 %find_lang %{name} --with-gnome --with-omf --all-name
@@ -219,20 +222,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/anjuta
 %attr(755,root,root) %{_bindir}/anjuta-launcher
 %attr(755,root,root) %{_bindir}/anjuta-tags
-#%%attr(755,root,root) %{_bindir}/gbf-am-parse
-#%%attr(755,root,root) %{_bindir}/gbf-mkfile-parse
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %attr(755,root,root) %{_libdir}/%{name}/anjuta-python-autocomplete.py
 %{_libdir}/%{name}/*.plugin
-#%%attr(755,root,root) %{_libdir}/glade3/modules/libgladeanjuta.so
 %{_pixmapsdir}/%{name}
 %dir %{_datadir}/%{name}
-#%%{_datadir}/%{name}/GBF
 %{_datadir}/%{name}/build
 %{_datadir}/%{name}/class-templates
 %{_datadir}/%{name}/glade
-#%%{_datadir}/%{name}/gtodo
 %{_datadir}/%{name}/profiles
 %{_datadir}/%{name}/project
 %dir %{_datadir}/%{name}/tools
@@ -252,42 +250,25 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/welcome.txt
 %{_datadir}/%{name}/AUTHORS
 %{_datadir}/mime/packages/anjuta.xml
-#%%{_datadir}/glade3/catalogs/anjuta-glade.xml
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/anjuta.1*
 %{_mandir}/man1/anjuta-launcher.1*
-#%%{_sysconfdir}/gconf/schemas/anjuta-build-basic-autotools-plugin.schemas
-#%%{_sysconfdir}/gconf/schemas/anjuta-cvs-plugin.schemas
-#%%{_sysconfdir}/gconf/schemas/anjuta-document-manager.schemas
-#%%{_sysconfdir}/gconf/schemas/anjuta-debug-manager.schemas
-#%%{_sysconfdir}/gconf/schemas/anjuta-editor-sourceview.schemas
-#%%{_sysconfdir}/gconf/schemas/anjuta-language-cpp-java.schemas
-#%%{_sysconfdir}/gconf/schemas/anjuta-message-manager-plugin.schemas
-#%%{_sysconfdir}/gconf/schemas/anjuta-symbol-db.schemas
-#%%{_sysconfdir}/gconf/schemas/anjuta-terminal-plugin.schemas
-#%%{_sysconfdir}/gconf/schemas/file-manager.schemas
-#%%{_sysconfdir}/gconf/schemas/preferences.schemas
-#%%{_sysconfdir}/gconf/schemas/python-plugin-properties.schemas
 %{_iconsdir}/hicolor/*/*/*.*
 
 %files -n libanjuta
 %defattr(644,root,root,755)
-#%%attr(755,root,root) %{_libdir}/libanjuta.so.*.*.*
-#%%attr(755,root,root) %ghost %{_libdir}/libanjuta.so.0
-#%%attr(755,root,root) %{_libdir}/libanjuta-foocanvas.so.*.*.*
-#%%attr(755,root,root) %ghost %{_libdir}/libanjuta-foocanvas.so.0
-#%%{_libdir}/girepository-1.0/Anjuta-1.0.typelib
-#%%{_libdir}/girepository-1.0/IAnjuta-1.0.typelib
+%attr(755,root,root) %{_libdir}/libanjuta-3.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libanjuta-3.so.0
+%{_libdir}/girepository-1.0/Anjuta-3.0.typelib
+%{_libdir}/girepository-1.0/IAnjuta-3.0.typelib
 
 %files -n libanjuta-devel
 %defattr(644,root,root,755)
-#%%attr(755,root,root) %{_libdir}/libanjuta.so
-#%%attr(755,root,root) %{_libdir}/libanjuta-foocanvas.so
-#%%{_libdir}/libanjuta-foocanvas.la
-#%%{_includedir}/libanjuta-1.0
-#%%{_pkgconfigdir}/libanjuta-1.0.pc
-#%%{_datadir}/gir-1.0/Anjuta-1.0.gir
-#%%{_datadir}/gir-1.0/IAnjuta-1.0.gir
+%attr(755,root,root) %{_libdir}/libanjuta-0.so
+%{_includedir}/libanjuta-3.0
+%{_pkgconfigdir}/libanjuta-3.0.pc
+%{_datadir}/gir-1.0/Anjuta-3.0.gir
+%{_datadir}/gir-1.0/IAnjuta-3.0.gir
 
 %files -n libanjuta-apidocs
 %defattr(644,root,root,755)
