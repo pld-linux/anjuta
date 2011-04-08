@@ -3,13 +3,13 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	2.32.1.0
-Release:	4
+Version:	3.0.0.0
+Release:	0.1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.32/%{name}-%{version}.tar.bz2
-# Source0-md5:	347e10404172d7f846b3f2bc92fc6760
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.0/%{name}-%{version}.tar.bz2
+# Source0-md5:	ae7b5b9e89f1251d7c1e2109671ccd33
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	GConf2-devel >= 2.26.0
 BuildRequires:	autoconf >= 2.59
@@ -17,7 +17,7 @@ BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	devhelp-devel >= 0.22
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gdl-devel >= 2.28.0
+BuildRequires:	gdl-devel >= 3.0.0
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
@@ -26,10 +26,10 @@ BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gnome-doc-utils
 BuildRequires:	gobject-introspection-devel >= 0.6.7
 BuildRequires:	graphviz-devel
-BuildRequires:	gtk+2-devel >= 2:2.20.0
+BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	gtk-webkit-devel
-BuildRequires:	gtksourceview2-devel >= 2.10.0
+BuildRequires:	gtksourceview3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libgda4-devel >= 4.2.0
 BuildRequires:	libgladeui-devel >= 3.6.7
@@ -45,8 +45,8 @@ BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
 BuildRequires:	subversion-devel >= 1.5.0
-BuildRequires:	vala >= 0.10.0
-BuildRequires:	vte-devel >= 0.20.0
+BuildRequires:	vala >= 0.12.0
+BuildRequires:	vte-devel >= 0.28.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
