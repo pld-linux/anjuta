@@ -169,6 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/anjuta
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libanjuta-3.la
 
 %find_lang %{name} --with-gnome --with-omf --all-name
 
