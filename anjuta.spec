@@ -256,7 +256,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/anjuta.1*
 %{_mandir}/man1/anjuta-launcher.1*
-%{_sysconfdir}/gconf/schemas/anjuta-build-basic-autotools-plugin.schemas
+#%%{_sysconfdir}/gconf/schemas/anjuta-build-basic-autotools-plugin.schemas
 #%%{_sysconfdir}/gconf/schemas/anjuta-cvs-plugin.schemas
 #%%{_sysconfdir}/gconf/schemas/anjuta-document-manager.schemas
 #%%{_sysconfdir}/gconf/schemas/anjuta-debug-manager.schemas
