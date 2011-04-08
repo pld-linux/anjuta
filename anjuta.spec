@@ -169,6 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/{anjuta,glade3/modules}/lib*.la
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/anjuta
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libanjuta.la
 
 %find_lang %{name} --with-gnome --with-omf --all-name
 
@@ -286,7 +287,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libanjuta.so
 %attr(755,root,root) %{_libdir}/libanjuta-foocanvas.so
-%{_libdir}/libanjuta.la
 %{_libdir}/libanjuta-foocanvas.la
 %{_includedir}/libanjuta-1.0
 %{_pkgconfigdir}/libanjuta-1.0.pc
