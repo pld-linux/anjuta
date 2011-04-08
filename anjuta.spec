@@ -249,6 +249,23 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/tables.sql
 %{_datadir}/%{name}/welcome.txt
 %{_datadir}/%{name}/AUTHORS
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.build.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.code-analyzer.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.cpp.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.cvs.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.debug-manager.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.document-manager.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.file-manager.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.js.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.message-manager.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.python.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.run.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.snippets.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.sourceview.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.symbol-db.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.terminal.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.tools.gschema.xml
 %{_datadir}/mime/packages/anjuta.xml
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/anjuta.1*
@@ -264,7 +281,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n libanjuta-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libanjuta-0.so
+%attr(755,root,root) %{_libdir}/libanjuta-3.so
 %{_includedir}/libanjuta-3.0
 %{_pkgconfigdir}/libanjuta-3.0.pc
 %{_datadir}/gir-1.0/Anjuta-3.0.gir
