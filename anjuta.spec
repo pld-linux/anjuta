@@ -4,58 +4,60 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	3.0.1.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.0/%{name}-%{version}.tar.bz2
 # Source0-md5:	30206f46588c485dc157fda5cf4e953c
 URL:		http://projects.gnome.org/anjuta/
-BuildRequires:	GConf2-devel >= 2.26.0
-BuildRequires:	autoconf >= 2.59
+BuildRequires:	autoconf >= 2.65
 BuildRequires:	autogen
-BuildRequires:	automake >= 1:1.9
-BuildRequires:	devhelp-devel >= 0.22
+BuildRequires:	automake >= 1:1.10
+BuildRequires:	bison
+BuildRequires:	devhelp-devel >= 3.0.0
 BuildRequires:	docbook-dtd412-xml
+BuildRequires:	flex
 BuildRequires:	gdl-devel >= 3.0.0
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel
-BuildRequires:	glib2-devel >= 1:2.26.0
+BuildRequires:	glade-devel >= 3.10.0
+BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	glibc-misc
 BuildRequires:	gnome-common >= 2.24.0
-BuildRequires:	gnome-doc-utils
-BuildRequires:	gobject-introspection-devel >= 0.6.7
-BuildRequires:	graphviz-devel
+BuildRequires:	gnome-doc-utils >= 0.18.0
+BuildRequires:	gobject-introspection-devel >= 0.10.0
+BuildRequires:	graphviz-devel >= 1.0.0
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.7
-BuildRequires:	gtk-webkit-devel
+BuildRequires:	gtk-webkit3-devel
 BuildRequires:	gtksourceview3-devel >= 3.0.0
-BuildRequires:	intltool >= 0.40.0
+BuildRequires:	intltool >= 0.40.1
 BuildRequires:	libgda4-devel >= 4.2.0
-BuildRequires:	libgladeui-devel >= 3.6.7
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
-BuildRequires:	libunique-devel >= 1.0.0
+BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	libxslt-devel
 BuildRequires:	neon-devel >= 0.28.2
 BuildRequires:	perl-Locale-gettext
 BuildRequires:	pkgconfig
+BuildRequires:	python-devel
 BuildRequires:	rpmbuild(find_lang) >= 1.23
-BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	scrollkeeper
 BuildRequires:	subversion-devel >= 1.5.0
 BuildRequires:	vala >= 0.12.0
 BuildRequires:	vte-devel >= 0.28.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
-Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	scrollkeeper
 Requires(post,postun):	shared-mime-info
-Requires(post,preun):	GConf2
+Requires(post,postun):	glib2 >= 1:2.26.0
 # Requires:	gnome-terminal
-Requires:	glib2 >= 1:2.26.0
-Requires:	gtksourceview2 >= 2.10.0
+Requires:	glade >= 3.10.0
+Requires:	glib2 >= 1:2.28.0
+Requires:	gtksourceview3 >= 3.0.0
+Requires:	hicolor-icon-theme
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 Requires:	libgda4-provider-sqlite >= 4.2.0
 Requires:	perl-Locale-gettext
@@ -115,9 +117,10 @@ Biblioteka libanjuta.
 Summary:	Header files for libanjuta library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libanjuta
 Group:		X11/Development/Libraries
-Requires:	GConf2-devel >= 2.26.0
-Requires:	gtk+2-devel >= 2:2.20.0
+Requires:	gdl-devel >= 3.0.0
+Requires:	gtk+3-devel >= 3.0.0
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
+Requires:	libxml2-devel >= 1:2.6.26
 
 %description -n libanjuta-devel
 Header files for libanjuta library.
@@ -143,30 +146,30 @@ Dokumentacja API biblioteki libanjuta.
 %build
 %{__intltoolize}
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 %configure \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-omf-dir=%{_omf_dest_dir} \
-	--disable-schemas-install \
+	--disable-schemas-compile \
 	--disable-scrollkeeper \
 	--disable-silent-rules \
 	--disable-static
 
-%{__make} -j1
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} -j1 install \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	mimepngicondir=%{_iconsdir}/hicolor/48x48/mimetypes \
 	mimesvgicondir=%{_iconsdir}/hicolor/scalable/mimetypes
 
 # *.la not needed - *.so loaded through libgmodule
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/anjuta/lib*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/{anjuta,glade/modules}/lib*.la
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/anjuta
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libanjuta-3.la
@@ -180,39 +183,15 @@ rm -rf $RPM_BUILD_ROOT
 %scrollkeeper_update_post
 %update_mime_database
 %update_desktop_database
-%gconf_schema_install anjuta-build-basic-autotools-plugin.schemas
-%gconf_schema_install anjuta-cvs-plugin.schemas
-%gconf_schema_install anjuta-document-manager.schemas
-%gconf_schema_install anjuta-debug-manager.schemas
-%gconf_schema_install anjuta-editor-sourceview.schemas
-%gconf_schema_install anjuta-language-cpp-java.schemas
-%gconf_schema_install anjuta-message-manager-plugin.schemas
-%gconf_schema_install preferences.schemas
-%gconf_schema_install anjuta-symbol-db.schemas
-%gconf_schema_install anjuta-terminal-plugin.schemas
-%gconf_schema_install file-manager.schemas
-%gconf_schema_install python-plugin-properties.schemas
 %update_icon_cache hicolor
-
-%preun
-%gconf_schema_uninstall anjuta-build-basic-autotools-plugin.schemas
-%gconf_schema_uninstall anjuta-cvs-plugin.schemas
-%gconf_schema_uninstall anjuta-document-manager.schemas
-%gconf_schema_uninstall anjuta-debug-manager.schemas
-%gconf_schema_uninstall anjuta-editor-sourceview.schemas
-%gconf_schema_uninstall anjuta-language-cpp-java.schemas
-%gconf_schema_uninstall anjuta-message-manager-plugin.schemas
-%gconf_schema_uninstall preferences.schemas
-%gconf_schema_uninstall anjuta-symbol-db.schemas
-%gconf_schema_uninstall anjuta-terminal-plugin.schemas
-%gconf_schema_uninstall file-manager.schemas
-%gconf_schema_uninstall python-plugin-properties.schemas
+%glib_compile_schemas
 
 %postun
 %scrollkeeper_update_postun
 %update_mime_database
 %update_desktop_database_postun
 %update_icon_cache hicolor
+%glib_compile_schemas
 
 %post	-n libanjuta -p /sbin/ldconfig
 %postun -n libanjuta -p /sbin/ldconfig
@@ -227,6 +206,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %attr(755,root,root) %{_libdir}/%{name}/anjuta-python-autocomplete.py
 %{_libdir}/%{name}/*.plugin
+%attr(755,root,root) %{_libdir}/glade/modules/libgladeanjuta.so
+%{_datadir}/glade/catalogs/anjuta-glade.xml
 %{_pixmapsdir}/%{name}
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/build
