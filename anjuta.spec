@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.32.1.1
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
@@ -168,6 +168,8 @@ rm -rf $RPM_BUILD_ROOT
 # *.la not needed - *.so loaded through libgmodule
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/{anjuta,glade3/modules}/lib*.la
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libanjuta.la
+
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/anjuta
 
 %find_lang %{name} --with-gnome --with-omf --all-name
@@ -286,7 +288,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libanjuta.so
 %attr(755,root,root) %{_libdir}/libanjuta-foocanvas.so
-%{_libdir}/libanjuta.la
 %{_libdir}/libanjuta-foocanvas.la
 %{_includedir}/libanjuta-1.0
 %{_pkgconfigdir}/libanjuta-1.0.pc
