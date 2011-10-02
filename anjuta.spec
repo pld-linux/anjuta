@@ -15,7 +15,7 @@ BuildRequires:	autoconf >= 2.65
 BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
-BuildRequires:	devhelp-devel >= 3.0.0
+BuildRequires:	devhelp-devel >= 3.2.0
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	flex
 BuildRequires:	gdl-devel >= 3.0.0
@@ -28,10 +28,10 @@ BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gnome-doc-utils >= 0.18.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	graphviz-devel >= 1.0.0
-BuildRequires:	gtk+3-devel >= 3.0.0
+BuildRequires:	gtk+3-devel >= 3.2.0
 BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	gtk-webkit3-devel
-BuildRequires:	gtksourceview3-devel >= 3.0.0
+BuildRequires:	gtksourceview3-devel >= 3.2.0
 BuildRequires:	intltool >= 0.40.1
 BuildRequires:	libgda4-devel >= 4.2.0
 BuildRequires:	libstdc++-devel
