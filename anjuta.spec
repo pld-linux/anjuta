@@ -48,7 +48,7 @@ BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	scrollkeeper
 BuildRequires:	subversion-devel >= 1.5.0
-BuildRequires:	vala >= 0.12.0
+BuildRequires:	vala >= 2:0.14.0
 BuildRequires:	vte-devel >= 0.28.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
