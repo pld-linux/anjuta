@@ -1,0 +1,60 @@
+diff -ur anjuta-2.32.1.1.orig//configure.in anjuta-2.32.1.1/configure.in
+--- anjuta-2.32.1.1.orig//configure.in	2010-12-29 17:33:54.000000000 +0000
++++ anjuta-2.32.1.1/configure.in	2011-12-13 11:39:32.799022750 +0000
+@@ -282,7 +282,7 @@
+ 	AC_MSG_RESULT(no)
+ 	enable_vala="yes"
+ 	PKG_CHECK_MODULES(VALA,
+-		[vala-0.10 >= $VALA_REQUIRED])
++		[libvala-0.12 >= $VALA_REQUIRED])
+ fi
+ 
+ if test x$enable_vala = xyes; then
+diff -ur anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.am anjuta-2.32.1.1/plugins/language-support-vala/Makefile.am
+--- anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.am	2010-12-29 17:23:51.000000000 +0000
++++ anjuta-2.32.1.1/plugins/language-support-vala/Makefile.am	2011-12-13 11:39:47.199026575 +0000
+@@ -31,7 +31,7 @@
+ 	-DG_LOG_DOMAIN=\"language-support-vala\" \
+ 	--no-warn
+ 
+-VALAFLAGS = --vapidir $(srcdir) --pkg vala-0.10 --pkg libanjuta-1.0
++VALAFLAGS = --vapidir $(srcdir) --pkg libvala-0.12 --pkg libanjuta-1.0
+ 
+ # The plugin
+ plugindir = $(anjuta_plugin_dir)
+diff -ur anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.in anjuta-2.32.1.1/plugins/language-support-vala/Makefile.in
+--- anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.in	2011-12-13 11:38:19.000000000 +0000
++++ anjuta-2.32.1.1/plugins/language-support-vala/Makefile.in	2011-12-13 11:39:41.288022633 +0000
+@@ -395,7 +395,7 @@
+ @ENABLE_VALA_TRUE@	-DG_LOG_DOMAIN=\"language-support-vala\" \
+ @ENABLE_VALA_TRUE@	--no-warn
+ 
+-@ENABLE_VALA_TRUE@VALAFLAGS = --vapidir $(srcdir) --pkg vala-0.10 --pkg libanjuta-1.0
++@ENABLE_VALA_TRUE@VALAFLAGS = --vapidir $(srcdir) --pkg libvala-0.12 --pkg libanjuta-1.0
+ 
+ # The plugin
+ @ENABLE_VALA_TRUE@plugindir = $(anjuta_plugin_dir)
+diff -ur anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.am anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.am
+--- anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.am	2010-12-29 17:22:49.000000000 +0000
++++ anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.am	2011-12-13 11:39:58.815151895 +0000
+@@ -31,7 +31,7 @@
+ 	${LEXER} ${LEXCCFLAGS} ${LEXFILE}
+ 
+ ctags-visitor.c: ctags-visitor.vala
+-	$(VALAC) -g -h ctags-vala.h -C --pkg vala-0.10 $^
++	$(VALAC) -g -h ctags-vala.h -C --pkg libvala-0.12 $^
+ 
+ anjuta_tags_SOURCES = \
+ 	main.c        \
+diff -ur anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.in anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.in
+--- anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.in	2011-12-13 11:38:27.000000000 +0000
++++ anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.in	2011-12-13 11:39:54.256022768 +0000
+@@ -870,7 +870,7 @@
+ 	${LEXER} ${LEXCCFLAGS} ${LEXFILE}
+ 
+ ctags-visitor.c: ctags-visitor.vala
+-	$(VALAC) -g -h ctags-vala.h -C --pkg vala-0.10 $^
++	$(VALAC) -g -h ctags-vala.h -C --pkg libvala-0.12 $^
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
