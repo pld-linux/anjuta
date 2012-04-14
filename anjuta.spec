@@ -4,13 +4,14 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	2.32.1.1
-Release:	7
+Release:	8
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.32/%{name}-%{version}.tar.bz2
 # Source0-md5:	7af70f6486eda92796268fc4bf659c27
 Patch0:		%{name}-vala-0.12.patch
+Patch1:		%{name}-install.patch
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	GConf2-devel >= 2.26.0
 BuildRequires:	autoconf >= 2.59
@@ -140,7 +141,8 @@ Dokumentacja API biblioteki libanjuta.
 
 %prep
 %setup -q
-%patch0  -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__intltoolize}
