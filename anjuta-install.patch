@@ -1,0 +1,22 @@
+diff -urN anjuta-2.32.1.1.orig//plugins/class-gen/templates/Makefile.am anjuta-2.32.1.1/plugins/class-gen/templates/Makefile.am
+--- anjuta-2.32.1.1.orig//plugins/class-gen/templates/Makefile.am	2010-12-29 17:22:49.000000000 +0000
++++ anjuta-2.32.1.1/plugins/class-gen/templates/Makefile.am	2012-04-14 14:52:24.831850218 +0000
+@@ -1,5 +1,5 @@
+ # Templates
+-clsgen_appdatadir = "$(datadir)/anjuta/class-templates/"
++clsgen_appdatadir = $(datadir)/anjuta/class-templates/
+ clsgen_appdata_DATA = \
+ 	cc-header.tpl \
+ 	cc-source.tpl \
+diff -urN anjuta-2.32.1.1.orig//plugins/class-gen/templates/Makefile.in anjuta-2.32.1.1/plugins/class-gen/templates/Makefile.in
+--- anjuta-2.32.1.1.orig//plugins/class-gen/templates/Makefile.in	2010-12-29 17:44:30.000000000 +0000
++++ anjuta-2.32.1.1/plugins/class-gen/templates/Makefile.in	2012-04-14 14:52:18.763725304 +0000
+@@ -309,7 +309,7 @@
+ top_srcdir = @top_srcdir@
+ 
+ # Templates
+-clsgen_appdatadir = "$(datadir)/anjuta/class-templates/"
++clsgen_appdatadir = $(datadir)/anjuta/class-templates/
+ clsgen_appdata_DATA = \
+ 	cc-header.tpl \
+ 	cc-source.tpl \
