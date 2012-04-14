@@ -1,7 +1,16 @@
-diff -ur anjuta-2.32.1.1.orig//configure.in anjuta-2.32.1.1/configure.in
+diff -urN anjuta-2.32.1.1.orig//configure.in anjuta-2.32.1.1/configure.in
 --- anjuta-2.32.1.1.orig//configure.in	2010-12-29 17:33:54.000000000 +0000
-+++ anjuta-2.32.1.1/configure.in	2011-12-13 11:39:32.799022750 +0000
-@@ -282,7 +282,7 @@
++++ anjuta-2.32.1.1/configure.in	2012-04-14 13:35:43.086850543 +0000
+@@ -46,7 +46,7 @@
+ GLADEUI_REQUIRED=3.6.7
+ 
+ dnl Vala
+-VALA_REQUIRED=0.9.5
++VALA_REQUIRED=0.11.2
+ 
+ dnl Introspection
+ GI_REQUIRED=0.6.6
+@@ -282,11 +282,11 @@
  	AC_MSG_RESULT(no)
  	enable_vala="yes"
  	PKG_CHECK_MODULES(VALA,
@@ -10,9 +19,14 @@ diff -ur anjuta-2.32.1.1.orig//configure.in anjuta-2.32.1.1/configure.in
  fi
  
  if test x$enable_vala = xyes; then
-diff -ur anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.am anjuta-2.32.1.1/plugins/language-support-vala/Makefile.am
+-	AC_PATH_PROG(VALAC, valac, valac)
++	AC_PATH_PROG(VALAC, [valac-0.12 valac], valac)
+ 	AC_SUBST(VALAC)
+ fi
+ 
+diff -urN anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.am anjuta-2.32.1.1/plugins/language-support-vala/Makefile.am
 --- anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.am	2010-12-29 17:23:51.000000000 +0000
-+++ anjuta-2.32.1.1/plugins/language-support-vala/Makefile.am	2011-12-13 11:39:47.199026575 +0000
++++ anjuta-2.32.1.1/plugins/language-support-vala/Makefile.am	2012-04-14 13:35:43.086850543 +0000
 @@ -31,7 +31,7 @@
  	-DG_LOG_DOMAIN=\"language-support-vala\" \
  	--no-warn
@@ -22,10 +36,10 @@ diff -ur anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.am anjuta-
  
  # The plugin
  plugindir = $(anjuta_plugin_dir)
-diff -ur anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.in anjuta-2.32.1.1/plugins/language-support-vala/Makefile.in
---- anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.in	2011-12-13 11:38:19.000000000 +0000
-+++ anjuta-2.32.1.1/plugins/language-support-vala/Makefile.in	2011-12-13 11:39:41.288022633 +0000
-@@ -395,7 +395,7 @@
+diff -urN anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.in anjuta-2.32.1.1/plugins/language-support-vala/Makefile.in
+--- anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.in	2010-12-29 17:44:42.000000000 +0000
++++ anjuta-2.32.1.1/plugins/language-support-vala/Makefile.in	2012-04-14 13:35:43.086850543 +0000
+@@ -390,7 +390,7 @@
  @ENABLE_VALA_TRUE@	-DG_LOG_DOMAIN=\"language-support-vala\" \
  @ENABLE_VALA_TRUE@	--no-warn
  
@@ -34,9 +48,167 @@ diff -ur anjuta-2.32.1.1.orig//plugins/language-support-vala/Makefile.in anjuta-
  
  # The plugin
  @ENABLE_VALA_TRUE@plugindir = $(anjuta_plugin_dir)
-diff -ur anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.am anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.am
+diff -urN anjuta-2.32.1.1.orig//plugins/language-support-vala/plugin.vala anjuta-2.32.1.1/plugins/language-support-vala/plugin.vala
+--- anjuta-2.32.1.1.orig//plugins/language-support-vala/plugin.vala	2010-12-29 17:22:49.000000000 +0000
++++ anjuta-2.32.1.1/plugins/language-support-vala/plugin.vala	2012-04-14 14:30:29.722671707 +0000
+@@ -35,6 +35,9 @@
+ 	Vala.SymbolResolver resolver;
+ 	Vala.SemanticAnalyzer analyzer;
+ 
++	ValaPlugin () {
++		Object ();
++	}
+ 	public override bool activate () {
+ 		//debug("Activating ValaPlugin");
+ 		context = new Vala.CodeContext();
+@@ -46,14 +49,12 @@
+ 		prefs = shell.get_preferences ();
+ 		var project = (IAnjuta.ProjectManager) shell.get_object("IAnjutaProjectManager");
+ 		weak List<string> packages = project.get_packages();
+-		add_package(context, "glib-2.0");
+-		add_package(context, "gobject-2.0");
++		context.add_package("glib-2.0");
++		context.add_package("gobject-2.0");
+ 
+ 		var status = shell.get_status ();
+-		foreach(var pkg in packages) {
+-			if (!add_package(context, pkg))
+-				status.set("Package %s not found", pkg);
+-		}
++		foreach (var pkg in packages)
++			context.add_package(pkg);
+ 
+ 		source_files = new Vala.HashMap<string, Vala.SourceFile>(str_hash, str_equal, direct_equal);
+ 
+@@ -61,20 +62,20 @@
+ 		foreach (var src in sources) {
+ 			if (src.get_path() != null && !source_files.contains(src.get_path())) {
+ 				if (src.get_basename().has_suffix("vala") || src.get_basename().has_suffix("gs")) {
+-					var vsrc = new Vala.SourceFile(context, src.get_path());
++					var vsrc = new Vala.SourceFile(context, Vala.SourceFileType.SOURCE, src.get_path());
+ 					context.add_source_file(vsrc);
+ 					var ns_ref = new Vala.UsingDirective (new Vala.UnresolvedSymbol (null, "GLib", null));
+ 					vsrc.add_using_directive (ns_ref);
+ 					context.root.add_using_directive (ns_ref);
+ 					source_files[src.get_path()] = vsrc;
+ 				} else if (src.get_basename().has_suffix("vapi")) {
+-					var vsrc = new Vala.SourceFile (context, src.get_path(), true);
++					var vsrc = new Vala.SourceFile (context, Vala.SourceFileType.PACKAGE, src.get_path());
+ 					context.add_source_file(vsrc);
+ 					source_files[src.get_path()] = vsrc;
+ 				}
+ 			}
+ 		}
+-		ThreadFunc parse = () => {
++		ThreadFunc<void*> parse = () => {
+ 			lock (context) {
+ 				Vala.CodeContext.push(context);
+ 				var report = context.report as AnjutaReport;
+@@ -102,10 +103,11 @@
+ 
+ 				Vala.CodeContext.pop();
+ 			}
++			return null;
+ 		};
+ 
+ 		try {
+-			Thread.create(parse, false);
++			Thread.create<void*>(parse, false);
+ 			debug("Using threads");
+ 		} catch (ThreadError err) {
+ 			parse();
+@@ -195,7 +197,10 @@
+ 		var path = file.get_file().get_path();
+ 		lock (context) {
+ 			if (!(path in source_files)) {
+-				var src = new Vala.SourceFile(context, path, path.has_suffix("vapi"));
++				var src = new Vala.SourceFile(context,
++				                              path.has_suffix("vapi") ? Vala.SourceFileType.PACKAGE:
++					                                                    Vala.SourceFileType.SOURCE,
++				                              path);
+ 				context.add_source_file(src);
+ 				source_files[path] = src;
+ 				update_file(src);
+@@ -276,8 +281,8 @@
+ 		} else if (sym is Vala.Property) {
+ 			var prop = (Vala.Property) sym;
+ 			result.concat (symbol_lookup_inherited (prop.property_type.data_type, name, prefix_match));
+-		} else if (sym is Vala.FormalParameter) {
+-			var fp = (Vala.FormalParameter) sym;
++		} else if (sym is Vala.Parameter) {
++			var fp = (Vala.Parameter) sym;
+ 			result.concat (symbol_lookup_inherited (fp.variable_type.data_type, name, prefix_match));
+ 		}
+ 
+@@ -327,44 +332,6 @@
+ 	}
+ }
+ 
+-
+-/* Copied from valac */
+-public bool add_package (Vala.CodeContext context, string pkg) {
+-	if (context.has_package (pkg)) {
+-		// ignore multiple occurences of the same package
+-		return true;
+-	}
+-	var package_path = context.get_package_path (pkg, new string[]{});
+-
+-	if (package_path == null) {
+-		return false;
+-	}
+-
+-	context.add_package (pkg);
+-
+-	context.add_source_file (new Vala.SourceFile (context, package_path, true));
+-
+-	var deps_filename = Path.build_filename (Path.get_dirname (package_path), "%s.deps".printf (pkg));
+-	if (FileUtils.test (deps_filename, FileTest.EXISTS)) {
+-		try {
+-			string deps_content;
+-			ulong deps_len;
+-			FileUtils.get_contents (deps_filename, out deps_content, out deps_len);
+-			foreach (string dep in deps_content.split ("\n")) {
+-				if (dep != "") {
+-					if (!add_package (context, dep)) {
+-						context.report.err (null, "%s, dependency of %s, not found in specified Vala API directories".printf (dep, pkg));
+-					}
+-				}
+-			}
+-		} catch (FileError e) {
+-			context.report.err (null, "Unable to read dependency file: %s".printf (e.message));
+-		}
+-	}
+-
+-	return true;
+-}
+-
+ [ModuleInit]
+ public Type anjuta_glue_register_components (TypeModule module) {
+     return typeof (ValaPlugin);
+diff -urN anjuta-2.32.1.1.orig//plugins/language-support-vala/provider.vala anjuta-2.32.1.1/plugins/language-support-vala/provider.vala
+--- anjuta-2.32.1.1.orig//plugins/language-support-vala/provider.vala	2010-12-29 17:22:49.000000000 +0000
++++ anjuta-2.32.1.1/plugins/language-support-vala/provider.vala	2012-04-14 13:35:43.087854800 +0000
+@@ -26,7 +26,7 @@
+ 	const string PREF_AUTOCOMPLETE_ENABLE = "language.cpp.code.completion.enable";
+ 	const string PREF_SPACE_AFTER_FUNC = "language.cpp.code.completion.space.after.func";
+ 	const string PREF_BRACE_AFTER_FUNC = "language.cpp.code.completion.brace.after.func";
+-	const string PREF_CALLTIP_ENABLE = "language.cpp.code.calltip.enable";
++	internal const string PREF_CALLTIP_ENABLE = "cpp-calltip-enable";
+ 
+ 	static construct {
+ 		try {
+@@ -137,7 +137,7 @@
+ 		                                 false, plugin.get_current_block (editor));
+ 
+ 		foreach (var sym in syms) {
+-			Vala.List<Vala.FormalParameter> parameters = null;
++			Vala.List<Vala.Parameter> parameters = null;
+ 			if (sym is Vala.Method) {
+ 				parameters = ((Vala.Method) sym).get_parameters ();
+ 			} else if (sym is Vala.Signal) {
+diff -urN anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.am anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.am
 --- anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.am	2010-12-29 17:22:49.000000000 +0000
-+++ anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.am	2011-12-13 11:39:58.815151895 +0000
++++ anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.am	2012-04-14 13:35:43.088662959 +0000
 @@ -31,7 +31,7 @@
  	${LEXER} ${LEXCCFLAGS} ${LEXFILE}
  
@@ -46,10 +218,10 @@ diff -ur anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.am anjuta-
  
  anjuta_tags_SOURCES = \
  	main.c        \
-diff -ur anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.in anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.in
---- anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.in	2011-12-13 11:38:27.000000000 +0000
-+++ anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.in	2011-12-13 11:39:54.256022768 +0000
-@@ -870,7 +870,7 @@
+diff -urN anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.in anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.in
+--- anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.in	2010-12-29 17:45:07.000000000 +0000
++++ anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/Makefile.in	2012-04-14 13:35:43.088662959 +0000
+@@ -865,7 +865,7 @@
  	${LEXER} ${LEXCCFLAGS} ${LEXFILE}
  
  ctags-visitor.c: ctags-visitor.vala
@@ -58,3 +230,33 @@ diff -ur anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/Makefile.in anjuta-
  
  # Tell versions [3.59,3.63) of GNU make to not export all variables.
  # Otherwise a system limit (for SysV at least) may be exceeded.
+diff -urN anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/ctags-visitor.vala anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/ctags-visitor.vala
+--- anjuta-2.32.1.1.orig//plugins/symbol-db/anjuta-tags/ctags-visitor.vala	2010-12-29 17:22:49.000000000 +0000
++++ anjuta-2.32.1.1/plugins/symbol-db/anjuta-tags/ctags-visitor.vala	2012-04-14 13:36:34.591850544 +0000
+@@ -112,7 +112,7 @@
+ 		}
+ 		return ret.str;
+ 	}
+-	static string signature (Vala.List<Vala.FormalParameter> parameter) {
++	static string signature (Vala.List<Vala.Parameter> parameter) {
+ 		var ret = new StringBuilder("(");
+ 		var first = true;
+ 		foreach (var p in parameter) {
+@@ -367,7 +367,7 @@
+ 		 * assumes that Parser.context is the same as source_file.context anyway */
+ 		var context = new CodeContext();
+ 		context.report = new DummyReport();
+-		var source_file = new SourceFile(context, filename, filename.has_suffix("vapi"));
++		var source_file = new SourceFile(context, filename.has_suffix("vapi") ? SourceFileType.PACKAGE : SourceFileType.SOURCE, filename);
+ 
+ 		CodeContext.push(context);
+ 		context.add_source_file(source_file);
+@@ -383,7 +383,7 @@
+ 		taglist = new GLib.List<CTagsEntry?>();
+ 		var context = new CodeContext();
+ 		context.report = new DummyReport();
+-		var source_file = new SourceFile(context, filename);
++		var source_file = new SourceFile(context, SourceFileType.SOURCE, filename);
+ 		context.add_source_file(source_file);
+ 
+ 		CodeContext.push(context);
