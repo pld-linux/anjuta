@@ -4,12 +4,13 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	3.6.0
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.6/%{name}-%{version}.tar.xz
 # Source0-md5:	d5986b83c3080663d631065354d7ab44
+Patch0:		autoconf-cxx.patch
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	autoconf >= 2.65
 BuildRequires:	autogen
@@ -138,6 +139,7 @@ Dokumentacja API biblioteki libanjuta.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__intltoolize}
@@ -207,6 +209,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/glade
 %{_datadir}/%{name}/profiles
 %{_datadir}/%{name}/project
+%{_datadir}/%{name}/templates
 %dir %{_datadir}/%{name}/tools
 %attr(755,root,root) %{_datadir}/%{name}/tools/find-fixmes.pl
 %attr(755,root,root) %{_datadir}/%{name}/tools/prepare-changelog.pl
@@ -223,23 +226,27 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/tables.sql
 %{_datadir}/%{name}/welcome.txt
 %{_datadir}/%{name}/AUTHORS
-%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.build.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.code-analyzer.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.cpp.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.cvs.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.debug-manager.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.document-manager.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.file-manager.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.js.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.message-manager.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.python.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.run.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.snippets.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.sourceview.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.symbol-db.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.terminal.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.tools.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.build.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.cpp.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.debug-manager.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.indent-c.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.indent-python.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.js.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.message-manager.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.parser-cxx.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.python.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.run.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.sourceview.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.vala.gschema.xml
+
 %{_datadir}/mime/packages/anjuta.xml
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man1/anjuta.1*
