@@ -3,32 +3,30 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	3.4.4
-Release:	2
+Version:	3.6.0
+Release:	0.1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.4/%{name}-%{version}.tar.xz
-# Source0-md5:	b6a8093a8096a2337db1b50464eec1ea
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.6/%{name}-%{version}.tar.xz
+# Source0-md5:	d5986b83c3080663d631065354d7ab44
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	autoconf >= 2.65
 BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
-BuildRequires:	devhelp-devel >= 3.2.0
+BuildRequires:	devhelp-devel >= 3.4.2
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	flex
-BuildRequires:	gdl-devel >= 3.0.0
+BuildRequires:	gdl-devel >= 3.6.0
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel
 BuildRequires:	glade-devel >= 3.12.0
-BuildRequires:	glib2-devel >= 1:2.30.0
+BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	glibc-misc
 BuildRequires:	gnome-common >= 2.24.0
-BuildRequires:	gnome-doc-utils >= 0.18.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
-BuildRequires:	graphviz-devel >= 1.0.0
-BuildRequires:	gtk+3-devel >= 3.2.0
+BuildRequires:	gtk+3-devel >= 3.4.0
 BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	gtksourceview3-devel >= 3.2.0
 BuildRequires:	intltool >= 0.40.1
@@ -43,16 +41,17 @@ BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	subversion-devel >= 1.5.0
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	vala >= 2:0.14.0
+BuildRequires:	vala >= 2:0.16.0
 BuildRequires:	vte-devel >= 0.28.0
 BuildRequires:	xz
+BuildRequires:	yelp-tools
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
-Requires(post,postun):	glib2 >= 1:2.26.0
+Requires(post,postun):	glib2 >= 1:2.32.0
 # Requires:	gnome-terminal
 Requires:	glade >= 3.12.0
-Requires:	glib2 >= 1:2.30.0
+Requires:	glib2 >= 1:2.32.0
 Requires:	gtksourceview3 >= 3.0.0
 Requires:	hicolor-icon-theme
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
@@ -114,8 +113,8 @@ Biblioteka libanjuta.
 Summary:	Header files for libanjuta library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libanjuta
 Group:		X11/Development/Libraries
-Requires:	gdl-devel >= 3.0.0
-Requires:	gtk+3-devel >= 3.2.0
+Requires:	gdl-devel >= 3.6.0
+Requires:	gtk+3-devel >= 3.4.0
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 Requires:	libxml2-devel >= 1:2.6.26
 
