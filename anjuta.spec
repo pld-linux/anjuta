@@ -3,20 +3,20 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	3.6.2
+Version:	3.8.0
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.6/%{name}-%{version}.tar.xz
-# Source0-md5:	3cd2e771df0768af6274a0334fb24502
-Patch0:		autoconf-cxx.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.8/%{name}-%{version}.tar.xz
+# Source0-md5:	aa3d0db7163be147edebf64609eacaa7
+Patch0:		vala-0.20.patch
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	autoconf >= 2.65
 BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
-BuildRequires:	devhelp-devel >= 3.4.2
+BuildRequires:	devhelp-devel >= 3.7.4
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	flex
 BuildRequires:	gdl-devel >= 3.6.0
@@ -152,6 +152,7 @@ Dokumentacja API biblioteki libanjuta.
 	--with-html-dir=%{_gtkdocdir} \
 	--disable-schemas-compile \
 	--disable-silent-rules \
+	--enable-glade-catalog \
 	--disable-static
 
 %{__make}
