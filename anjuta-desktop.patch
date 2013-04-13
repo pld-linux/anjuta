@@ -1,0 +1,12 @@
+diff -urN anjuta-3.8.0.orig/anjuta.desktop.in.in anjuta-3.8.0/anjuta.desktop.in.in
+--- anjuta-3.8.0.orig/anjuta.desktop.in.in	2013-02-27 01:19:09.000000000 +0100
++++ anjuta-3.8.0/anjuta.desktop.in.in	2013-04-13 16:16:38.000000000 +0200
+@@ -10,7 +10,7 @@
+ Type=Application
+ Categories=GNOME;GTK;Development;IDE;
+ StartupNotify=true
+-MimeType=application/x-anjuta;application/x-anjuta-project-template;x-anjuta-compressed-project-template;inode/directory;
++MimeType=application/x-anjuta;application/x-anjuta-project-template;x-anjuta-compressed-project-template;
+ X-GNOME-DocPath=anjuta/anjuta-manual.xml
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=anjuta
