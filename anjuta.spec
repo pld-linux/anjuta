@@ -3,13 +3,13 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	3.8.0
-Release:	3
+Version:	3.8.2
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	aa3d0db7163be147edebf64609eacaa7
+# Source0-md5:	d60e15661099702675d93bfc392ff846
 Patch0:		vala-0.20.patch
 Patch1:		%{name}-desktop.patch
 URL:		http://projects.gnome.org/anjuta/
@@ -211,7 +211,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/class-templates
 %{_datadir}/%{name}/glade
 %{_datadir}/%{name}/profiles
-%{_datadir}/%{name}/project
 %{_datadir}/%{name}/templates
 %dir %{_datadir}/%{name}/tools
 %attr(755,root,root) %{_datadir}/%{name}/tools/find-fixmes.pl
