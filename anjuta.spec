@@ -3,15 +3,14 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	3.8.2
+Version:	3.8.3
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	d60e15661099702675d93bfc392ff846
-Patch0:		vala-0.20.patch
-Patch1:		%{name}-desktop.patch
+# Source0-md5:	24ae681f3881081d2df47bc82a06dc3c
+Patch0:		%{name}-desktop.patch
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	autoconf >= 2.65
 BuildRequires:	autogen
@@ -43,7 +42,7 @@ BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	subversion-devel >= 1.5.0
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	vala >= 2:0.16.0
+BuildRequires:	vala >= 2:0.18.0
 BuildRequires:	vte-devel >= 0.28.0
 BuildRequires:	xz
 BuildRequires:	yelp-tools
@@ -141,7 +140,6 @@ Dokumentacja API biblioteki libanjuta.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__intltoolize}
