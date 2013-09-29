@@ -5,8 +5,8 @@ diff -urN anjuta-3.8.0.orig/anjuta.desktop.in.in anjuta-3.8.0/anjuta.desktop.in.
  Type=Application
  Categories=GNOME;GTK;Development;IDE;
  StartupNotify=true
--MimeType=application/x-anjuta;application/x-anjuta-project-template;x-anjuta-compressed-project-template;inode/directory;
-+MimeType=application/x-anjuta;application/x-anjuta-project-template;x-anjuta-compressed-project-template;
+-MimeType=application/x-anjuta;application/x-anjuta-project-template;application/x-anjuta-compressed-project-template;inode/directory;
++MimeType=application/x-anjuta;application/x-anjuta-project-template;application/x-anjuta-compressed-project-template;
  X-GNOME-DocPath=anjuta/anjuta-manual.xml
  X-GNOME-Bugzilla-Bugzilla=GNOME
  X-GNOME-Bugzilla-Product=anjuta

@@ -3,13 +3,13 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	3.8.4
+Version:	3.10.0
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	603bc45af1809bd8853c1639dcf91127
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.10/%{name}-%{version}.tar.xz
+# Source0-md5:	e7cd4ca20029d5f6ddf9fa3ab4520dfd
 Patch0:		%{name}-desktop.patch
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	autoconf >= 2.65
@@ -23,11 +23,11 @@ BuildRequires:	gdl-devel >= 3.6.0
 BuildRequires:	gettext-devel
 BuildRequires:	gjs-devel
 BuildRequires:	glade-devel >= 3.12.0
-BuildRequires:	glib2-devel >= 1:2.32.0
+BuildRequires:	glib2-devel >= 1:2.34.0
 BuildRequires:	glibc-misc
 BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
-BuildRequires:	gtk+3-devel >= 3.4.0
+BuildRequires:	gtk+3-devel >= 3.6.0
 BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	gtksourceview3-devel >= 3.2.0
 BuildRequires:	intltool >= 0.40.1
@@ -52,7 +52,7 @@ Requires(post,postun):	shared-mime-info
 Requires(post,postun):	glib2 >= 1:2.32.0
 # Requires:	gnome-terminal
 Requires:	glade >= 3.12.0
-Requires:	glib2 >= 1:2.32.0
+Requires:	glib2 >= 1:2.34.0
 Requires:	gtksourceview3 >= 3.0.0
 Requires:	hicolor-icon-theme
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
@@ -115,7 +115,7 @@ Summary:	Header files for libanjuta library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libanjuta
 Group:		X11/Development/Libraries
 Requires:	gdl-devel >= 3.6.0
-Requires:	gtk+3-devel >= 3.4.0
+Requires:	gtk+3-devel >= 3.6.0
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 Requires:	libxml2-devel >= 1:2.6.26
 
@@ -237,6 +237,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.build.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.cpp.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.debug-manager.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.git.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.indent-c.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.indent-python.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.js.gschema.xml
@@ -252,6 +253,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/anjuta.1*
 %{_mandir}/man1/anjuta-launcher.1*
 %{_iconsdir}/hicolor/*/*/*.*
+%{_iconsdir}/HighContrast/*/*/*.*
 
 %files -n libanjuta
 %defattr(644,root,root,755)
