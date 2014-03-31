@@ -3,13 +3,13 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	3.10.2
-Release:	2
+Version:	3.12.0
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	b88a472987ab692d5aad3949e348bde9
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.12/%{name}-%{version}.tar.xz
+# Source0-md5:	9ab0b5d6b005e7ad45049e66f6ee5f75
 Patch0:		%{name}-desktop.patch
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	autoconf >= 2.65
@@ -226,6 +226,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/tables.sql
 %{_datadir}/%{name}/welcome.txt
 %{_datadir}/%{name}/AUTHORS
+%{_datadir}/appdata/anjuta.appdata.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.cvs.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.document-manager.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.file-manager.gschema.xml
@@ -243,6 +244,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.js.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.message-manager.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.parser-cxx.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.project-wizard.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.python.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.run.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.sourceview.gschema.xml
