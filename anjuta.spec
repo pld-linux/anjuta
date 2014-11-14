@@ -235,6 +235,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.file-manager.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.snippets.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.anjuta.starter.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.symbol-db.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.terminal.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.tools.gschema.xml
