@@ -20,7 +20,7 @@ BuildRequires:	devhelp-devel >= 3.7.4
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	flex
 BuildRequires:	gdl-devel >= 3.6.0
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	gjs-devel
 BuildRequires:	glade-devel >= 3.12.0
 BuildRequires:	glib2-devel >= 1:2.34.0
