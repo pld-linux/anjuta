@@ -1,0 +1,10 @@
+--- anjuta-3.14.1/aclocal.m4~	2015-01-24 08:23:43.000000000 +0100
++++ anjuta-3.14.1/aclocal.m4	2015-03-24 00:08:32.145549790 +0100
+@@ -120,7 +120,6 @@
+         -Werror=pointer-arith \
+         -Werror=init-self \
+         -Werror=format-security \
+-        -Werror=format=2 \
+         -Werror=missing-include-dirs \
+     "
+ 

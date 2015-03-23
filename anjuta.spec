@@ -11,6 +11,7 @@ Group:		X11/Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.14/%{name}-%{version}.tar.xz
 # Source0-md5:	f5deffdfb0d1a436bacbbdeb942b187c
 Patch0:		%{name}-desktop.patch
+Patch1:		disable-too-pedantic-Werror.patch
 URL:		http://projects.gnome.org/anjuta/
 BuildRequires:	autoconf >= 2.65
 BuildRequires:	autogen
@@ -143,6 +144,7 @@ Dokumentacja API biblioteki libanjuta.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__intltoolize}
