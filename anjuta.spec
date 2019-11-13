@@ -3,15 +3,15 @@ Summary(es.UTF-8):	Entorno integrado de desarrollo (IDE) de GNOME
 Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
-Version:	3.16.0
-Release:	4
+Version:	3.34.0
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.16/%{name}-%{version}.tar.xz
-# Source0-md5:	9c7216d921df9210cb8b8581034f4fc3
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.34/%{name}-%{version}.tar.xz
+# Source0-md5:	f81e3c9dbe406bb8635ea065e1602029
 Patch0:		%{name}-desktop.patch
-URL:		http://projects.gnome.org/anjuta/
+URL:		https://wiki.gnome.org/Apps/Anjuta
 BuildRequires:	autoconf >= 2.65
 BuildRequires:	autogen
 BuildRequires:	automake >= 1:1.10
@@ -19,6 +19,7 @@ BuildRequires:	bison
 BuildRequires:	devhelp-devel >= 3.7.4
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	flex
+BuildRequires:	gdk-pixbuf2-devel >= 2.0.0
 BuildRequires:	gdl-devel >= 3.6.0
 BuildRequires:	gettext-tools
 BuildRequires:	gjs-devel
@@ -27,7 +28,7 @@ BuildRequires:	glib2-devel >= 1:2.34.0
 BuildRequires:	glibc-misc
 BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
-BuildRequires:	gtk+3-devel >= 3.6.0
+BuildRequires:	gtk+3-devel >= 3.10.0
 BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	gtksourceview3-devel >= 3.2.0
 BuildRequires:	intltool >= 0.40.1
@@ -35,12 +36,12 @@ BuildRequires:	libgda5-devel >= 5.0.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel >= 1:2.6.26
-BuildRequires:	neon-devel >= 0.28.2
-BuildRequires:	pkgconfig
-BuildRequires:	python-devel
+BuildRequires:	pkgconfig >= 1:0.22
+BuildRequires:	python-devel >= 2
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.592
-BuildRequires:	subversion-devel >= 1.5.0
+# require serf-based version (for simplicity)
+BuildRequires:	subversion-devel >= 1.8.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala >= 2:0.18.0
 BuildRequires:	vte-devel >= 0.28.0
@@ -49,21 +50,23 @@ BuildRequires:	yelp-tools
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
-Requires(post,postun):	glib2 >= 1:2.32.0
-# Requires:	gnome-terminal
+Requires(post,postun):	glib2 >= 1:2.34.0
+Requires:	devhelp >= 3.7.4
+# see libanjuta/anjuta-utils.c
+# Requires:	xdg-terminal | gnome-terminal | nxterm | xolor-xterm | rxvt | xterm | dtterm
 Requires:	glade >= 3.12.0
 Requires:	glib2 >= 1:2.34.0
-Requires:	gtksourceview3 >= 3.0.0
+Requires:	gtksourceview3 >= 3.2.0
 Requires:	hicolor-icon-theme
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 Requires:	libgda5-provider-sqlite >= 5.0.0
 Requires:	perl-Locale-gettext
-Requires:	pkgconfig
+Requires:	pkgconfig >= 1:0.22
+Requires:	subversion-libs >= 1.8.0
+Requires:	vte >= 0.28.0
 Suggests:	ctags
 Obsoletes:	gnome-build
 Obsoletes:	gnome-build-devel
-# sr@Latn vs. sr@latin
-Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -102,7 +105,11 @@ amigáveis.
 Summary:	libanjuta library
 Summary(pl.UTF-8):	Biblioteka libanjuta
 Group:		X11/Libraries
-Conflicts:	%{name} < 1:2.0.2-1
+Requires:	gdl >= 3.6.0
+Requires:	glib2 >= 1:2.34.0
+Requires:	gtk+3 >= 3.10.0
+Requires:	libxml2 >= 1:2.6.26
+Conflicts:	anjuta < 1:2.0.2-1
 
 %description -n libanjuta
 libanjuta library.
@@ -115,7 +122,7 @@ Summary:	Header files for libanjuta library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libanjuta
 Group:		X11/Development/Libraries
 Requires:	gdl-devel >= 3.6.0
-Requires:	gtk+3-devel >= 3.6.0
+Requires:	gtk+3-devel >= 3.10.0
 Requires:	libanjuta = %{epoch}:%{version}-%{release}
 Requires:	libxml2-devel >= 1:2.6.26
 
@@ -153,10 +160,10 @@ Dokumentacja API biblioteki libanjuta.
 %{__automake}
 %configure \
 	--with-html-dir=%{_gtkdocdir} \
-	--disable-schemas-compile \
-	--disable-silent-rules \
 	--enable-glade-catalog \
-	--disable-static
+	--disable-neon \
+	--disable-schemas-compile \
+	--disable-silent-rules
 
 %{__make}
 
@@ -164,9 +171,7 @@ Dokumentacja API biblioteki libanjuta.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	mimepngicondir=%{_iconsdir}/hicolor/48x48/mimetypes \
-	mimesvgicondir=%{_iconsdir}/hicolor/scalable/mimetypes
+	DESTDIR=$RPM_BUILD_ROOT
 
 # *.la not needed - *.so loaded through libgmodule
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/{anjuta,glade/modules}/lib*.la
@@ -229,7 +234,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/tables.sql
 %{_datadir}/%{name}/welcome.txt
 %{_datadir}/%{name}/AUTHORS
-%{_datadir}/appdata/anjuta.appdata.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.cvs.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.document-manager.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.file-manager.gschema.xml
@@ -253,13 +257,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.run.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.sourceview.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.anjuta.plugins.vala.gschema.xml
-
+%{_datadir}/metainfo/anjuta.appdata.xml
 %{_datadir}/mime/packages/anjuta.xml
-%{_desktopdir}/%{name}.desktop
+%{_desktopdir}/anjuta.desktop
+%{_iconsdir}/hicolor/*x*/apps/anjuta.png
+%{_iconsdir}/hicolor/*x*/mimetypes/application-x-anjuta.png
+%{_iconsdir}/hicolor/scalable/apps/anjuta.svg
+%{_iconsdir}/hicolor/scalable/mimetypes/application-x-anjuta.svg
+%{_iconsdir}/hicolor/symbolic/apps/anjuta-symbolic.svg
 %{_mandir}/man1/anjuta.1*
 %{_mandir}/man1/anjuta-launcher.1*
-%{_iconsdir}/hicolor/*/*/*.*
-%{_iconsdir}/HighContrast/*/*/*.*
 
 %files -n libanjuta
 %defattr(644,root,root,755)
