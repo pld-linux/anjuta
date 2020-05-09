@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	3.34.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
@@ -40,6 +40,7 @@ BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	python-devel >= 2
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.592
+BuildRequires:	sed >= 4.0
 # require serf-based version (for simplicity)
 BuildRequires:	subversion-devel >= 1.8.0
 BuildRequires:	tar >= 1:1.22
@@ -137,7 +138,7 @@ Summary:	libanjuta API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libanjuta
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -150,6 +151,8 @@ Dokumentacja API biblioteki libanjuta.
 %prep
 %setup -q
 %patch0 -p1
+
+%{__sed} -i -e '1s,/usr/bin/env perl,%{__perl},' plugins/tools/scripts/*.pl
 
 %build
 %{__intltoolize}
