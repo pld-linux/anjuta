@@ -138,9 +138,7 @@ Summary:	libanjuta API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libanjuta
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description -n libanjuta-apidocs
 libanjuta API documentation.
