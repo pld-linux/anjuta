@@ -1,0 +1,25 @@
+--- anjuta-3.34.0/configure.ac~	2023-09-12 03:14:01.000000000 +0200
++++ anjuta-3.34.0/configure.ac	2023-09-12 03:31:19.883083440 +0200
+@@ -37,7 +37,6 @@
+ GDK_PIXBUF_REQUIRED=2.0.0
+ GDA4_REQUIRED=4.2.0
+ GDA5_REQUIRED=5.0.0
+-GDA6_REQUIRED=5.99.0
+ LIBXML_REQUIRED=2.4.23
+ GDL_REQUIRED=3.5.5
+ LIBWNCK_REQUIRED=2.12
+@@ -166,13 +165,9 @@
+    [gdl-3.0 >= $GDL_REQUIRED])
+ 
+ PKG_CHECK_MODULES([GDA],
+-   [libgda-6.0 >= $GDA6_REQUIRED], [
+-		AC_DEFINE(HAVE_GDA6,[1],[libgda-6.0 support])
+-	],
+-   [PKG_CHECK_MODULES([GDA],
+       [libgda-5.0 >= $GDA5_REQUIRED],,
+          [PKG_CHECK_MODULES([GDA],
+-            [libgda-4.0 >= $GDA4_REQUIRED])])])
++            [libgda-4.0 >= $GDA4_REQUIRED])])
+ 
+ dnl Check for autogen
+ dnl -----------------
