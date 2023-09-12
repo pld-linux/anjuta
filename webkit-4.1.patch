@@ -1,0 +1,22 @@
+From: Jeremy Bicha <jeremy.bicha@canonical.com>
+Date: Wed, 31 Aug 2022 22:09:45 -0400
+Subject: devhelp: switch to webkit 4.1
+
+https://src.fedoraproject.org/rpms/anjuta/blob/rawhide/f/webkit.patch
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 94e3a1c..6794ad5 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -246,7 +246,7 @@ if test "x$devhelp_enabled" = "xyes"; then
+ 		*webkit2gtk-3.0*)
+ 			AC_DEFINE([HAVE_WEBKIT2], [1], [Defined if devhelp is built against webkitgtk2])
+ 			;;
+-		*webkit2gtk-4.0*)
++		*webkit2gtk-4.1*)
+ 			AC_DEFINE([HAVE_WEBKIT2], [1], [Defined if devhelp is built against webkitgtk2])
+ 			;;
+ 		esac

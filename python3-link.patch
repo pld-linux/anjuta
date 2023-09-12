@@ -1,0 +1,17 @@
+--- anjuta-3.34.0/configure.ac~	2023-09-12 02:59:25.000000000 +0200
++++ anjuta-3.34.0/configure.ac	2023-09-12 03:13:05.251658092 +0200
+@@ -372,12 +372,12 @@
+ if test x$have_python = xyes; then
+ 	if test -x $PYTHON-config; then
+ 		PYTHON_CFLAGS=`$PYTHON-config --cflags`
+-		PYTHON_LIBS=`$PYTHON-config --libs`
++		PYTHON_LIBS=`$PYTHON-config --libs --embed`
+ 		AC_SUBST(PYTHON_CFLAGS)
+ 		AC_SUBST(PYTHON_LIBS)
+ 	elif test -x $PYTHON$PYTHON_VERSION-config; then
+ 		PYTHON_CFLAGS=`$PYTHON$PYTHON_VERSION-config --cflags`
+-		PYTHON_LIBS=`$PYTHON$PYTHON_VERSION-config --libs`
++		PYTHON_LIBS=`$PYTHON$PYTHON_VERSION-config --libs --embed`
+ 		AC_SUBST(PYTHON_CFLAGS)
+ 		AC_SUBST(PYTHON_LIBS)		
+ 	else

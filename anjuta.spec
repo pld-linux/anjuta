@@ -4,13 +4,15 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	3.34.0
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.34/%{name}-%{version}.tar.xz
 # Source0-md5:	f81e3c9dbe406bb8635ea065e1602029
 Patch0:		%{name}-desktop.patch
+Patch1:		webkit-4.1.patch
+Patch2:		python3-link.patch
 URL:		https://wiki.gnome.org/Apps/Anjuta
 BuildRequires:	autoconf >= 2.65
 BuildRequires:	autogen
@@ -30,6 +32,7 @@ BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk+3-devel >= 3.10.0
 BuildRequires:	gtk-doc >= 1.7
+BuildRequires:	gtk-webkit4.1-devel
 BuildRequires:	gtksourceview3-devel >= 3.2.0
 BuildRequires:	intltool >= 0.40.1
 BuildRequires:	libgda5-devel >= 5.0.0
@@ -37,7 +40,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	pkgconfig >= 1:0.22
-BuildRequires:	python-devel >= 2
+BuildRequires:	python3-devel
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sed >= 4.0
@@ -149,6 +152,8 @@ Dokumentacja API biblioteki libanjuta.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env perl,%{__perl},' plugins/tools/scripts/*.pl
 
@@ -160,6 +165,7 @@ Dokumentacja API biblioteki libanjuta.
 %{__autoheader}
 %{__automake}
 %configure \
+	PYTHON=%{__python3} \
 	--with-html-dir=%{_gtkdocdir} \
 	--enable-glade-catalog \
 	--disable-neon \
