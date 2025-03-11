@@ -152,10 +152,10 @@ Dokumentacja API biblioteki libanjuta.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
+%patch -P 3 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env perl,%{__perl},' plugins/tools/scripts/*.pl
 
