@@ -8,7 +8,7 @@ Release:	6
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.34/%{name}-%{version}.tar.xz
+Source0:	https://download.gnome.org/sources/anjuta/3.34/%{name}-%{version}.tar.xz
 # Source0-md5:	f81e3c9dbe406bb8635ea065e1602029
 Patch0:		%{name}-desktop.patch
 Patch1:		webkit-4.1.patch
