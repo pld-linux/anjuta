@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Zintegrowane środowisko programowania dla GNOME
 Summary(pt_BR.UTF-8):	Ambiente de desenvolvimento integrado C e C++
 Name:		anjuta
 Version:	3.34.0
-Release:	6
+Release:	7
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Development/Tools
@@ -14,6 +14,7 @@ Patch0:		%{name}-desktop.patch
 Patch1:		webkit-4.1.patch
 Patch2:		python3-link.patch
 Patch3:		no-gda6.patch
+Patch4:		%{name}-types.patch
 URL:		https://wiki.gnome.org/Apps/Anjuta
 BuildRequires:	autoconf >= 2.65
 BuildRequires:	autogen
@@ -156,6 +157,7 @@ Dokumentacja API biblioteki libanjuta.
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
+%patch -P 4 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env perl,%{__perl},' plugins/tools/scripts/*.pl
 
